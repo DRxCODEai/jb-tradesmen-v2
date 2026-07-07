@@ -6,7 +6,6 @@ export default function Logo() {
       <img
         src="/src/assets/logo.png"
         alt="JBTRADESMENLLC"
-        style={{ height: '52px', width: 'auto', display: 'block' }}
       />
     </Link>
   )
