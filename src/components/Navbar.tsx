@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom'
+import Logo from './Logo'
 import './navbar.css'
 
 const links = [
@@ -15,9 +16,7 @@ export default function Navbar() {
   return (
     <header className="navbar-shell">
       <div className="navbar-inner">
-        <NavLink to="/" className="navbar-logo" aria-label="JBTradesmen home">
-          JBTradesmen
-        </NavLink>
+        <Logo />
 
         <nav className="navbar-nav" aria-label="Primary">
           <ul className="navbar-links">
