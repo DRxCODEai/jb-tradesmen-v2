@@ -562,59 +562,104 @@
     padding: 32px 24px;
   }
 }
-/* ===========================
+/* ==========================================
    HERO FEATURE STRIP
-=========================== */
+========================================== */
 
 .hero-feature-strip {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(5, minmax(220px, 1fr));
+
   align-items: center;
 
   background: #111111;
-  color: #ffffff;
-
-  padding: 20px 50px;
 
   border-top: 2px solid #d4af37;
   border-bottom: 2px solid #d4af37;
+
+  padding: 34px 56px;
+
+  column-gap: 60px;
+
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
 .hero-feature-item {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  align-items: flex-start;
+  gap: 18px;
 }
 
-.hero-feature-item span {
-  font-size: 24px;
+.hero-feature-item > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-feature-item svg {
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
   color: #d4af37;
+
+  stroke-width: 2.5;
+
+  margin-top: 2px;
 }
 
 .hero-feature-item strong {
   display: block;
-  font-size: 16px;
+
+  color: white;
+
+  font-size: 19px;
+
   font-weight: 700;
+
+  line-height: 1.2;
+
+  margin-bottom: 4px;
 }
 
-.hero-feature-item p {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: #cfcfcf;
+.hero-feature-item span {
+  display: block;
+
+  color: rgba(255,255,255,.72);
+
+  font-size: 14px;
+
+  line-height: 1.45;
 }
 
-@media (max-width: 1200px) {
-  .hero-feature-strip {
-    grid-template-columns: repeat(3, 1fr);
-  }
+@media (max-width:1200px){
+
+.hero-feature-strip{
+grid-template-columns:repeat(3,1fr);
 }
 
-@media (max-width: 700px) {
-  .hero-feature-strip {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 18px;
-    gap: 18px;
-  }
 }
 
+@media (max-width:768px){
+
+.hero-feature-strip{
+grid-template-columns:repeat(2,1fr);
+
+padding:24px;
+}
+
+.hero-feature-item{
+gap:14px;
+}
+
+.hero-feature-item svg{
+width:26px;
+height:26px;
+}
+
+.hero-feature-item strong{
+font-size:17px;
+}
+
+}

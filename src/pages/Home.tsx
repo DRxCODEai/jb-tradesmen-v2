@@ -190,45 +190,45 @@ export default function Home() {
 </section>
 <section className="hero-feature-strip">
 
-  <div className="hero-feature">
-    <Star size={20} strokeWidth={2} />
+<div className="hero-feature-item">
+    <Star size={34} strokeWidth={2.5} />
     <div>
-      <strong>5-Star Rated</strong>
-      <span>Trusted by Our Clients</span>
+        <strong>5-Star Rated</strong>
+        <span>Trusted by Hundreds of Clients</span>
     </div>
-  </div>
+</div>
 
-  <div className="hero-feature">
-    <HomeIcon size={20} strokeWidth={2} />
+<div className="hero-feature-item">
+    <HomeIcon size={34} strokeWidth={2.5} />
     <div>
-      <strong>Residential & Commercial</strong>
-      <span>Complete Solutions</span>
+        <strong>Residential & Commercial</strong>
+        <span>Maintenance Experts</span>
     </div>
-  </div>
+</div>
 
-  <div className="hero-feature">
-    <Zap size={20} strokeWidth={2} />
+<div className="hero-feature-item">
+    <Zap size={34} strokeWidth={2.5} />
     <div>
-      <strong>Fast Response</strong>
-      <span>Quick & Reliable</span>
+        <strong>Fast Response</strong>
+        <span>Quick & Reliable</span>
     </div>
-  </div>
+</div>
 
-  <div className="hero-feature">
-    <Building2 size={20} strokeWidth={2} />
+<div className="hero-feature-item">
+    <Building2 size={34} strokeWidth={2.5} />
     <div>
-      <strong>Property Management</strong>
-      <span>Projects of Every Size</span>
+        <strong>Property Management</strong>
+        <span>Preferred Vendor</span>
     </div>
-  </div>
+</div>
 
-  <div className="hero-feature">
-    <MapPin size={20} strokeWidth={2} />
+<div className="hero-feature-item">
+    <MapPin size={34} strokeWidth={2.5} />
     <div>
-      <strong>Serving Colorado, Wyoming & Nevada</strong>
-      <span>Regional Coverage</span>
+        <strong>Colorado • Wyoming • Nevada</strong>
+        <span>Licensed Regional Coverage</span>
     </div>
-  </div>
+</div>
 
 </section>
     <section className="content-section trust-section">
