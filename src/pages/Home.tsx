@@ -176,10 +176,12 @@ export default function Home() {
     />
 
     <a
-      href="/instant-project-estimate"
-      className="hero-overlay hero-estimate"
-      aria-label="Get a Free Estimate"
-    />
+    href="https://koalendar.com/u/Gh3fj36hpBYsbg1SA4npVoFy56m2"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hero-overlay hero-estimate"
+    aria-label="Schedule a Free Estimate"
+/>
 
     <a
       href="tel:9702865993"
