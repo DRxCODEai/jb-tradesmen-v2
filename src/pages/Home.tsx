@@ -45,7 +45,7 @@ const trustStats = [
 const serviceAreaGroups = [
   {
     state: 'Colorado',
-    cities: ['Fort Collins', 'Loveland', 'Greeley', 'Windsor', 'Timnath', 'Johnstown', 'Longmont'],
+    cities: ['Fort Collins', 'Loveland', 'Greeley', 'Windsor', 'Timnath', 'Johnstown'],
   },
   {
     state: 'Wyoming',
@@ -121,11 +121,11 @@ const featuredProjects = [
     location: 'Cheyenne, Wyoming',
     service: 'Maintenance & Responsive Service',
     image:
-      'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=900&q=80',
+      'https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=900&q=80',
   },
   {
     title: 'Property Management Support',
-    location: 'Fort Collins, Colorado',
+    location: 'Colorado, Wyoming & Nevada',
     service: 'Make-Ready Coordination & Punch Lists',
     image:
       'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=900&q=80',
