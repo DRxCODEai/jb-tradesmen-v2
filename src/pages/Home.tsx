@@ -1,5 +1,13 @@
 import heroImage from "../assets/hero-homepage-v1.png";
-import ReviewCarousel from '../components/ReviewCarousel'
+import ReviewCarousel from "../components/ReviewCarousel";
+
+import {
+  Star,
+  Home as HomeIcon,
+  Zap,
+  Building2,
+  MapPin,
+} from "lucide-react";
 
 const trustStats = [
   {
@@ -179,6 +187,49 @@ export default function Home() {
       aria-label="Call JBTRADESMENLLC"
     />
   </div>
+</section>
+<section className="hero-feature-strip">
+
+  <div className="hero-feature">
+    <Star size={20} strokeWidth={2} />
+    <div>
+      <strong>5-Star Rated</strong>
+      <span>Trusted by Our Clients</span>
+    </div>
+  </div>
+
+  <div className="hero-feature">
+    <HomeIcon size={20} strokeWidth={2} />
+    <div>
+      <strong>Residential & Commercial</strong>
+      <span>Complete Solutions</span>
+    </div>
+  </div>
+
+  <div className="hero-feature">
+    <Zap size={20} strokeWidth={2} />
+    <div>
+      <strong>Fast Response</strong>
+      <span>Quick & Reliable</span>
+    </div>
+  </div>
+
+  <div className="hero-feature">
+    <Building2 size={20} strokeWidth={2} />
+    <div>
+      <strong>Property Management</strong>
+      <span>Projects of Every Size</span>
+    </div>
+  </div>
+
+  <div className="hero-feature">
+    <MapPin size={20} strokeWidth={2} />
+    <div>
+      <strong>Serving Colorado, Wyoming & Nevada</strong>
+      <span>Regional Coverage</span>
+    </div>
+  </div>
+
 </section>
     <section className="content-section trust-section">
         <div className="section-heading trust-heading">
