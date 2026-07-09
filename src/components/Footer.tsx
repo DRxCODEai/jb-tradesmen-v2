@@ -13,7 +13,7 @@ const quickLinks = [
 const serviceAreas = [
   {
     state: 'Colorado',
-    cities: ['Fort Collins', 'Loveland', 'Greeley', 'Windsor', 'Longmont'],
+    cities: ['Fort Collins', 'Loveland', 'Greeley', 'Windsor'],
   },
   {
     state: 'Wyoming',
@@ -21,7 +21,7 @@ const serviceAreas = [
   },
   {
     state: 'Nevada',
-    cities: ['Las Vegas', 'Henderson', 'North Las Vegas', 'Summerlin'],
+    cities: ['Las Vegas', 'Henderson', 'North Las Vegas', 'Summerlin', 'Paradise'],
   },
 ]
 

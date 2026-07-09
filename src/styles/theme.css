@@ -1,0 +1,27 @@
+:root {
+  /* Brand Colors */
+  --primary: #d4af37;
+  --primary-hover: #c49b1f;
+  --dark: #111111;
+  --dark-2: #1a1a1a;
+  --card: #222222;
+  --border: rgba(212,175,55,.18);
+
+  /* Text */
+  --text: #ffffff;
+  --text-light: #b8b8b8;
+
+  /* Radius */
+  --radius: 18px;
+  --radius-lg: 28px;
+
+  /* Shadows */
+  --shadow:
+    0 12px 35px rgba(0,0,0,.28);
+
+  /* Width */
+  --container: 1300px;
+
+  /* Spacing */
+  --section-space: 110px;
+}
