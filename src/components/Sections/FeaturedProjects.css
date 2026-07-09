@@ -1,0 +1,218 @@
+/* ==========================================
+   FEATURED PROJECTS
+========================================== */
+
+.projects-section{
+
+    background:#111;
+
+    color:white;
+
+    padding:140px 0;
+
+}
+
+.projects-container{
+
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:0 40px;
+
+}
+
+.projects-container h2{
+
+    font-size:clamp(2.7rem,5vw,4.3rem);
+
+    line-height:1.1;
+
+    margin:20px 0;
+
+}
+
+.projects-intro{
+
+    max-width:760px;
+
+    color:#bdbdbd;
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+
+    margin-bottom:70px;
+
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.projects-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.project-card{
+
+    background:#181818;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    transition:.35s;
+
+    border:1px solid rgba(255,255,255,.05);
+
+}
+
+.project-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#d4af37;
+
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+
+}
+
+/* ==========================
+   IMAGE PLACEHOLDER
+========================== */
+
+.project-image{
+
+    height:260px;
+
+    background:linear-gradient(
+        135deg,
+        #2d2d2d,
+        #1b1b1b
+    );
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#d4af37;
+
+    font-size:1.2rem;
+
+    text-align:center;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+
+}
+
+/* ==========================
+   CONTENT
+========================== */
+
+.project-content{
+
+    padding:30px;
+
+}
+
+.project-content small{
+
+    color:#d4af37;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    font-weight:700;
+
+}
+
+.project-content h3{
+
+    margin:18px 0 10px;
+
+    font-size:1.7rem;
+
+}
+
+.project-content p{
+
+    color:#bdbdbd;
+
+    line-height:1.7;
+
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.project-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:26px;
+
+    color:#d4af37;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.project-button:hover{
+
+    transform:translateX(6px);
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:1100px){
+
+.projects-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.project-image{
+
+height:320px;
+
+}
+
+}
+.project-location{
+
+    margin-top:18px;
+
+    color:#d4af37;
+
+    font-weight:600;
+
+}

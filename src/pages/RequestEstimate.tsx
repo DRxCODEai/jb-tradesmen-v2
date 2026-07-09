@@ -15,6 +15,7 @@ export default function RequestEstimate() {
       <ProcessTimeline />
       <IndustriesGrid />
       <FAQSection />
+      import FeaturedProjects from '../components/Sections/FeaturedProjects';
       <CTASection />
     </>
   );

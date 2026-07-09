@@ -1,11 +1,13 @@
-import './EstimateHero.css'
+import './EstimateHero.css';
+import logo from '../../assets/logo.png';
 
 export default function EstimateHero() {
   return (
-    
     <section className="estimate-hero">
 
       <div className="estimate-overlay">
+
+        {/* LEFT SIDE */}
 
         <div className="estimate-left">
 
@@ -16,110 +18,130 @@ export default function EstimateHero() {
           <h1>
             Professional Property
             <br />
-            Assessment &
-            <span> Estimate</span>
+            <span>Assessment</span>
           </h1>
 
           <p>
-            Professional maintenance estimates for homeowners,
-            commercial properties, property managers, financial
-            institutions, retail facilities, and government agencies.
+            Receive a professional Property Assessment Report designed for
+            homeowners, commercial facilities, property managers,
+            financial institutions, retail facilities, and government
+            agencies.
+
+            Every assessment includes detailed findings,
+            photographs, repair recommendations, maintenance
+            priorities, and a professional estimate.
           </p>
 
           <div className="estimate-badges">
 
-            <div className="badge">
-              Residential
-            </div>
+            <div className="badge">Residential</div>
 
-            <div className="badge">
-              Commercial
-            </div>
+            <div className="badge">Commercial</div>
 
-            <div className="badge">
-              Property Management
-            </div>
+            <div className="badge">Property Management</div>
 
-            <div className="badge">
-              Government
-            </div>
+            <div className="badge">Financial Institutions</div>
 
-            <div className="badge">
-              Assessment Reports
-            </div>
+            <div className="badge">Government</div>
+
+          </div>
+
+          <div className="trust-strip">
+
+            <span>✓ Licensed &amp; Insured</span>
+
+            <span>✓ OSHA 30 Certified</span>
+
+            <span>✓ Federal Contractor</span>
+
+            <span>✓ 1,200+ Projects</span>
+
+            <span>✓ 10+ Years Experience</span>
+
+            <span>✓ 0–72 Hour Response</span>
 
           </div>
 
           <div className="estimate-buttons">
 
-            <a href="#estimate-form" className="primary-btn">
-              Request Assessment
+            <a
+              href="#assessment-report"
+              className="primary-btn"
+            >
+              Request Property Assessment
             </a>
 
-            <a href="tel:9702865993" className="secondary-btn">
-              Call (970) 286-5993
+            <a
+              href="#sample-report"
+              className="secondary-btn"
+            >
+              View Sample Report
             </a>
 
           </div>
 
         </div>
 
-  <div className="estimate-right">
+        {/* RIGHT SIDE */}
 
-  <img
-    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
-    alt="Professional property assessment"
-  />
+        <div className="estimate-right">
 
-  <div className="trust-panel">
+          <div className="brand-card">
 
-    <h3>★★★★★ 5-Star Rated Service</h3>
+            <img
+              src={logo}
+              alt="JBTRADESMENLLC"
+              className="brand-logo"
+            />
 
-    <p>
-      Trusted by homeowners, commercial clients,
-      property managers, financial institutions,
-      and government agencies.
-    </p>
+            <div className="brand-divider"></div>
 
-    <div className="trust-list">
+            <h3>
+              Professional Property Assessment Reports
+            </h3>
 
-      <div>✓ Licensed &amp; Insured</div>
+            <p>
+              Residential, Commercial, Property Management,
+              Financial Institutions and Government Facilities.
+            </p>
 
-      <div>✓ OSHA 30 Certified</div>
+            <div className="brand-checks">
 
-      <div>✓ EPA 608 &amp; 609</div>
+              <span>✓ Licensed &amp; Insured</span>
 
-      <div>✓ Federal Contractor</div>
+              <span>✓ OSHA 30 Certified</span>
 
-    </div>
+              <span>✓ EPA 608 &amp; 609 Certified</span>
 
-    <div className="trust-stats">
+              <span>✓ Federal Contractor</span>
 
-      <div>
-        <strong>1,200+</strong>
-        <span>Projects</span>
-      </div>
+            </div>
 
-      <div>
-        <strong>10+</strong>
-        <span>Years</span>
-      </div>
+            <div className="brand-stats">
 
-      <div>
-        <strong>72hr</strong>
-        <span>Response</span>
-      </div>
+              <div>
+                <strong>1,200+</strong>
+                <small>Projects</small>
+              </div>
 
-    </div>
+              <div>
+                <strong>10+</strong>
+                <small>Years</small>
+              </div>
 
-  </div>
+              <div>
+                <strong>CO • WY • NV</strong>
+                <small>Serving</small>
+              </div>
 
-</div>
+            </div>
+
+          </div>
 
         </div>
 
-      
+      </div>
 
     </section>
-  )
+  );
 }

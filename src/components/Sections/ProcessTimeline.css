@@ -1,174 +1,171 @@
-/* ==========================================
-   PROCESS TIMELINE
-========================================== */
-
 .timeline-section{
+
     background:#f8f8f8;
+
     padding:140px 0;
+
 }
 
 .timeline-container{
-    max-width:1400px;
-    margin:auto;
-    padding:0 40px;
-    text-align:center;
-}
 
-.section-tag{
-    display:inline-block;
-    color:#d4af37;
-    font-weight:700;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    font-size:.8rem;
-    margin-bottom:16px;
+    max-width:1400px;
+
+    margin:auto;
+
+    padding:0 40px;
+
+    text-align:center;
+
 }
 
 .timeline-container h2{
-    font-size:clamp(2.8rem,5vw,4.5rem);
+
+    font-size:clamp(2.5rem,5vw,4rem);
+
+    margin:18px 0;
+
     color:#111;
-    line-height:1.1;
-    margin-bottom:22px;
+
 }
 
 .timeline-intro{
+
     max-width:760px;
-    margin:0 auto 80px;
+
+    margin:0 auto 90px;
+
     color:#666;
+
+    line-height:1.8;
+
     font-size:1.1rem;
-    line-height:1.9;
+
 }
 
-/* ==========================================
-   GRID
-========================================== */
+.timeline{
 
-.timeline-grid{
     display:grid;
+
     grid-template-columns:repeat(5,1fr);
-    gap:28px;
+
+    gap:40px;
+
     position:relative;
+
 }
 
-.timeline-grid::before{
+.timeline::before{
+
     content:"";
+
     position:absolute;
-    top:40px;
+
     left:10%;
+
     right:10%;
+
+    top:36px;
+
     height:4px;
+
     background:#d4af37;
-    border-radius:999px;
+
     z-index:0;
+
 }
 
-/* ==========================================
-   CARD
-========================================== */
+.timeline-item{
 
-.timeline-card{
     position:relative;
+
     z-index:2;
-    background:white;
-    border-radius:24px;
-    padding:95px 28px 36px;
-    box-shadow:0 18px 45px rgba(0,0,0,.08);
-    transition:.35s;
+
 }
 
-.timeline-card:hover{
-    transform:translateY(-12px);
-    box-shadow:0 35px 70px rgba(0,0,0,.16);
-}
+.timeline-circle{
 
-/* ==========================================
-   NUMBER
-========================================== */
-
-.timeline-number{
-    position:absolute;
-    top:-24px;
-    left:50%;
-    transform:translateX(-50%);
     width:72px;
-    height:72px;
-    border-radius:50%;
-    background:#d4af37;
-    color:#111;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:1.4rem;
-    font-weight:800;
-    box-shadow:0 10px 35px rgba(212,175,55,.35);
-}
 
-/* ==========================================
-   ICON
-========================================== */
+    height:72px;
+
+    background:#d4af37;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#111;
+
+    font-weight:800;
+
+    font-size:1.2rem;
+
+    box-shadow:0 15px 40px rgba(212,175,55,.35);
+
+}
 
 .timeline-icon{
-    font-size:2.3rem;
-    margin-bottom:24px;
+
+    font-size:2rem;
+
+    margin:28px 0 18px;
+
 }
 
-.timeline-card h3{
-    font-size:1.35rem;
+.timeline-item h3{
+
+    font-size:1.25rem;
+
     color:#111;
-    margin-bottom:18px;
+
+    margin-bottom:12px;
+
 }
 
-.timeline-card p{
+.timeline-item p{
+
     color:#666;
-    line-height:1.8;
-    font-size:.97rem;
+
+    line-height:1.7;
+
+    font-size:.95rem;
+
 }
 
-/* ==========================================
-   TABLET
-========================================== */
+@media(max-width:1100px){
 
-@media(max-width:1200px){
+.timeline{
 
-.timeline-grid{
 grid-template-columns:repeat(2,1fr);
+
 }
 
-.timeline-grid::before{
+.timeline::before{
+
 display:none;
-}
 
 }
 
-/* ==========================================
-   MOBILE
-========================================== */
+}
 
 @media(max-width:768px){
 
-.timeline-section{
-padding:90px 0;
-}
+.timeline{
 
-.timeline-grid{
 grid-template-columns:1fr;
-gap:50px;
+
 }
 
-.timeline-card{
-padding:90px 24px 30px;
-}
+.timeline-section{
 
-.timeline-container{
-padding:0 24px;
-}
+padding:90px 0;
 
-.timeline-container h2{
-font-size:2.3rem;
-}
-
-.timeline-intro{
-font-size:1rem;
 }
 
 }

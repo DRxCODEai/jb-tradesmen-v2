@@ -5,31 +5,31 @@ const steps = [
     number: '01',
     icon: '📅',
     title: 'Request Assessment',
-    text: 'Submit your request online or call our office to discuss your project.',
+    text: 'Submit your request online or give us a call to discuss your project.',
   },
   {
     number: '02',
     icon: '📋',
     title: 'Project Review',
-    text: 'We review your property information, photos, and maintenance needs.',
+    text: 'We review property details, photos, and maintenance needs.',
   },
   {
     number: '03',
     icon: '🔎',
     title: 'Professional Site Visit',
-    text: 'Our technician performs an on-site inspection and documents findings.',
+    text: 'Our technician performs a detailed on-site inspection.',
   },
   {
     number: '04',
     icon: '📄',
     title: 'Assessment Report',
-    text: 'Receive a detailed Property Assessment Report with recommendations and pricing.',
+    text: 'Receive a professional report with recommendations and pricing.',
   },
   {
     number: '05',
     icon: '✔',
-    title: 'Project Scheduling',
-    text: 'Approve the proposal and we schedule your project for completion.',
+    title: 'Schedule Project',
+    text: "Approve your proposal and we'll schedule the work.",
   },
 ];
 
@@ -50,27 +50,30 @@ export default function ProcessTimeline() {
         </h2>
 
         <p className="timeline-intro">
-          Every project follows a clear, professional process designed
-          to keep you informed from your initial request through project
-          completion.
+          From your first phone call to project completion, we keep the
+          process simple, transparent, and professional.
         </p>
 
-        <div className="timeline-grid">
+        <div className="timeline">
 
           {steps.map((step) => (
 
             <div
               key={step.number}
-              className="timeline-card"
+              className="timeline-item"
             >
 
-              <div className="timeline-number">
-    {step.number}
-</div>
+              <div className="timeline-circle">
 
-<div className="timeline-icon">
-    {step.icon}
-</div>
+                <span>{step.number}</span>
+
+              </div>
+
+              <div className="timeline-icon">
+
+                {step.icon}
+
+              </div>
 
               <h3>{step.title}</h3>
 

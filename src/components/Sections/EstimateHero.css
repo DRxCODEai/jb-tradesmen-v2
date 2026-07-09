@@ -302,8 +302,136 @@
         width:100%;
     }
 
-    .estimate-right img{
+    /* ===========================
+   RIGHT SIDE
+=========================== */
 
-        height:360px;
-    }
+.estimate-right{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.brand-card{
+
+    width:100%;
+
+    max-width:520px;
+
+    padding:60px;
+
+    border-radius:30px;
+
+    background:linear-gradient(
+        180deg,
+        #1b1b1b,
+        #111
+    );
+
+    border:1px solid rgba(212,175,55,.2);
+
+    text-align:center;
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.45);
+
+}
+
+.brand-logo{
+
+    width:260px;
+
+    display:block;
+
+    margin:0 auto 35px;
+
+}
+
+.brand-divider{
+
+    width:90px;
+
+    height:4px;
+
+    background:#d4af37;
+
+    margin:0 auto 35px;
+
+    border-radius:999px;
+
+}
+
+.brand-card h3{
+
+    color:white;
+
+    font-size:2rem;
+
+    margin-bottom:20px;
+
+}
+
+.brand-card p{
+
+    color:#bfbfbf;
+
+    line-height:1.8;
+
+    margin-bottom:40px;
+
+}
+
+.brand-checks{
+
+    display:grid;
+
+    gap:18px;
+
+    text-align:left;
+
+    margin-bottom:45px;
+
+}
+
+.brand-checks span{
+
+    color:#d4af37;
+
+    font-weight:600;
+
+}
+
+.brand-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    padding-top:35px;
+
+}
+
+.brand-stats strong{
+
+    display:block;
+
+    color:white;
+
+    font-size:1.8rem;
+
+}
+
+.brand-stats small{
+
+    color:#999;
+
+}
 }
