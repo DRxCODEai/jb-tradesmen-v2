@@ -10,13 +10,39 @@
 
     padding:140px 0;
 
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.why-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+
+    height:700px;
+
+    background:radial-gradient(rgba(212,175,55,.08),transparent 70%);
+
+    top:-350px;
+
+    right:-250px;
+
 }
 
 .why-container{
 
+    position:relative;
+
+    z-index:2;
+
     max-width:1400px;
 
-    margin:0 auto;
+    margin:auto;
 
     padding:0 40px;
 
@@ -26,11 +52,11 @@
 
 .why-container h2{
 
-    font-size:clamp(2.8rem,5vw,4.2rem);
+    font-size:clamp(3rem,5vw,4.5rem);
 
-    line-height:1.1;
+    line-height:1.08;
 
-    margin:18px 0 24px;
+    margin:20px 0 24px;
 
 }
 
@@ -42,9 +68,9 @@
 
     color:#bdbdbd;
 
-    font-size:1.08rem;
-
     line-height:1.9;
+
+    font-size:1.08rem;
 
 }
 
@@ -54,21 +80,25 @@
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:30px;
+    gap:32px;
 
 }
 
+/* ===========================
+   CARD
+=========================== */
+
 .why-card{
 
-    background:#181818;
+    background:linear-gradient(180deg,#1b1b1b,#141414);
 
-    border:1px solid rgba(255,255,255,.06);
+    border:1px solid rgba(212,175,55,.08);
 
-    border-radius:24px;
+    border-radius:26px;
 
-    padding:45px 35px;
+    padding:42px 34px;
 
-    transition:.3s ease;
+    transition:.35s;
 
 }
 
@@ -78,23 +108,25 @@
 
     border-color:#d4af37;
 
-    box-shadow:0 30px 70px rgba(0,0,0,.35);
+    box-shadow:0 35px 70px rgba(0,0,0,.35);
 
 }
 
+/* ===========================
+   ICON
+=========================== */
+
 .why-icon{
 
-    width:80px;
+    width:82px;
 
-    height:80px;
-
-    margin:0 auto 24px;
+    height:82px;
 
     border-radius:50%;
 
-    background:#d4af37;
+    background:#1d1d1d;
 
-    color:#111;
+    border:2px solid #d4af37;
 
     display:flex;
 
@@ -102,15 +134,27 @@
 
     align-items:center;
 
-    font-size:2rem;
+    margin:0 auto 28px;
 
-    box-shadow:0 15px 35px rgba(212,175,55,.35);
+}
+
+.why-dot{
+
+    width:24px;
+
+    height:24px;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    box-shadow:0 0 25px rgba(212,175,55,.6);
 
 }
 
 .why-card h3{
 
-    font-size:1.45rem;
+    font-size:1.5rem;
 
     margin-bottom:18px;
 
@@ -124,13 +168,11 @@
 
     line-height:1.8;
 
-    font-size:.98rem;
-
 }
 
-/* ==========================================
+/* ===========================
    TABLET
-========================================== */
+=========================== */
 
 @media(max-width:1100px){
 
@@ -142,9 +184,9 @@ grid-template-columns:repeat(2,1fr);
 
 }
 
-/* ==========================================
+/* ===========================
    MOBILE
-========================================== */
+=========================== */
 
 @media(max-width:768px){
 
@@ -168,7 +210,7 @@ grid-template-columns:1fr;
 
 .why-container h2{
 
-font-size:2.4rem;
+font-size:2.5rem;
 
 }
 

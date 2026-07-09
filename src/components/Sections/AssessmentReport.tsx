@@ -6,7 +6,6 @@ export default function AssessmentReport() {
       className="assessment-section"
       id="assessment-report"
     >
-
       <div className="assessment-container">
 
         {/* LEFT */}
@@ -24,25 +23,25 @@ export default function AssessmentReport() {
           </h2>
 
           <p>
-            Every Property Assessment Report is designed to help you make
-            informed decisions before spending thousands on repairs.
+            Our Professional Property Assessment Reports help homeowners,
+            commercial property owners, property managers, financial
+            institutions and government agencies understand a property's
+            condition before committing to repairs or maintenance.
 
-            Whether you're a homeowner, commercial property owner,
-            property manager, financial institution or government agency,
-            you'll receive professional documentation identifying current
-            conditions, recommended repairs, maintenance priorities and
-            estimated project costs.
+            Every report includes detailed documentation, photographs,
+            repair recommendations, maintenance priorities and estimated
+            project costs prepared by JBTRADESMENLLC.
           </p>
 
           <div className="assessment-grid">
 
-            <div>📷 High Resolution Property Photos</div>
+            <div>📷 High Resolution Photos</div>
 
             <div>📋 Detailed Inspection Findings</div>
 
-            <div>🔧 Professional Repair Recommendations</div>
+            <div>🔧 Recommended Repairs</div>
 
-            <div>⚠ Maintenance Priority Ranking</div>
+            <div>⚠ Maintenance Priorities</div>
 
             <div>💲 Estimated Repair Costs</div>
 
@@ -56,56 +55,68 @@ export default function AssessmentReport() {
 
         <div className="assessment-card">
 
-          <div className="report-header">
-            PROFESSIONAL PROPERTY REPORT
-          </div>
+          <div className="report-cover">
 
-          <div className="report-body">
-
-            <h3>
-              $49
-            </h3>
-
-            <span className="report-price-label">
-              Flat Rate Assessment
-            </span>
-
-            <p>
-              A comprehensive on-site property assessment delivered
-              as a professional PDF report complete with photographs,
-              inspection findings, maintenance priorities and estimated
-              repair recommendations.
-            </p>
-
-            <div className="report-benefits">
-
-              <div>✔ Residential Properties</div>
-
-              <div>✔ Commercial Facilities</div>
-
-              <div>✔ Property Management</div>
-
-              <div>✔ Financial Institutions</div>
-
-              <div>✔ Government Agencies</div>
-
-              <div>✔ Insurance Documentation</div>
-
+            <div className="report-top">
+              PROPERTY ASSESSMENT REPORT
             </div>
 
-            <a
-              href="#estimate-form"
-              className="primary-btn"
-            >
-              Schedule Assessment
-            </a>
+            <div className="report-content">
+
+              <small>JBTRADESMENLLC</small>
+
+              <h3>
+                Professional Property
+                <br />
+                Assessment
+              </h3>
+
+              <div className="report-divider"></div>
+
+              <div className="report-list">
+
+                <span>✓ Interior Inspection</span>
+
+                <span>✓ Exterior Inspection</span>
+
+                <span>✓ Property Photos</span>
+
+                <span>✓ Repair Recommendations</span>
+
+                <span>✓ Priority Ratings</span>
+
+                <span>✓ Cost Estimates</span>
+
+              </div>
+
+              <div className="report-footer">
+
+                <div>
+                  <strong>PDF</strong>
+                  <small>Professional Report</small>
+                </div>
+
+                <div>
+                  <strong>$49</strong>
+                  <small>Flat Rate</small>
+                </div>
+
+              </div>
+
+              <a
+                href="#estimate-form"
+                className="primary-btn"
+              >
+                Request Assessment
+              </a>
+
+            </div>
 
           </div>
 
         </div>
 
       </div>
-
     </section>
   );
 }

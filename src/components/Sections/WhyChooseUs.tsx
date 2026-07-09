@@ -4,38 +4,32 @@ const reasons = [
   {
     title: 'Licensed & Insured',
     description:
-      'Fully insured and committed to professional workmanship on every project.',
-    icon: '🛡',
+      'Fully licensed and insured for residential and commercial property maintenance.',
   },
   {
     title: 'Federal Contractor',
     description:
-      'Registered Federal Contractor with active CAGE and UEI registrations.',
-    icon: '🏛',
+      'Active CAGE and UEI registrations for government and institutional projects.',
   },
   {
     title: '1,200+ Projects',
     description:
-      'Extensive experience serving homeowners, businesses, and property managers.',
-    icon: '🔨',
+      'Successfully completed projects across residential, commercial and property management sectors.',
   },
   {
-    title: '5-Star Service',
+    title: '10+ Years Experience',
     description:
-      'Built on professionalism, communication, and quality craftsmanship.',
-    icon: '⭐',
+      'A decade of hands-on experience delivering dependable maintenance solutions.',
   },
   {
-    title: '72-Hour Response',
+    title: 'Fast Response',
     description:
-      'Responsive scheduling and communication for residential and commercial clients.',
-    icon: '⚡',
+      'Most assessment requests receive a response within 72 hours.',
   },
   {
     title: 'Professional Reports',
     description:
-      'Detailed assessment reports with photographs, findings, repair priorities, and cost recommendations.',
-    icon: '📄',
+      'Detailed digital assessment reports with photos, findings and repair recommendations.',
   },
 ];
 
@@ -46,19 +40,21 @@ export default function WhyChooseUs() {
       <div className="why-container">
 
         <span className="section-tag">
-          WHY JBTRADESMENLLC
+          WHY CHOOSE JBTRADESMENLLC
         </span>
 
         <h2>
-          Experience You Can Trust.
+          Professional.
           <br />
-          Results You Can See.
+          Reliable.
+          <br />
+          Trusted.
         </h2>
 
         <p className="why-intro">
-          We combine professional property assessments, commercial maintenance
-          experience, and transparent communication to help our clients make
-          informed decisions before every project.
+          We combine professional property assessments, quality workmanship,
+          transparent communication and industry certifications to deliver
+          dependable maintenance solutions for every client.
         </p>
 
         <div className="why-grid">
@@ -71,7 +67,9 @@ export default function WhyChooseUs() {
             >
 
               <div className="why-icon">
-                {reason.icon}
+
+                <div className="why-dot"></div>
+
               </div>
 
               <h3>
