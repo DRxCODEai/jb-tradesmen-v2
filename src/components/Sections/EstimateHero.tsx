@@ -64,16 +64,61 @@ export default function EstimateHero() {
 
         </div>
 
-        <div className="estimate-right">
+  <div className="estimate-right">
 
-          <img
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
-            alt="Professional property assessment"
-          />
+  <img
+    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+    alt="Professional property assessment"
+  />
+
+  <div className="trust-panel">
+
+    <h3>★★★★★ 5-Star Rated Service</h3>
+
+    <p>
+      Trusted by homeowners, commercial clients,
+      property managers, financial institutions,
+      and government agencies.
+    </p>
+
+    <div className="trust-list">
+
+      <div>✓ Licensed &amp; Insured</div>
+
+      <div>✓ OSHA 30 Certified</div>
+
+      <div>✓ EPA 608 &amp; 609</div>
+
+      <div>✓ Federal Contractor</div>
+
+    </div>
+
+    <div className="trust-stats">
+
+      <div>
+        <strong>1,200+</strong>
+        <span>Projects</span>
+      </div>
+
+      <div>
+        <strong>10+</strong>
+        <span>Years</span>
+      </div>
+
+      <div>
+        <strong>72hr</strong>
+        <span>Response</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
         </div>
 
-      </div>
+      
 
     </section>
   )

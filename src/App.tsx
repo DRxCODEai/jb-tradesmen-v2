@@ -10,7 +10,7 @@ import ProjectGallery from './pages/ProjectGallery'
 import WhoWeWorkWith from './pages/WhoWeWorkWith'
 import Resources from './pages/Resources'
 
-import InstantProjectEstimate from './pages/InstantProjectEstimate'
+import InstantProjectEstimate from './pages/AIEstimator'
 import RequestEstimate from './pages/RequestEstimate'
 
 import Contact from './pages/Contact'
