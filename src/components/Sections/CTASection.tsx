@@ -1,16 +1,57 @@
+import './CTASection.css';
+
 export default function CTASection() {
   return (
     <section className="cta-section">
 
-      <h2>Ready to Start Your Project?</h2>
+      <div className="cta-container">
 
-      <p>
-        Schedule your assessment or call us today.
-      </p>
+        <span className="section-tag">
+          READY TO GET STARTED?
+        </span>
 
-      <a href="tel:9702865993">
-        Call (970) 286-5993
-      </a>
+        <h2>
+          Let's Build Your Next Project Together
+        </h2>
+
+        <p>
+          Whether you need a professional property assessment,
+          commercial maintenance, residential repairs,
+          or ongoing facility support,
+          JBTRADESMENLLC is ready to help.
+        </p>
+
+        <div className="cta-highlights">
+
+          <span>Residential</span>
+
+          <span>Commercial</span>
+
+          <span>Property Management</span>
+
+          <span>Government Contracting</span>
+
+        </div>
+
+        <div className="cta-buttons">
+
+          <a
+            href="/request-estimate"
+            className="primary-btn"
+          >
+            Request Assessment
+          </a>
+
+          <a
+            href="tel:9702865993"
+            className="secondary-btn"
+          >
+            Call (970) 286-5993
+          </a>
+
+        </div>
+
+      </div>
 
     </section>
   );

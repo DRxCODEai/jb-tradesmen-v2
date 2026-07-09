@@ -1,0 +1,214 @@
+/* ==========================================
+   PROCESS TIMELINE
+========================================== */
+
+.timeline-section{
+
+    background:#f7f7f7;
+
+    padding:140px 0;
+}
+
+.timeline-container{
+
+    max-width:1320px;
+
+    margin:auto;
+
+    padding:0 30px;
+
+    text-align:center;
+}
+
+.timeline-container h2{
+
+    font-size:clamp(2.6rem,5vw,4.2rem);
+
+    color:#111;
+
+    margin:18px 0 22px;
+
+    line-height:1.15;
+}
+
+.timeline-intro{
+
+    max-width:760px;
+
+    margin:0 auto 70px;
+
+    color:#666;
+
+    font-size:1.1rem;
+
+    line-height:1.9;
+}
+
+/* ==========================
+   GRID
+========================== */
+
+.timeline-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:26px;
+
+    position:relative;
+}
+
+/* gold connector */
+
+.timeline-grid::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:8%;
+
+    right:8%;
+
+    top:54px;
+
+    height:4px;
+
+    background:#d4af37;
+
+    border-radius:999px;
+
+    z-index:0;
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.timeline-card{
+
+    position:relative;
+
+    z-index:2;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:85px 26px 32px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.08);
+
+    transition:.35s ease;
+}
+
+.timeline-card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 35px 70px rgba(0,0,0,.16);
+}
+
+/* ==========================
+   NUMBER
+========================== */
+
+.timeline-number{
+
+    position:absolute;
+
+    top:-22px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    color:#111;
+
+    font-size:1.4rem;
+
+    font-weight:800;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:0 10px 35px rgba(212,175,55,.35);
+}
+
+.timeline-card h3{
+
+    font-size:1.35rem;
+
+    margin-bottom:18px;
+
+    color:#111;
+}
+
+.timeline-card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    font-size:.98rem;
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:1200px){
+
+.timeline-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+.timeline-grid::before{
+
+display:none;
+
+}
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+.timeline-section{
+
+padding:90px 0;
+
+}
+
+.timeline-grid{
+
+grid-template-columns:1fr;
+
+gap:45px;
+
+}
+
+.timeline-card{
+
+padding:80px 24px 30px;
+
+}
+
+}

@@ -7,18 +7,19 @@ export default function ProfessionalCredentials() {
 
       <div className="credentials-container">
 
-        <p className="section-label">
+        <span className="section-tag">
           PROFESSIONAL CREDENTIALS
-        </p>
+        </span>
 
         <h2>
-          Trusted Qualifications
+          Certifications & Professional Qualifications
         </h2>
 
         <p className="credentials-intro">
-          JBTRADESMENLLC provides professional residential,
-          commercial and government maintenance services backed by
-          nationally recognized certifications.
+          JBTRADESMENLLC maintains nationally recognized certifications,
+          licensing and contractor registrations to support residential,
+          commercial, retail, financial institution and government
+          maintenance projects.
         </p>
 
         <div className="credentials-grid">
@@ -30,11 +31,11 @@ export default function ProfessionalCredentials() {
               className="credential-card"
             >
 
-              <div className="credential-check">
+              <div className="credential-icon">
                 ✓
               </div>
 
-              <span>{credential}</span>
+              <h3>{credential}</h3>
 
             </div>
 

@@ -1,0 +1,211 @@
+/* =====================================================
+   ASSESSMENT REPORT
+===================================================== */
+
+.assessment-section{
+    background:#ffffff;
+    padding:120px 0;
+}
+
+.assessment-container{
+    max-width:1400px;
+    margin:0 auto;
+    padding:0 40px;
+
+    display:grid;
+    grid-template-columns:1.15fr .85fr;
+    gap:80px;
+    align-items:center;
+}
+
+/* ==========================================
+   LEFT SIDE
+========================================== */
+
+.section-tag{
+    display:inline-block;
+
+    color:#d4af37;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.22em;
+
+    margin-bottom:18px;
+}
+
+.assessment-left h2{
+
+    font-size:clamp(2.5rem,5vw,4rem);
+
+    line-height:1.1;
+
+    color:#111;
+
+    margin-bottom:28px;
+}
+
+.assessment-left p{
+
+    font-size:1.12rem;
+
+    color:#666;
+
+    line-height:1.9;
+
+    margin-bottom:42px;
+
+    max-width:720px;
+}
+
+/* ==========================================
+   FEATURE GRID
+========================================== */
+
+.assessment-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+}
+
+.assessment-grid div{
+
+    background:#fafafa;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    border:1px solid rgba(0,0,0,.06);
+
+    font-weight:600;
+
+    transition:.25s ease;
+}
+
+.assessment-grid div:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#d4af37;
+
+    box-shadow:0 20px 40px rgba(0,0,0,.08);
+}
+
+/* ==========================================
+   REPORT CARD
+========================================== */
+
+.assessment-card{
+
+    background:#111;
+
+    color:white;
+
+    border-radius:28px;
+
+    overflow:hidden;
+
+    box-shadow:0 35px 90px rgba(0,0,0,.18);
+}
+
+.report-header{
+
+    background:#d4af37;
+
+    color:#111;
+
+    text-align:center;
+
+    padding:18px;
+
+    font-weight:700;
+
+    letter-spacing:1px;
+}
+
+.report-body{
+
+    padding:45px;
+}
+
+.report-body h3{
+
+    font-size:4rem;
+
+    color:#d4af37;
+
+    margin-bottom:12px;
+}
+
+.report-body p{
+
+    color:#d0d0d0;
+
+    line-height:1.8;
+
+    margin-bottom:28px;
+}
+
+.report-body ul{
+
+    padding-left:22px;
+
+    margin-bottom:34px;
+
+    line-height:2;
+}
+
+.report-body li{
+
+    color:white;
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:1050px){
+
+    .assessment-container{
+
+        grid-template-columns:1fr;
+
+        gap:60px;
+    }
+
+    .assessment-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .assessment-section{
+
+        padding:90px 0;
+    }
+
+    .assessment-container{
+
+        padding:0 24px;
+    }
+
+    .report-body{
+
+        padding:32px;
+    }
+
+    .report-body h3{
+
+        font-size:3rem;
+    }
+
+}

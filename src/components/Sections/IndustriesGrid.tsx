@@ -1,24 +1,82 @@
+import './IndustriesGrid.css';
+
+const industries = [
+  {
+    title: 'Residential',
+    description:
+      'Repairs, maintenance, remodels and home improvement services for homeowners.'
+  },
+  {
+    title: 'Commercial',
+    description:
+      'Maintenance solutions for offices, retail stores, restaurants and facilities.'
+  },
+  {
+    title: 'Property Management',
+    description:
+      'Turnovers, inspections, work orders and preventative maintenance.'
+  },
+  {
+    title: 'Financial Institutions',
+    description:
+      'Banks, credit unions and financial facilities requiring dependable service.'
+  },
+  {
+    title: 'Government',
+    description:
+      'Federal, state and municipal maintenance performed to professional standards.'
+  },
+  {
+    title: 'Retail & Multi-Site',
+    description:
+      'Nationwide and regional maintenance programs for retail and franchise locations.'
+  }
+];
+
 export default function IndustriesGrid() {
   return (
     <section className="industries-section">
 
-      <h2>Industries We Serve</h2>
+      <div className="industries-container">
 
-      <ul>
+        <span className="section-tag">
+          WHO WE SERVE
+        </span>
 
-        <li>Residential</li>
+        <h2>
+          Industries We Proudly Serve
+        </h2>
 
-        <li>Commercial</li>
+        <p className="industries-intro">
+          From homeowners to national commercial clients, our team
+          delivers dependable maintenance solutions backed by
+          professional communication and quality workmanship.
+        </p>
 
-        <li>Property Management</li>
+        <div className="industries-grid">
 
-        <li>Financial Institutions</li>
+          {industries.map((industry) => (
 
-        <li>Retail</li>
+            <div
+              key={industry.title}
+              className="industry-card"
+            >
 
-        <li>Government Agencies</li>
+              <div className="industry-icon">
+                ◆
+              </div>
 
-      </ul>
+              <h3>{industry.title}</h3>
+
+              <p>{industry.description}</p>
+
+            </div>
+
+          ))}
+
+        </div>
+
+      </div>
 
     </section>
   );

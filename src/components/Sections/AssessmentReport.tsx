@@ -1,5 +1,4 @@
 import './AssessmentReport.css';
-
 export default function AssessmentReport() {
   return (
     <section className="assessment-section">
@@ -8,24 +7,27 @@ export default function AssessmentReport() {
 
         <div className="assessment-left">
 
-          <p className="section-label">
-            PROFESSIONAL REPORTS
-          </p>
+          <span className="section-tag">
+            PROPERTY ASSESSMENT REPORTS
+          </span>
 
           <h2>
-            Detailed Property Assessment Reports
+            Know Exactly What Your Property Needs
           </h2>
 
           <p>
-            Our professional Property Assessment Reports provide
-            homeowners, commercial property owners, property managers,
-            financial institutions, and government agencies with a
-            comprehensive evaluation of their property.
+            Our professional Property Assessment Reports help
+            homeowners, commercial property owners, property
+            managers, retail facilities and government agencies
+            understand maintenance needs before committing to
+            repairs.
           </p>
 
-          <div className="assessment-features">
+          <div className="assessment-grid">
 
-            <div>✔ Photographs Included</div>
+            <div>✔ Detailed Property Inspection</div>
+
+            <div>✔ High Resolution Photos</div>
 
             <div>✔ Repair Recommendations</div>
 
@@ -35,16 +37,14 @@ export default function AssessmentReport() {
 
             <div>✔ Professional PDF Report</div>
 
-            <div>✔ Only $49</div>
-
           </div>
 
         </div>
 
-        <div className="report-card">
+        <div className="assessment-card">
 
           <div className="report-header">
-            PROPERTY ASSESSMENT REPORT
+            PROFESSIONAL REPORT
           </div>
 
           <div className="report-body">
@@ -52,10 +52,28 @@ export default function AssessmentReport() {
             <h3>$49</h3>
 
             <p>
-              Delivered professionally and ready for property owners,
-              insurance documentation, budgeting, maintenance planning,
-              or investment decisions.
+              Flat-rate assessment for residential,
+              commercial and property management clients.
             </p>
+
+            <ul>
+
+              <li>Residential</li>
+
+              <li>Commercial</li>
+
+              <li>Property Management</li>
+
+              <li>Government Facilities</li>
+
+            </ul>
+
+            <a
+              href="#estimate-form"
+              className="primary-btn"
+            >
+              Request Assessment
+            </a>
 
           </div>
 

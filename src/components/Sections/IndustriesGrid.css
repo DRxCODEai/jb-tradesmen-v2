@@ -1,0 +1,138 @@
+/* ==========================================
+   INDUSTRIES
+========================================== */
+
+.industries-section{
+    background:#ffffff;
+    padding:120px 0;
+}
+
+.industries-container{
+    max-width:1400px;
+    margin:auto;
+    padding:0 40px;
+}
+
+.industries-container h2{
+
+    font-size:clamp(2.5rem,5vw,4rem);
+
+    margin:18px 0 24px;
+
+    color:#111;
+}
+
+.industries-intro{
+
+    max-width:760px;
+
+    font-size:1.1rem;
+
+    color:#666;
+
+    line-height:1.9;
+
+    margin-bottom:60px;
+}
+
+/* ========================================== */
+
+.industries-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:28px;
+}
+
+.industry-card{
+
+    background:#fafafa;
+
+    padding:40px;
+
+    border-radius:24px;
+
+    border:1px solid rgba(0,0,0,.06);
+
+    transition:.3s ease;
+}
+
+.industry-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#d4af37;
+
+    box-shadow:0 25px 60px rgba(0,0,0,.08);
+}
+
+.industry-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:#d4af37;
+
+    color:#111;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:1.8rem;
+
+    margin-bottom:24px;
+}
+
+.industry-card h3{
+
+    margin-bottom:18px;
+
+    font-size:1.5rem;
+
+    color:#111;
+}
+
+.industry-card p{
+
+    color:#666;
+
+    line-height:1.8;
+}
+
+/* ========================================== */
+
+@media(max-width:1100px){
+
+    .industries-grid{
+
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .industries-section{
+
+        padding:90px 0;
+    }
+
+    .industries-container{
+
+        padding:0 24px;
+    }
+
+    .industries-grid{
+
+        grid-template-columns:1fr;
+    }
+
+}
