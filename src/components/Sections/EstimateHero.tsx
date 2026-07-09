@@ -2,6 +2,7 @@ import './EstimateHero.css'
 
 export default function EstimateHero() {
   return (
+    
     <section className="estimate-hero">
 
       <div className="estimate-overlay">

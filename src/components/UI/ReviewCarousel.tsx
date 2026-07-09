@@ -1,5 +1,5 @@
 import { useEffect, useState, type TouchEvent } from 'react'
-import { reviews } from '../data/reviews'
+import { reviews } from '../../data/reviews'
 
 export default function ReviewCarousel() {
   const [activeIndex, setActiveIndex] = useState(0)
