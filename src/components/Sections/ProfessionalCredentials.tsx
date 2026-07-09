@@ -7,24 +7,25 @@ export default function ProfessionalCredentials() {
 
       <div className="credentials-container">
 
-        <span className="section-tag">
-          PROFESSIONAL CREDENTIALS
-        </span>
+        <div className="credentials-heading">
 
-        <h2>
-          Certified.
-          <br />
-          Qualified.
-          <br />
-          Trusted.
-        </h2>
+          <p className="section-label">
+            PROFESSIONAL CREDENTIALS
+          </p>
 
-        <p className="credentials-intro">
-          JBTRADESMENLLC maintains nationally recognized certifications,
-          contractor registrations and professional qualifications that
-          support residential, commercial, retail, property management,
-          financial institution and government maintenance projects.
-        </p>
+          <h2>
+            Trusted by Property Owners,
+            Businesses & Government Agencies
+          </h2>
+
+          <p>
+            JBTRADESMENLLC delivers professional maintenance,
+            repair, inspections and property assessments backed
+            by nationally recognized certifications and federal
+            contractor registration.
+          </p>
+
+        </div>
 
         <div className="credentials-grid">
 
@@ -46,13 +47,9 @@ export default function ProfessionalCredentials() {
 
               <div className="credential-content">
 
-                <h3>
-                  {credential.title}
-                </h3>
+                <h3>{credential.title}</h3>
 
-                <p>
-                  {credential.description}
-                </p>
+                <p>{credential.description}</p>
 
               </div>
 
