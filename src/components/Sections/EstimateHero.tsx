@@ -4,10 +4,9 @@ import logo from '../../assets/logo.png';
 export default function EstimateHero() {
   return (
     <section className="estimate-hero">
-
       <div className="estimate-overlay">
 
-        {/* LEFT SIDE */}
+        {/* LEFT */}
 
         <div className="estimate-left">
 
@@ -24,12 +23,11 @@ export default function EstimateHero() {
           <p>
             Receive a professional Property Assessment Report designed for
             homeowners, commercial facilities, property managers,
-            financial institutions, retail facilities, and government
-            agencies.
+            financial institutions, retail facilities and government agencies.
 
             Every assessment includes detailed findings,
-            photographs, repair recommendations, maintenance
-            priorities, and a professional estimate.
+            photographs, repair recommendations,
+            maintenance priorities and a professional estimate.
           </p>
 
           <div className="estimate-badges">
@@ -82,7 +80,7 @@ export default function EstimateHero() {
 
         </div>
 
-        {/* RIGHT SIDE */}
+        {/* RIGHT */}
 
         <div className="estimate-right">
 
@@ -96,14 +94,37 @@ export default function EstimateHero() {
 
             <div className="brand-divider"></div>
 
-            <h3>
-              Professional Property Assessment Reports
-            </h3>
+            <h3>JBTRADESMENLLC</h3>
 
-            <p>
-              Residential, Commercial, Property Management,
-              Financial Institutions and Government Facilities.
+            <p className="brand-subtitle">
+              Professional Property Assessments
             </p>
+
+            <div className="brand-dashboard">
+
+              <div className="dashboard-item">
+                <strong>1,200+</strong>
+                <span>Projects Completed</span>
+              </div>
+
+              <div className="dashboard-item">
+                <strong>10+</strong>
+                <span>Years Experience</span>
+              </div>
+
+              <div className="dashboard-item">
+                <strong>★★★★★</strong>
+                <span>5-Star Rating</span>
+              </div>
+
+              <div className="dashboard-item">
+                <strong>CO • WY • NV</strong>
+                <span>Serving</span>
+              </div>
+
+            </div>
+
+            <div className="brand-divider"></div>
 
             <div className="brand-checks">
 
@@ -115,24 +136,9 @@ export default function EstimateHero() {
 
               <span>✓ Federal Contractor</span>
 
-            </div>
+              <span>✓ CAGE: 13SR1</span>
 
-            <div className="brand-stats">
-
-              <div>
-                <strong>1,200+</strong>
-                <small>Projects</small>
-              </div>
-
-              <div>
-                <strong>10+</strong>
-                <small>Years</small>
-              </div>
-
-              <div>
-                <strong>CO • WY • NV</strong>
-                <small>Serving</small>
-              </div>
+              <span>✓ UEI: PKT6EMEN5BJ9</span>
 
             </div>
 
@@ -141,7 +147,6 @@ export default function EstimateHero() {
         </div>
 
       </div>
-
     </section>
   );
 }

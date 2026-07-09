@@ -1,78 +1,103 @@
 import './AssessmentReport.css';
+
 export default function AssessmentReport() {
   return (
-    <section className="assessment-section">
+    <section
+      className="assessment-section"
+      id="assessment-report"
+    >
 
       <div className="assessment-container">
+
+        {/* LEFT */}
 
         <div className="assessment-left">
 
           <span className="section-tag">
-            PROPERTY ASSESSMENT REPORTS
+            PROFESSIONAL PROPERTY ASSESSMENTS
           </span>
 
           <h2>
-            Know Exactly What Your Property Needs
+            Know Exactly What
+            <br />
+            Your Property Needs
           </h2>
 
           <p>
-            Our professional Property Assessment Reports help
-            homeowners, commercial property owners, property
-            managers, retail facilities and government agencies
-            understand maintenance needs before committing to
-            repairs.
+            Every Property Assessment Report is designed to help you make
+            informed decisions before spending thousands on repairs.
+
+            Whether you're a homeowner, commercial property owner,
+            property manager, financial institution or government agency,
+            you'll receive professional documentation identifying current
+            conditions, recommended repairs, maintenance priorities and
+            estimated project costs.
           </p>
 
           <div className="assessment-grid">
 
-            <div>✔ Detailed Property Inspection</div>
+            <div>📷 High Resolution Property Photos</div>
 
-            <div>✔ High Resolution Photos</div>
+            <div>📋 Detailed Inspection Findings</div>
 
-            <div>✔ Repair Recommendations</div>
+            <div>🔧 Professional Repair Recommendations</div>
 
-            <div>✔ Estimated Repair Costs</div>
+            <div>⚠ Maintenance Priority Ranking</div>
 
-            <div>✔ Maintenance Priorities</div>
+            <div>💲 Estimated Repair Costs</div>
 
-            <div>✔ Professional PDF Report</div>
+            <div>📄 Professional PDF Report</div>
 
           </div>
 
         </div>
 
+        {/* RIGHT */}
+
         <div className="assessment-card">
 
           <div className="report-header">
-            PROFESSIONAL REPORT
+            PROFESSIONAL PROPERTY REPORT
           </div>
 
           <div className="report-body">
 
-            <h3>$49</h3>
+            <h3>
+              $49
+            </h3>
+
+            <span className="report-price-label">
+              Flat Rate Assessment
+            </span>
 
             <p>
-              Flat-rate assessment for residential,
-              commercial and property management clients.
+              A comprehensive on-site property assessment delivered
+              as a professional PDF report complete with photographs,
+              inspection findings, maintenance priorities and estimated
+              repair recommendations.
             </p>
 
-            <ul>
+            <div className="report-benefits">
 
-              <li>Residential</li>
+              <div>✔ Residential Properties</div>
 
-              <li>Commercial</li>
+              <div>✔ Commercial Facilities</div>
 
-              <li>Property Management</li>
+              <div>✔ Property Management</div>
 
-              <li>Government Facilities</li>
+              <div>✔ Financial Institutions</div>
 
-            </ul>
+              <div>✔ Government Agencies</div>
+
+              <div>✔ Insurance Documentation</div>
+
+            </div>
 
             <a
               href="#estimate-form"
               className="primary-btn"
             >
-              Request Assessment
+              Schedule Assessment
             </a>
 
           </div>
