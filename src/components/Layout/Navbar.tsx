@@ -8,7 +8,7 @@ const links = [
   { to: '/project-gallery', label: 'Gallery' },
   { to: '/who-we-work-with', label: 'Clients' },
   { to: '/resources', label: 'Resources' },
-  { to: '/instant-project-estimate', label: 'Estimate' },
+  { to: '/request-estimate', label: 'Estimate' },
   { to: '/contact', label: 'Contact' },
 ]
 

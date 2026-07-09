@@ -1,5 +1,5 @@
 import licensed from '../assets/certifications/licensed.png';
-import osha from '../assets/certifications/osha.jpg';
+import osha from '../assets/certifications/osha.png';
 import epa from '../assets/certifications/epa.png';
 import government from '../assets/certifications/government.png';
 import sam from '../assets/certifications/sam.png';

@@ -175,12 +175,10 @@ export default function Home() {
       className="hero-image"
     />
 
-    <a
-    href="https://koalendar.com/u/Gh3fj36hpBYsbg1SA4npVoFy56m2"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="hero-overlay hero-estimate"
-    aria-label="Schedule a Free Estimate"
+   <a
+  href="/request-estimate"
+  className="hero-overlay hero-estimate"
+  aria-label="Request a Property Assessment"
 />
 
     <a
@@ -396,12 +394,15 @@ export default function Home() {
             </p>
           </div>
           <div className="estimate-actions">
-            <a className="primary-cta" href="/instant-project-estimate">
-              Get a Free Estimate
-            </a>
-            <a className="secondary-cta dark-cta" href="/contact">
-              Contact Our Team
-            </a>
+            <a className="primary-cta" href="/request-estimate">
+  Request Property Assessment
+</a>
+            <a
+  className="secondary-cta dark-cta"
+  href="/instant-project-estimate"
+>
+  Try AI Instant Estimate
+</a>
           </div>
         </div>
       </section>
