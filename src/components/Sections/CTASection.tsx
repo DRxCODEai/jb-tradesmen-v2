@@ -1,4 +1,5 @@
 import './CTASection.css';
+import { KOALENDAR_URL } from '../../config/links';
 
 export default function CTASection() {
   return (
@@ -36,7 +37,9 @@ export default function CTASection() {
         <div className="cta-buttons">
 
           <a
-            href="/request-estimate"
+            href={KOALENDAR_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="primary-btn"
           >
             Request Assessment

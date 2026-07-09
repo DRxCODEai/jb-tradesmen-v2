@@ -5,7 +5,6 @@ import ProfessionalCredentials from '../components/Sections/ProfessionalCredenti
 import ProcessTimeline from '../components/Sections/ProcessTimeline';
 import IndustriesGrid from '../components/Sections/IndustriesGrid';
 import FAQSection from '../components/Sections/FAQSection';
-import FeaturedProjects from '../components/Sections/FeaturedProjects';
 import CTASection from '../components/Sections/CTASection';
 
 export default function RequestEstimate() {
@@ -25,7 +24,6 @@ export default function RequestEstimate() {
 
       <FAQSection />
 
-      <FeaturedProjects />
 
       <CTASection />
     </>

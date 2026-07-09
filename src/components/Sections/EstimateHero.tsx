@@ -1,5 +1,6 @@
 import './EstimateHero.css';
 import logo from '../../assets/logo.png';
+import { KOALENDAR_URL } from '../../config/links';
 
 export default function EstimateHero() {
   return (
@@ -63,7 +64,9 @@ export default function EstimateHero() {
           <div className="estimate-buttons">
 
             <a
-              href="#assessment-report"
+              href={KOALENDAR_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="primary-btn"
             >
               Request Property Assessment

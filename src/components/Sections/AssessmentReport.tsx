@@ -1,4 +1,5 @@
 import './AssessmentReport.css';
+import { KOALENDAR_URL } from '../../config/links';
 
 export default function AssessmentReport() {
   return (
@@ -104,7 +105,9 @@ export default function AssessmentReport() {
               </div>
 
               <a
-                href="#estimate-form"
+                href={KOALENDAR_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="primary-btn"
               >
                 Request Assessment
