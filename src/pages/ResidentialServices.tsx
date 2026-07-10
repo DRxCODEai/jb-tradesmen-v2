@@ -1,10 +1,10 @@
-import ResidentialHero from '../components/Sections/ResidentialHero'
-import ResidentialServicesGrid from '../components/Sections/ResidentialServicesGrid'
-import ResidentialBenefits from '../components/Sections/ResidentialBenefits'
-import ResidentialProcess from '../components/Sections/ResidentialProcess'
-import ResidentialServiceAreas from '../components/Sections/ResidentialServiceAreas'
-import ResidentialFAQ from '../components/Sections/ResidentialFAQ'
-import ResidentialCTA from '../components/Sections/ResidentialCTA'
+import ResidentialHero from '../components/Residential/ResidentialHero'
+import ResidentialServicesGrid from '../components/Residential/ResidentialServicesGrid'
+import ResidentialBenefits from '../components/Residential/ResidentialBenefits'
+import ResidentialProcess from '../components/Residential/ResidentialProcess'
+import ResidentialServiceAreas from '../components/Residential/ResidentialServiceAreas'
+import ResidentialFAQ from '../components/Residential/ResidentialFAQ'
+import ResidentialCTA from '../components/Residential/ResidentialCTA'
 
 export default function ResidentialServices() {
   return (
