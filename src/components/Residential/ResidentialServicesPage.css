@@ -1,0 +1,36 @@
+.residential-page { color: #171717; background: #fff; }
+.residential-shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+.residential-eyebrow { margin: 0 0 14px; color: #b88719; font-size: .75rem; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; }
+.residential-page h1, .residential-page h2, .residential-page h3, .residential-page p { margin-top: 0; }
+.residential-page h2 { font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.08; letter-spacing: -.045em; }
+.residential-hero { min-height: 610px; display: grid; align-items: center; position: relative; overflow: hidden; background: #111; color: #fff; isolation: isolate; }
+.residential-hero__image, .residential-hero__image::after { position: absolute; inset: 0; z-index: -1; }
+.residential-hero__image img { width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: .62; }
+.residential-hero__image::after { content: ''; background: linear-gradient(90deg, rgba(7, 7, 7, .94) 4%, rgba(7, 7, 7, .74) 42%, rgba(7, 7, 7, .2) 100%); }
+.residential-hero__content { padding: 88px 0; max-width: 1120px; }
+.residential-hero h1 { max-width: 720px; font-size: clamp(3rem, 6.4vw, 5.65rem); line-height: .98; letter-spacing: -.065em; margin-bottom: 24px; }
+.residential-hero .residential-eyebrow { color: #e7c15a; }
+.residential-hero__copy { width: min(100%, 590px); color: rgba(255,255,255,.84); font-size: 1.1rem; line-height: 1.7; margin-bottom: 32px; }
+.residential-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.residential-button { min-height: 49px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; padding: 0 21px; border: 1px solid transparent; border-radius: 999px; font-weight: 750; text-decoration: none; transition: transform .2s ease, background .2s ease; }
+.residential-button:hover { transform: translateY(-2px); }
+.residential-button--gold { color: #15110a; background: #d9a441; }
+.residential-button--outline { color: #fff; border-color: rgba(255,255,255,.6); background: rgba(0,0,0,.16); }
+.residential-intro { display: grid; grid-template-columns: 1.15fr .85fr; gap: 90px; padding: 105px 0; align-items: end; }
+.residential-intro h2 { margin-bottom: 0; max-width: 590px; }
+.residential-intro > p { margin: 0; color: #565656; font-size: 1.08rem; line-height: 1.8; }
+.residential-services { padding: 104px 0; background: #f6f5f2; }
+.residential-section-heading { max-width: 670px; margin-bottom: 42px; }
+.residential-section-heading h2 { margin-bottom: 0; }
+.residential-service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.residential-service-card { padding: 31px; border: 1px solid rgba(17,17,17,.08); background: #fff; border-radius: 17px; box-shadow: 0 12px 30px rgba(17,17,17,.035); }
+.residential-service-card__icon { display: inline-grid; width: 50px; height: 50px; place-items: center; margin-bottom: 22px; color: #9b7015; background: #f8eed9; border-radius: 50%; }
+.residential-service-card h3 { font-size: 1.32rem; margin-bottom: 11px; }
+.residential-service-card > p { min-height: 76px; color: #5b5b5b; line-height: 1.65; }
+.residential-service-card ul { list-style: none; padding: 20px 0 0; margin: 22px 0 0; border-top: 1px solid #e8e5de; display: grid; gap: 11px; }
+.residential-service-card li { display: flex; align-items: center; gap: 8px; font-size: .94rem; font-weight: 650; }.residential-service-card li svg { color: #b88719; }
+.residential-confidence { padding: 105px 0; background: #171717; color: #fff; }.residential-confidence__grid { display: grid; grid-template-columns: .88fr 1.12fr; gap: 86px; align-items: center; }.residential-confidence__image { height: 510px; overflow: hidden; border-radius: 18px; }.residential-confidence__image img { width: 100%; height: 100%; object-fit: cover; object-position: 66% center; }.residential-confidence__content > p:not(.residential-eyebrow) { max-width: 570px; color: rgba(255,255,255,.72); line-height: 1.7; font-size: 1.06rem; }.residential-confidence .residential-eyebrow { color: #e7c15a; }.residential-confidence h2 { margin-bottom: 20px; }.residential-trust-list { margin-top: 33px; display: grid; gap: 22px; }.residential-trust-list > div { display: flex; gap: 15px; }.residential-trust-list svg { flex: 0 0 auto; color: #e1b74b; margin-top: 2px; }.residential-trust-list span { color: rgba(255,255,255,.72); font-size: .96rem; line-height: 1.55; }.residential-trust-list strong { display: block; color: #fff; margin-bottom: 3px; }
+.residential-process { padding: 108px 0; }.residential-process ol { list-style: none; margin: 48px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; counter-reset: none; }.residential-process li { display: grid; grid-template-columns: auto 1fr; gap: 18px; }.residential-process li > span { color: #b88719; font-size: 1rem; font-weight: 800; letter-spacing: .06em; }.residential-process h3 { margin-bottom: 10px; font-size: 1.2rem; }.residential-process p { color: #616161; line-height: 1.7; margin-bottom: 0; }
+.residential-cta { padding: 64px 0; background: #d9a441; }.residential-cta__content { display: flex; align-items: center; gap: 24px; }.residential-cta__content > svg { flex: 0 0 auto; }.residential-cta h2 { margin: 0; font-size: clamp(1.7rem, 3vw, 2.5rem); }.residential-cta .residential-eyebrow { color: #5e450d; margin-bottom: 7px; }.residential-cta .residential-button { margin-left: auto; color: #fff; background: #171717; white-space: nowrap; }
+@media (max-width: 820px) { .residential-hero { min-height: 550px; }.residential-intro, .residential-confidence__grid { grid-template-columns: 1fr; gap: 34px; }.residential-intro { padding: 78px 0; }.residential-service-grid, .residential-process ol { grid-template-columns: 1fr; }.residential-service-card > p { min-height: auto; }.residential-confidence { padding: 78px 0; }.residential-confidence__image { height: 340px; }.residential-process { padding: 78px 0; }.residential-process ol { gap: 28px; margin-top: 36px; }.residential-cta__content { align-items: flex-start; flex-wrap: wrap; }.residential-cta .residential-button { margin-left: 0; } }
+@media (max-width: 540px) { .residential-shell { width: min(100% - 32px, 1120px); }.residential-hero { min-height: 590px; }.residential-hero__image img { object-position: 59% center; }.residential-hero__image::after { background: linear-gradient(90deg, rgba(7,7,7,.91), rgba(7,7,7,.58)); }.residential-hero__content { padding: 64px 0; }.residential-hero h1 { font-size: clamp(2.75rem, 13vw, 4rem); }.residential-actions { display: grid; width: 100%; }.residential-button { width: 100%; }.residential-services { padding: 76px 0; }.residential-service-card { padding: 27px 23px; }.residential-confidence__image { height: 290px; }.residential-cta { padding: 52px 0; } }
