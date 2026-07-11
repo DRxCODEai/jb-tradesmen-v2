@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description">
+  <title id="title">Copper-to-PEX Plumbing Conversion — Cover Image</title>
+  <desc id="description">Placeholder to be replaced with project photography</desc>
+  <rect width="1600" height="1000" fill="#111111"/>
+  <rect x="70" y="70" width="1460" height="860" rx="28" fill="#181818" stroke="#d4af37" stroke-width="4"/>
+  <path d="M70 300h1460M70 770h1460" stroke="#d4af37" stroke-width="2" opacity=".45"/>
+  <text x="800" y="405" fill="#d4af37" font-family="Arial, Helvetica, sans-serif" font-size="38" font-weight="700" text-anchor="middle" letter-spacing="5">COVER IMAGE</text>
+  <text x="800" y="505" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" text-anchor="middle">Copper-to-PEX Plumbing Conversion</text>
+  <text x="800" y="610" fill="#d4af37" font-family="Arial, Helvetica, sans-serif" font-size="30" text-anchor="middle">Replace this file with project photography</text>
+  <text x="800" y="840" fill="#ffffff" opacity=".7" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" text-anchor="middle" letter-spacing="4">JBTRADESMENLLC PROJECT GALLERY</text>
+</svg>
