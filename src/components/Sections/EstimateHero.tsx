@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './EstimateHero.css';
 import logo from '../../assets/logo.png';
 import { KOALENDAR_URL } from '../../config/links';
@@ -75,6 +76,13 @@ export default function EstimateHero() {
             >
               Request Property Assessment
             </a>
+
+            <Link
+              to="/instant-project-estimate"
+              className="secondary-btn"
+            >
+              Try Smart Project Estimator
+            </Link>
 
             <a
               href="#sample-report"

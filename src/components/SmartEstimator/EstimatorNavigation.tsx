@@ -1,0 +1,1 @@
+export default function EstimatorNavigation({step,onBack,onNext}:{step:number;onBack:()=>void;onNext:()=>void}){if(step===7)return null;return <div className="smart-nav">{step>0?<button type="button" onClick={onBack}>Back</button>:<span/>}<button type="button" onClick={onNext}>{step===6?'Calculate Estimate':'Continue'}</button></div>}
