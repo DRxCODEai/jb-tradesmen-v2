@@ -1,0 +1,4 @@
+import { ArrowRight, Phone } from 'lucide-react'
+import { KOALENDAR_URL } from '../../config/links'
+import './CommercialCTA.css'
+export default function CommercialCTA(){return <section className="commercial-cta" aria-labelledby="commercial-cta-title"><div className="commercial-cta__inner"><span>Get started today</span><h2 id="commercial-cta-title">Need Reliable Commercial Maintenance?</h2><p>From one-time repairs to ongoing facility maintenance, JBTRADESMENLLC provides dependable commercial service throughout Colorado, Wyoming and Nevada.</p><div className="commercial-cta__actions"><a href={KOALENDAR_URL} target="_blank" rel="noopener noreferrer" className="commercial-cta__button commercial-cta__button--primary">Request Commercial Service <ArrowRight size={18} aria-hidden="true"/></a><a href="tel:9702865993" className="commercial-cta__button commercial-cta__button--secondary"><Phone size={18} aria-hidden="true"/> Call (970) 286-5993</a></div></div></section>}

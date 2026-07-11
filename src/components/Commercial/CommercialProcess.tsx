@@ -1,0 +1,4 @@
+import { CalendarDays, ClipboardCheck, Handshake, SearchCheck, Wrench, Zap } from 'lucide-react'
+import './CommercialProcess.css'
+const steps=[[ClipboardCheck,'Request Service'],[SearchCheck,'Site Visit'],[Handshake,'Proposal'],[CalendarDays,'Scheduled Service'],[Wrench,'Project Completion'],[Zap,'Ongoing Support']] as const
+export default function CommercialProcess(){return <section className="commercial-process" aria-labelledby="commercial-process-title"><div className="commercial-process__inner"><header className="commercial-process__heading"><span>Simple by design</span><h2 id="commercial-process-title">Our Commercial Service Process</h2></header><ol className="commercial-process__timeline">{steps.map(([Icon,title],index)=><li key={title}><span className="commercial-process__number">{String(index+1).padStart(2,'0')}</span><span className="commercial-process__icon"><Icon size={25} aria-hidden="true"/></span><h3>{title}</h3></li>)}</ol></div></section>}

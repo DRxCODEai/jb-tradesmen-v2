@@ -1,0 +1,4 @@
+import { MapPin } from 'lucide-react'
+import './CommercialServiceAreas.css'
+const areas=[['Colorado',['Fort Collins','Loveland','Greeley','Windsor','Timnath']],['Wyoming',['Cheyenne','Laramie']],['Nevada',['Las Vegas','Henderson','Summerlin','Paradise','North Las Vegas']]] as const
+export default function CommercialServiceAreas(){return <section className="commercial-areas" aria-labelledby="commercial-areas-title"><div className="commercial-areas__inner"><header className="commercial-areas__heading"><span>Where we work</span><h2 id="commercial-areas-title">Serving Commercial Clients Across Colorado, Wyoming &amp; Nevada</h2></header><div className="commercial-areas__grid">{areas.map(([state,cities])=><article className="commercial-areas__card" key={state}><MapPin size={27} aria-hidden="true"/><h3>{state}</h3><div>{cities.map(city=><span key={city}>{city}</span>)}</div></article>)}</div></div></section>}
