@@ -14,17 +14,17 @@ const services = [
   {
     title: 'Property Maintenance',
     icon: Building2,
-    items: ['Lock Changes', 'Property Inspections', 'Drywall Repairs', 'Door Repairs', 'Window Repairs', 'Trim Repairs', 'Painting'],
+    items: ['Lock Changes', 'Property Inspections', 'Interior Repairs', 'Exterior Repairs', 'Appliance Repairs', 'Interior & Exterior Painting'],
   },
   {
     title: 'Interior Repairs',
     icon: Paintbrush,
-    items: ['Drywall', 'Tile', 'Doors', 'Trim', 'Cabinets', 'Hardware'],
+    items: ['Drywall', 'Tile', 'Flooring', 'Doors', 'Trim', 'Cabinets', 'Hardware'],
   },
   {
     title: 'Plumbing',
     icon: Droplets,
-    items: ['Fixture Replacement', 'Valve Repairs', 'Water Heater Repairs', 'Water Filtration Systems', 'Irrigation Repairs'],
+    items: ['Fixture Replacement', 'Valve Repairs', 'Leak Repairs', 'Water Heater Repairs', 'Water Filtration Systems', 'Irrigation Repairs'],
   },
   {
     title: 'Electrical',
@@ -34,17 +34,17 @@ const services = [
   {
     title: 'HVAC',
     icon: Wind,
-    items: ['Diagnostics', 'Thermostats', 'Filter Replacement', 'Minor Repairs', 'Preventative Maintenance'],
+    items: ['Diagnostics', 'Thermostats', 'Filter Replacement & Maintenance', 'Minor Repairs', 'Preventative Maintenance'],
   },
   {
     title: 'Kitchen & Bathroom Remodeling',
     icon: Bath,
-    items: ['Kitchen Remodeling', 'Bathroom Remodeling', 'Cabinet Installation', 'Countertops', 'Tile Installation', 'Fixture Upgrades'],
+    items: ['Kitchen Remodeling', 'Bathroom Remodeling', 'Cabinet Installation', 'Countertops', 'Tile Installation', 'Flooring', 'Fixture Upgrades'],
   },
   {
     title: 'Appliance Repairs & Diagnostics',
     icon: Refrigerator,
-    items: ['Washer', 'Dryer', 'Dishwasher', 'Refrigerator', 'Garbage Disposal'],
+    items: ['Washer', 'Dryer', 'Dishwasher', 'Refrigerators', 'Ranges', 'Garbage Disposal'],
   },
 ]
 
