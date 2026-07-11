@@ -1,7 +1,7 @@
 import './CommercialTrustedBy.css'
 
 const clients = [
-  'First Interstate Bank', 'Home Depot', 'Red Lobster', "Michael's Arts & Crafts", 'GNC', 'Sally Beauty', 'Ross', 'TJ Maxx', 'Family Dollar', 'Sprouts Farmers Market', 'Superior Property Management', 'DaVita Dialysis', 'ATD (American Tire Distributors)', 'MasTec', 'USPS (United States Postal Service)', 'FedEx',
+  'First Interstate Bank', 'Home Depot', 'Red Lobster', "Michael's Arts & Crafts", 'GNC', "Sally's Beauty Salon", 'Ross', 'TJ Maxx', 'Family Dollar', 'Sprouts Farmers Market', 'Superior Property Management', 'DaVita Dialysis', 'ATD (American Tire Distributors)', 'MasTec', 'USPS (United States Postal Service)', 'FedEx',
 ]
 
 const metrics = [
