@@ -1,0 +1,4 @@
+import { ArrowRight, Phone } from 'lucide-react'
+import { KOALENDAR_URL } from '../../config/links'
+import './ClientsCTA.css'
+export default function ClientsCTA(){return <section className="clients-cta" aria-labelledby="clients-cta-title"><div className="clients-cta__inner"><span>Let's work together</span><h2 id="clients-cta-title">Let's Build a Long-Term Partnership</h2><p>Whether you're a homeowner, property manager, business owner or facility manager, JBTRADESMENLLC is ready to provide dependable maintenance, repairs and professional support.</p><div className="clients-cta__actions"><a href={KOALENDAR_URL} target="_blank" rel="noopener noreferrer" className="clients-cta__button clients-cta__button--primary">Schedule Consultation <ArrowRight size={18} aria-hidden="true"/></a><a href="tel:9702865993" className="clients-cta__button clients-cta__button--secondary"><Phone size={18} aria-hidden="true"/> Call (970) 286-5993</a></div></div></section>}

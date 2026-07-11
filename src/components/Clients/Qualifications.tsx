@@ -1,0 +1,4 @@
+import { Award, BadgeCheck, ShieldCheck, Star, UserCheck } from 'lucide-react'
+import './Qualifications.css'
+const qualifications=[[ShieldCheck,'Licensed & Insured'],[Award,'OSHA 30 Certified'],[BadgeCheck,'EPA 608 & 609 Certified'],[UserCheck,'Federal Contractor'],[BadgeCheck,'SAM Registered'],[BadgeCheck,'UEI Registered'],[Award,'CAGE Code 13SR1'],[Star,'5-Star Rated']] as const
+export default function Qualifications(){return <section className="client-qualifications" aria-labelledby="client-qualifications-title"><div className="client-qualifications__inner"><header className="client-qualifications__heading"><span>Confidence in every project</span><h2 id="client-qualifications-title">Professional Credentials</h2></header><div className="client-qualifications__grid">{qualifications.map(([Icon,title])=><article className="client-qualifications__card" key={title}><span><Icon size={25} aria-hidden="true"/></span><h3>{title}</h3></article>)}</div></div></section>}

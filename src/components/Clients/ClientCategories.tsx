@@ -1,0 +1,15 @@
+import { Building2, Factory, HeartPulse, House, Landmark, MapPinned, Store, UtensilsCrossed, Warehouse } from 'lucide-react'
+import './ClientCategories.css'
+const categories=[
+  [House,'Residential Homeowners','From everyday repairs to home improvements, we help homeowners keep their properties comfortable, functional, and cared for. Our team provides clear communication and dependable hands-on support.'],
+  [MapPinned,'Property Management Companies','We support managed portfolios with responsive repairs, inspections, turnovers, and preventative maintenance. Our service helps property teams keep communities and units ready.'],
+  [Landmark,'Financial Institutions','We provide professional repair and maintenance support for banks, credit unions, and financial facilities. Our work is planned around professional environments and operational needs.'],
+  [Store,'Retail Facilities','Retail teams rely on us for timely repairs, maintenance, and facility support. We help keep storefronts, customer spaces, and back-of-house areas operational.'],
+  [Building2,'Commercial Offices','We support office buildings and business complexes with practical maintenance and repair solutions. Our team works to minimize disruption for occupants and operations.'],
+  [HeartPulse,'Healthcare Facilities','Medical offices and healthcare facilities benefit from our responsive, professional maintenance support. We work with care around active client environments.'],
+  [Landmark,'Government Agencies','We provide qualified maintenance and repair services for municipal, state, and federal facilities. Our experience supports professional and regulated properties.'],
+  [Factory,'Industrial & Manufacturing','Light industrial and manufacturing clients count on us for practical facility repairs and maintenance. We help maintain safe, functional work environments.'],
+  [Warehouse,'Warehouses & Distribution','We support warehouse and distribution operations with facility repairs, preventative maintenance, and responsive service. Our work helps keep active logistics spaces functional and prepared.'],
+  [UtensilsCrossed,'Restaurants & Hospitality','Restaurants and hospitality properties receive dependable repair and maintenance support tailored to busy operations. We coordinate practical service around the needs of active guest and customer environments.'],
+] as const
+export default function ClientCategories(){return <section className="client-categories" aria-labelledby="client-categories-title"><div className="client-categories__inner"><header className="client-categories__heading"><span>Built for every client</span><h2 id="client-categories-title">Industries We Support</h2><p>Professional maintenance and repair solutions tailored to the unique needs of every client.</p></header><div className="client-categories__grid">{categories.map(([Icon,title,copy])=><article className="client-categories__card" key={title}><span className="client-categories__icon"><Icon size={25} aria-hidden="true"/></span><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>}
