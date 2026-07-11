@@ -2,7 +2,19 @@ import logo from '../../assets/logo.png'
 import { KOALENDAR_URL } from '../../config/links'
 import './CommercialHero.css'
 
-const capabilities = ['Commercial Maintenance', 'Retail Facilities', 'Property Management', 'Government Facilities', 'Financial Institutions', 'Preventative Maintenance', 'Emergency Repairs']
+const capabilities = [
+  'Commercial Maintenance',
+  'Facility Repairs',
+  'Property Management',
+  'Retail Facilities',
+  'Financial Institutions',
+  'Government Contracting',
+  'SAM Registered',
+  'UEI Registered',
+  'CAGE Code 13SR1',
+  'Licensed & Insured',
+  'OSHA 30 Certified',
+]
 
 export default function CommercialHero() {
   return <section className="commercial-hero">

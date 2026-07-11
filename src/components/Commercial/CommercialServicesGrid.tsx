@@ -2,7 +2,7 @@ import { Building2, Check, Droplets, Store, Wind, Wrench, Zap } from 'lucide-rea
 import './CommercialServicesGrid.css'
 
 const services=[
-  ['Commercial Property Maintenance',Building2,['Preventative Maintenance','Facility Inspections','Lock Changes','Interior Repairs','Exterior Repairs','Painting','General Repairs']],
+  ['Commercial Property Maintenance',Building2,['Preventative Maintenance','Facility Inspections','Lock Changes','Interior Repairs','Exterior Repairs','Interior & Exterior Painting','Parking Lot Striping','General Repairs']],
   ['Commercial Repairs',Wrench,['Drywall','Doors','Ceiling Tile','Millwork','Hardware','Storefront Repairs','Tenant Improvements']],
   ['Plumbing',Droplets,['Fixture Repairs','Leak Repairs','Valve Repairs','Water Heater Repairs','Water Filtration','Irrigation Repairs']],
   ['Electrical',Zap,['Lighting','Ballasts','Switches','Outlets','Troubleshooting','Emergency Electrical Repairs']],
