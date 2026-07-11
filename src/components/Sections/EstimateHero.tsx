@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import './EstimateHero.css';
 import logo from '../../assets/logo.png';
 import { KOALENDAR_URL } from '../../config/links';
+import SampleAssessmentModal from '../Estimate/SampleAssessmentModal';
 
 export default function EstimateHero() {
+  const [isSampleOpen, setIsSampleOpen] = useState(false);
+
   return (
     <section className="estimate-hero">
       <div className="estimate-overlay">
@@ -74,6 +78,10 @@ export default function EstimateHero() {
 
             <a
               href="#sample-report"
+              onClick={(event) => {
+                event.preventDefault();
+                setIsSampleOpen(true);
+              }}
               className="secondary-btn"
             >
               View Sample Report
@@ -150,6 +158,10 @@ export default function EstimateHero() {
         </div>
 
       </div>
+      <SampleAssessmentModal
+        isOpen={isSampleOpen}
+        onClose={() => setIsSampleOpen(false)}
+      />
     </section>
   );
 }
