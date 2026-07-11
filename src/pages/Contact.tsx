@@ -1,3 +1,10 @@
+import { useEffect } from 'react'
+import ContactPage from '../components/Contact/ContactPage'
+
 export default function Contact() {
-  return <h1>Contact</h1>
+  useEffect(() => {
+    document.title = 'Contact JBTRADESMENLLC | Residential & Commercial Services'
+  }, [])
+
+  return <ContactPage />
 }
