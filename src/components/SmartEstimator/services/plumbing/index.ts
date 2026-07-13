@@ -1,0 +1,6 @@
+export { faucetReplacement } from './faucetReplacement'
+export { hoseBibRepairReplacement } from './hoseBibRepairReplacement'
+export { minorPlumbingLeakRepair } from './minorPlumbingLeakRepair'
+export { shutoffValveReplacement } from './shutoffValveReplacement'
+export { toiletRepairReplacement } from './toiletRepairReplacement'
+export { waterHeaterReplacement } from './waterHeaterReplacement'

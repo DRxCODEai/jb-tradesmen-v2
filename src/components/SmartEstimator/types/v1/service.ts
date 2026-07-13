@@ -1,5 +1,5 @@
 import type { EstimatorQuestion } from '../../templates/estimatorQuestionTemplate'
-import type { ServiceModifier } from '../../templates/serviceModifierTemplate'
+import type { ServiceModifier, ServiceModifierCondition } from '../../templates/serviceModifierTemplate'
 import type { CrewConfiguration, PropertyContext } from './company'
 import type { NumericRange, PricingConfiguration } from './pricing'
 import type { ServiceTimeline } from './timeline'
@@ -44,11 +44,21 @@ export interface ServiceLabor {
 export interface ServiceMaterials {
   costRange: NumericRange
   costUnit: string
+  costComponents?: readonly MaterialCostComponent[]
   typicalMaterials: readonly string[]
   wasteFactorPercentage: number
   customerSuppliedAllowed: boolean
   materialPickupUsuallyRequired: boolean
   specialOrderPossible: boolean
+}
+
+export interface MaterialCostComponent {
+  name: string
+  costRange: NumericRange
+  costUnit: 'perProject' | 'perSquareFoot' | 'perLinearFoot' | 'perItem'
+  customerSuppliedEligible: boolean
+  applyWasteFactor: boolean
+  conditions?: readonly ServiceModifierCondition[]
 }
 
 export interface ServiceEquipment {

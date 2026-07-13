@@ -2,8 +2,8 @@ import { COMPANY_STANDARDS } from '../company/companyStandards'
 import type { MasterServiceTemplate } from '../templates/masterServiceTemplate'
 import type { ServiceEstimateInput, PricingEngineResult } from '../types/v1/engines'
 import type { NumericRange } from '../types/v1/pricing'
-import { createConditionContext, evaluateConditions } from '../utils/v1/evaluateConditions'
-import { addFlatAmount, addRanges, clampRangeMinimum, mapRange, multiplyRange, normalizeRange } from '../utils/v1/rangeMath'
+import { createConditionContext, evaluateConditions, type ConditionContext } from '../utils/v1/evaluateConditions'
+import { addFlatAmount, addRanges, clampRangeMinimum, mapRange, multiplyRange, multiplyRanges, normalizeRange } from '../utils/v1/rangeMath'
 import { roundCurrencyRange } from '../utils/v1/roundCurrency'
 
 function selectLaborRate(input: ServiceEstimateInput): number {
@@ -28,7 +28,32 @@ function quantityScale(input: ServiceEstimateInput, profile: MasterServiceTempla
   return { quantity, factor: Math.max(1, quantity / baseline) }
 }
 
-function baseMaterialRange(input: ServiceEstimateInput, profile: MasterServiceTemplate, quantity: number, factor: number): NumericRange {
+function componentScale(costUnit: 'perProject' | 'perSquareFoot' | 'perLinearFoot' | 'perItem', input: ServiceEstimateInput): number {
+  if (costUnit === 'perSquareFoot') return Math.max(1, input.squareFeet ?? input.quantity ?? 1)
+  if (costUnit === 'perLinearFoot') return Math.max(1, input.linearFeet ?? input.quantity ?? 1)
+  if (costUnit === 'perItem') return Math.max(1, input.itemCount ?? input.quantity ?? 1)
+  return 1
+}
+
+function baseMaterialRange(input: ServiceEstimateInput, profile: MasterServiceTemplate, quantity: number, factor: number, context: ConditionContext): NumericRange {
+  if (profile.materials.costComponents?.length) {
+    const wasteFactor = 1 + Math.max(0, profile.materials.wasteFactorPercentage) / 100
+    const components = profile.materials.costComponents
+      .filter((component) => !component.conditions || evaluateConditions(component.conditions, context))
+      .filter((component) => !(input.customerSuppliedMaterials && component.customerSuppliedEligible))
+      .map((component) => {
+        const scale = componentScale(component.costUnit, input)
+        const range = multiplyRange(component.costRange, scale)
+        return component.applyWasteFactor ? multiplyRange(range, wasteFactor) : range
+      })
+    const combined = addRanges(...components)
+    if (input.customerSuppliedMaterials && combined.maximum === 0) {
+      const allowance = COMPANY_STANDARDS.billing.roundCurrencyToNearest
+      return { minimum: allowance, typical: allowance, maximum: allowance }
+    }
+    return combined
+  }
+
   const perUnit = /per|linearFoot|squareFoot|item/i.test(profile.materials.costUnit)
   const scale = perUnit ? quantity : factor
   let range = multiplyRange(profile.materials.costRange, scale)
@@ -51,7 +76,7 @@ export function calculateServicePricing(input: ServiceEstimateInput, profile: Ma
   const { quantity, factor } = quantityScale(input, profile)
   const fixedHours = profile.labor.setupHours + profile.labor.cleanupHours
   let laborHours = addFlatAmount(multiplyRange(profile.labor.baseHours, factor), fixedHours)
-  let materials = baseMaterialRange(input, profile, quantity, factor)
+  let materials = baseMaterialRange(input, profile, quantity, factor, context)
   let equipment = profile.equipment.rentalCostRange && (
     input.accessDifficulty === 'difficult' ||
     (input.ceilingHeightFeet ?? 0) > 10 ||
@@ -62,11 +87,25 @@ export function calculateServicePricing(input: ServiceEstimateInput, profile: Ma
 
   for (const modifier of activeModifiers) {
     const effects = modifier.effects
+    if (effects.laborHoursOverride !== undefined) laborHours = addFlatAmount(effects.laborHoursOverride, fixedHours)
+    if (effects.materialCostOverride !== undefined) materials = normalizeRange(effects.materialCostOverride)
     if (effects.laborMultiplier !== undefined) laborHours = multiplyRange(laborHours, effects.laborMultiplier)
+    if (effects.laborMultiplierRange !== undefined) laborHours = multiplyRanges(laborHours, effects.laborMultiplierRange)
     if (effects.materialMultiplier !== undefined) materials = multiplyRange(materials, effects.materialMultiplier)
+    if (effects.materialMultiplierRange !== undefined) materials = multiplyRanges(materials, effects.materialMultiplierRange)
     if (effects.equipmentMultiplier !== undefined) equipment = multiplyRange(equipment, effects.equipmentMultiplier)
+    if (effects.laborHoursPerUnit !== undefined && effects.laborUnitField) {
+      const units = context[effects.laborUnitField]
+      if (typeof units === 'number') laborHours = addRanges(laborHours, multiplyRange(effects.laborHoursPerUnit, Math.max(0, units)))
+    }
+    if (effects.materialCostPerUnit !== undefined && effects.materialUnitField) {
+      const units = context[effects.materialUnitField]
+      if (typeof units === 'number') materials = addRanges(materials, multiplyRange(effects.materialCostPerUnit, Math.max(0, units)))
+    }
     if (effects.flatLaborHours !== undefined) laborHours = addFlatAmount(laborHours, effects.flatLaborHours)
+    if (effects.flatLaborHoursRange !== undefined) laborHours = addRanges(laborHours, effects.flatLaborHoursRange)
     if (effects.flatMaterialCost !== undefined) materials = addFlatAmount(materials, effects.flatMaterialCost)
+    if (effects.flatMaterialCostRange !== undefined) materials = addRanges(materials, effects.flatMaterialCostRange)
     if (effects.flatEquipmentCost !== undefined) equipment = addFlatAmount(equipment, effects.flatEquipmentCost)
     if (effects.extraVisits !== undefined) siteVisits += Math.max(0, Math.round(effects.extraVisits))
     if (effects.requiresManualReview) manualReviewFlags.push(modifier.name)

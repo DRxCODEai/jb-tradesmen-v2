@@ -201,3 +201,13 @@ AI may later help interpret free-text descriptions, categorize requests, suggest
 - The existing Smart Project Estimator has not been integrated with the Phase 2A engines or profiles.
 - Phase 2B will add flooring, tile, and plumbing profiles.
 - Phase 2C will add electrical and HVAC profiles.
+
+## Phase 2B Implementation Status
+
+- Flooring profiles have been added for luxury vinyl plank and laminate flooring.
+- Tile profiles have been added for localized tile repair and grout or caulk repair.
+- Plumbing profiles have been added for faucet, toilet, shutoff-valve, minor leak, water-heater, and hose-bib service.
+- The typed service registry now contains 20 active Phase 2 profiles.
+- Nationally informed planning assumptions still require comparison against completed JBTRADESMENLLC jobs before final production approval.
+- The existing visible Smart Project Estimator remains unconnected to the Phase 2 engines and profiles.
+- Phase 2C will add electrical and HVAC profiles, cross-profile validation, and final engine hardening.

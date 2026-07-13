@@ -19,6 +19,14 @@ export function multiplyRange(range: NumericRange, multiplier: number): NumericR
   return mapRange(range, (value) => value * Math.max(0, multiplier))
 }
 
+export function multiplyRanges(left: NumericRange, right: NumericRange): NumericRange {
+  return normalizeRange({
+    minimum: left.minimum * Math.max(0, right.minimum),
+    typical: left.typical * Math.max(0, right.typical),
+    maximum: left.maximum * Math.max(0, right.maximum),
+  })
+}
+
 export function addRanges(...ranges: readonly NumericRange[]): NumericRange {
   return normalizeRange(ranges.reduce<NumericRange>((total, range) => ({
     minimum: total.minimum + range.minimum,

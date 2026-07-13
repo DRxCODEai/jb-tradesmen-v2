@@ -1,3 +1,5 @@
+import type { NumericRange } from '../types/v1/pricing'
+
 export type ServiceModifierValue = string | number | boolean | readonly string[]
 
 export interface ServiceModifierCondition {
@@ -7,12 +9,23 @@ export interface ServiceModifierCondition {
 }
 
 export interface ServiceModifierEffects {
+  laborHoursOverride?: NumericRange
+  materialCostOverride?: NumericRange
   laborMultiplier?: number
+  laborMultiplierRange?: NumericRange
   materialMultiplier?: number
+  materialMultiplierRange?: NumericRange
   equipmentMultiplier?: number
   timelineMultiplier?: number
+  laborHoursPerUnit?: NumericRange
+  laborUnitField?: string
+  materialCostPerUnit?: NumericRange
+  materialUnitField?: string
+  calendarDaysToAdd?: NumericRange
   flatLaborHours?: number
+  flatLaborHoursRange?: NumericRange
   flatMaterialCost?: number
+  flatMaterialCostRange?: NumericRange
   flatEquipmentCost?: number
   extraVisits?: number
   confidenceAdjustment?: number
