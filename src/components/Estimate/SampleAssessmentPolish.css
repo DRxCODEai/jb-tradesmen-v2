@@ -1,23 +1,27 @@
-.sample-report__cover {
+.sample-report__cover-logo-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   isolation: isolate;
 }
 
-.sample-report__cover::before {
+.sample-report__cover-logo-glow::before {
   position: absolute;
   z-index: 0;
-  top: 19%;
+  top: 50%;
   left: 50%;
-  width: 190px;
-  height: 78px;
+  width: 82%;
+  height: 62%;
   content: '';
   pointer-events: none;
-  background: rgba(212, 175, 55, 0.1);
+  background: rgba(212, 175, 55, 0.24);
   border-radius: 50%;
   filter: blur(34px);
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
 }
 
-.sample-report__cover > img {
+.sample-report__cover-logo-glow > img {
   position: relative;
   z-index: 1;
 }

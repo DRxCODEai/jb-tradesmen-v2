@@ -31,7 +31,7 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <LogoGlow>
+          <LogoGlow centered>
             <Logo />
           </LogoGlow>
           <h2>JBTRADESMENLLC</h2>
