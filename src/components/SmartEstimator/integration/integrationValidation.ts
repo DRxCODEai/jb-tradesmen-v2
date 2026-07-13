@@ -1,82 +1,67 @@
 import { COMPANY_STANDARDS } from '../company/companyStandards'
-import { VISIBLE_SERVICE_ID_MAP, resolveServiceProfile } from './serviceIdMap'
-import { calculateIntegratedEstimate } from './calculateIntegratedEstimate'
-import type { Data } from '../types/estimator'
+import type { Data, Estimate } from '../types/estimator'
 import { validate } from '../utils/validateEstimatorStep'
+import { calculateIntegratedEstimate } from './calculateIntegratedEstimate'
+import { VISIBLE_SERVICE_ID_MAP, resolveServiceProfile } from './serviceIdMap'
 
 export interface IntegrationValidationCheck { name: string; passed: boolean }
 export interface IntegrationValidationResult { passed: boolean; checks: readonly IntegrationValidationCheck[] }
 
 function data(overrides: Partial<Data> = {}): Data {
-  return { projectType: 'Residential', category: 'Repair', service: 'Drywall Repair', description: 'Repair one accessible damaged area with supplied dimensions and normal site conditions.', condition: 'Normal condition', quantity: '1', dimensions: '2 ft x 2 ft', outcome: 'Complete repair', materials: false, matching: false, accessNotes: '', propertyType: 'Single-family home', city: 'Fort Collins', state: 'Colorado', zip: '80521', occupancy: 'Occupied', location: 'Interior', floor: '1', access: 'Easy', urgency: 'Routine', timing: 'Flexible', photos: [], firstName: 'Test', lastName: 'Customer', email: 'test@example.com', phone: '9702865993', contact: 'Phone', company: '', consent: true, ...overrides }
+  return { projectType: 'Residential', category: 'Repair', service: 'Other', description: 'Other minor repair with accessible normal site conditions.', condition: 'Normal condition', quantity: '1', dimensions: '', outcome: 'Complete repair', materials: false, matching: false, accessNotes: '', propertyType: 'Single-family home', city: 'Fort Collins', state: 'Colorado', zip: '80521', occupancy: 'Occupied', location: 'Interior', floor: '1', access: 'Easy', urgency: 'Routine', timing: 'Flexible', photos: [], firstName: 'Test', lastName: 'Customer', email: 'test@example.com', phone: '9702865993', contact: 'Phone', company: '', consent: true, ...overrides }
 }
 
+function hasDollarRange(estimate: Estimate): boolean { return /^\$[\d,]+(?:–\$[\d,]+)?$/.test(estimate.total) }
+function ranges(estimate: Estimate) { const value = estimate.calculationRanges; return value ? [value.laborHours, value.laborCost, value.tripCharges, value.materials, value.equipment, value.total, value.visits] : [] }
+
 export function validateEstimatorIntegration(): IntegrationValidationResult {
-  const testPhoto = { file: new File(['test'], 'repair.jpg', { type: 'image/jpeg' }), url: 'blob:integration-test' }
-  const residentialDrywall = calculateIntegratedEstimate(data({ photos: [testPhoto] }))
-  const commercialDrywall = calculateIntegratedEstimate(data({ projectType: 'Commercial', propertyType: 'Office' }))
-  const residentialEmergencyPlumbing = calculateIntegratedEstimate(data({ category: 'Emergency Service', service: 'Minor Plumbing Leak', urgency: 'Emergency' }))
-  const commercialEmergencyPlumbing = calculateIntegratedEstimate(data({ projectType: 'Commercial', propertyType: 'Commercial facility', category: 'Emergency Service', service: 'Minor Plumbing Leak', urgency: 'Emergency' }))
-  const oneVisit = calculateIntegratedEstimate(data({ service: 'Ceiling Tiles', quantity: '10', dimensions: '10-foot ceiling', projectType: 'Commercial', propertyType: 'Office', occupancy: 'Occupied' }))
-  const twoVisitDrywall = residentialDrywall
-  const suppliedLvp = calculateIntegratedEstimate(data({ service: 'Luxury Vinyl Plank Flooring', dimensions: '300 sq ft', quantity: '300', materials: true }))
-  const waterHeater = calculateIntegratedEstimate(data({ service: 'Water Heater Replacement' }))
-  const lvp = calculateIntegratedEstimate(data({ service: 'Luxury Vinyl Plank Flooring', dimensions: '100 sq ft', quantity: '100' }))
-  const deterministicA = calculateIntegratedEstimate(data())
-  const deterministicB = calculateIntegratedEstimate(data())
-  const gasOdor = calculateIntegratedEstimate(data({ service: 'HVAC Diagnostics or Minor Repair', description: 'There is a gas odor near the furnace.' }))
-  const arcing = calculateIntegratedEstimate(data({ service: 'Electrical Troubleshooting', description: 'The outlet has active arcing now.' }))
-  const commercialLightFixture = calculateIntegratedEstimate(data({ service: 'Light Fixture Replacement', projectType: 'Commercial', propertyType: 'Retail facility' }))
-  const pmResidential = calculateIntegratedEstimate(data({ projectType: 'Property Management', propertyType: 'Managed single-family home' }))
-  const pmCommercial = calculateIntegratedEstimate(data({ projectType: 'Property Management', propertyType: 'Apartment common area' }))
-  const pmUnknown = calculateIntegratedEstimate(data({ projectType: 'Property Management', propertyType: 'Managed property' }))
-  const numericSummaries = [residentialDrywall, commercialDrywall, residentialEmergencyPlumbing, commercialEmergencyPlumbing, oneVisit, suppliedLvp, waterHeater, lvp].flatMap((result) => result.engineSummary ? [result.engineSummary] : [])
-  const ranges = numericSummaries.flatMap((summary) => [summary.laborHours, summary.laborCost, summary.materials, summary.equipment, summary.total, summary.calendarDurationDays])
+  const hotWater = calculateIntegratedEstimate(data({ service: 'Plumbing', description: 'replace hot water heater' }))
+  const flooring = calculateIntegratedEstimate(data({ category: 'Remodel', service: 'Flooring', description: 'replace flooring' }))
+  const kitchenRemodel = calculateIntegratedEstimate(data({ category: 'Remodel', service: 'Kitchen Remodeling', description: 'complete kitchen remodel' }))
+  const tenantImprovement = calculateIntegratedEstimate(data({ projectType: 'Commercial', category: 'Remodel', service: 'Tenant Improvements', description: 'commercial tenant improvement', propertyType: 'Retail facility' }))
+  const residentialAppliance = calculateIntegratedEstimate(data({ service: 'Appliance Repair', description: 'appliance not working' }))
+  const commercialAppliance = calculateIntegratedEstimate(data({ projectType: 'Commercial', service: 'Appliance Repair', description: 'commercial appliance not working', propertyType: 'Commercial kitchen' }))
+  const assessment = calculateIntegratedEstimate(data({ category: 'Property Assessment', service: 'Property Inspection', description: 'property assessment' }))
+  const residentialOther = calculateIntegratedEstimate(data({ service: 'Other', description: 'unknown residential other work' }))
+  const commercialOther = calculateIntegratedEstimate(data({ projectType: 'Commercial', service: 'Other', description: 'unknown commercial other work', propertyType: 'Office' }))
+  const gasOdor = calculateIntegratedEstimate(data({ service: 'HVAC', description: 'gas odor' }))
+  const arcing = calculateIntegratedEstimate(data({ service: 'Electrical', description: 'outlet is sparking' }))
+  const plumbingWork = calculateIntegratedEstimate(data({ service: 'Plumbing', description: 'plumbing work' }))
+  const deterministicA = calculateIntegratedEstimate(data({ service: 'Plumbing', description: 'replace hot water heater' }))
+  const deterministicB = calculateIntegratedEstimate(data({ service: 'Plumbing', description: 'replace hot water heater' }))
+  const residentialDrywall = calculateIntegratedEstimate(data({ service: 'Drywall Repair', description: 'patch wall hole', dimensions: '2 ft x 2 ft' }))
+  const commercialDrywall = calculateIntegratedEstimate(data({ projectType: 'Commercial', service: 'Drywall Repair', description: 'patch wall hole', dimensions: '2 ft x 2 ft', propertyType: 'Office' }))
+  const allResults = [hotWater, flooring, kitchenRemodel, tenantImprovement, residentialAppliance, commercialAppliance, assessment, residentialOther, commercialOther, gasOdor, arcing, plumbingWork, residentialDrywall, commercialDrywall]
+  const allRanges = allResults.flatMap((result) => ranges(result.estimate))
 
   const checks: IntegrationValidationCheck[] = [
     { name: 'Every direct visible service mapping resolves to a registered profile', passed: Object.values(VISIBLE_SERVICE_ID_MAP).every((id) => Boolean(resolveServiceProfile(id))) },
-    { name: 'Unsupported broad services return manual review', passed: calculateIntegratedEstimate(data({ service: 'Plumbing' })).estimate.status === 'manualReview' },
-    { name: 'Remodel returns manual review', passed: calculateIntegratedEstimate(data({ category: 'Remodel', service: 'Kitchen Remodeling' })).estimate.status === 'manualReview' },
-    { name: 'Property Assessment returns scheduling review rather than repair pricing', passed: calculateIntegratedEstimate(data({ category: 'Property Assessment', service: 'Property Inspection' })).estimate.status === 'manualReview' },
-    { name: 'Appliance Repair returns manual review', passed: calculateIntegratedEstimate(data({ service: 'Appliance Repair' })).estimate.status === 'manualReview' },
-    { name: 'Tenant Improvements return manual review', passed: calculateIntegratedEstimate(data({ service: 'Tenant Improvements' })).estimate.status === 'manualReview' },
-    { name: 'Residential standard drywall uses the approved rate', passed: residentialDrywall.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residential },
-    { name: 'Commercial standard drywall uses the approved rate', passed: commercialDrywall.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercial },
-    { name: 'Residential emergency plumbing uses the approved rate', passed: residentialEmergencyPlumbing.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residentialEmergency },
-    { name: 'Commercial emergency plumbing uses the approved rate', passed: commercialEmergencyPlumbing.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercialEmergency },
-    { name: 'No second commercial multiplier applies', passed: commercialDrywall.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercial },
-    { name: 'No second emergency multiplier applies', passed: residentialEmergencyPlumbing.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residentialEmergency },
-    { name: 'One expected visit creates one trip charge', passed: oneVisit.engineSummary?.tripCharges === COMPANY_STANDARDS.billing.tripChargePerVisit },
-    { name: 'Two expected visits create two trip charges', passed: twoVisitDrywall.engineSummary?.tripCharges === COMPANY_STANDARDS.billing.tripChargePerVisit * 2 },
-    { name: 'Drywall repair displays multiple expected trip charges', passed: twoVisitDrywall.estimate.tripChargeTotal === '$100' },
-    { name: 'Customer-supplied materials retain consumable costs', passed: (suppliedLvp.engineSummary?.materials.minimum ?? 0) > 0 },
-    { name: 'Water-heater minimum labor remains at least four hours', passed: (waterHeater.engineSummary?.laborHours.minimum ?? 0) >= 4 },
-    { name: 'LVP minimum labor remains at least four hours', passed: (lvp.engineSummary?.laborHours.minimum ?? 0) >= 4 },
-    { name: 'Same estimator input produces identical output', passed: JSON.stringify(deterministicA) === JSON.stringify(deterministicB) },
-    { name: 'Supported profile calculation does not use the legacy fallback', passed: residentialDrywall.metadata.supportedProfile && !residentialDrywall.metadata.fallbackUsed },
-    { name: 'Missing service profile resolves safely without a crash', passed: resolveServiceProfile('missing-service-profile') === undefined },
-    { name: 'Gas-odor HVAC input produces a safety override', passed: gasOdor.estimate.status === 'safetyOverride' },
-    { name: 'Active electrical arcing produces a safety override', passed: arcing.estimate.status === 'safetyOverride' },
-    { name: 'Unsupported regulated electrical work produces manual review', passed: calculateIntegratedEstimate(data({ service: 'Electrical' })).estimate.status === 'manualReview' },
-    { name: 'Property Management residential context uses residential pricing', passed: pmResidential.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residential },
-    { name: 'Property Management common-area context uses commercial pricing', passed: pmCommercial.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercial },
-    { name: 'Unknown Property Management context discloses assumption review', passed: pmUnknown.estimate.pricingContext === 'Residential assumption — review required' && pmUnknown.estimate.manualReviewRequired === true },
-    { name: 'Low result never exceeds typical', passed: ranges.every((range) => range.minimum <= range.typical) },
-    { name: 'Typical result never exceeds high', passed: ranges.every((range) => range.typical <= range.maximum) },
-    { name: 'No negative values are produced', passed: ranges.every((range) => range.minimum >= 0 && range.typical >= 0 && range.maximum >= 0) },
-    { name: 'Reset-compatible empty data has no selected service or photos', passed: !data({ service: undefined, photos: [] }).service && data({ photos: [] }).photos.length === 0 },
+    { name: 'Residential plumbing description resolves hot-water-heater replacement', passed: hotWater.metadata.profileId === 'water-heater-replacement' && hotWater.metadata.resolutionSource === 'description' },
+    { name: 'Hot-water-heater result displays Phase 2 pricing at the residential rate', passed: hasDollarRange(hotWater.estimate) && hotWater.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residential },
+    { name: 'Hot-water-heater minimum labor is at least four hours with a separate $50 trip charge', passed: (hotWater.engineSummary?.laborHours.minimum ?? 0) >= 4 && hotWater.estimate.tripChargeTotal === '$50' },
+    { name: 'Replace flooring without a flooring type displays the residential flooring fallback', passed: flooring.estimate.resultLabel?.startsWith('Broad Flooring Planning Range') === true && hasDollarRange(flooring.estimate) },
+    { name: 'Flooring fallback displays materials and trip charges and requests measurements and selection', passed: /^\$/.test(flooring.estimate.materials) && /^\$/.test(flooring.estimate.tripChargeTotal ?? '') && flooring.estimate.recommendations?.some((item) => /square footage|flooring selection/i.test(item)) === true },
+    { name: 'Complete kitchen remodel displays the broad residential remodel range', passed: kitchenRemodel.estimate.resultLabel === 'Broad Remodel Planning Range' && hasDollarRange(kitchenRemodel.estimate) && kitchenRemodel.estimate.confidence === 'Preliminary' },
+    { name: 'Commercial tenant improvement displays the broad commercial range at $75 per hour', passed: tenantImprovement.estimate.resultLabel === 'Commercial Tenant-Improvement Planning Range' && tenantImprovement.estimate.applicableLaborRate === COMPANY_STANDARDS.laborRates.commercial && hasDollarRange(tenantImprovement.estimate) },
+    { name: 'Residential appliance repair displays a diagnostic range and parts allowance', passed: residentialAppliance.estimate.resultHeading === 'Preliminary Diagnostic Range' && residentialAppliance.estimate.applicableLaborRate === COMPANY_STANDARDS.laborRates.residential && residentialAppliance.estimate.materials !== '$0' },
+    { name: 'Commercial appliance repair displays a commercial diagnostic range', passed: commercialAppliance.estimate.resultHeading === 'Preliminary Diagnostic Range' && commercialAppliance.estimate.applicableLaborRate === COMPANY_STANDARDS.laborRates.commercial && hasDollarRange(commercialAppliance.estimate) },
+    { name: 'Property Assessment displays a priced assessment service with a separate trip charge', passed: assessment.estimate.resultLabel === 'Property Assessment Service Range' && assessment.estimate.tripChargeTotal === '$50' && hasDollarRange(assessment.estimate) },
+    { name: 'Unknown residential work displays a broad preliminary range', passed: residentialOther.estimate.resultHeading === 'Broad Preliminary Planning Range' && residentialOther.estimate.confidence === 'Preliminary' && hasDollarRange(residentialOther.estimate) },
+    { name: 'Unknown commercial work displays a broad preliminary range', passed: commercialOther.estimate.resultHeading === 'Broad Preliminary Planning Range' && commercialOther.estimate.applicableLaborRate === COMPANY_STANDARDS.laborRates.commercial && hasDollarRange(commercialOther.estimate) },
+    { name: 'Unspecified plumbing work displays a preliminary plumbing service range', passed: plumbingWork.estimate.resultHeading === 'Preliminary Diagnostic Range' && hasDollarRange(plumbingWork.estimate) },
+    { name: 'HVAC gas odor displays the safety warning and residential emergency range', passed: gasOdor.estimate.status === 'safetyOverride' && gasOdor.estimate.resultHeading === 'Emergency Diagnostic / Initial Service Range' && gasOdor.estimate.total === '$150–$450' },
+    { name: 'Active electrical arcing displays the safety warning and emergency range', passed: arcing.estimate.status === 'safetyOverride' && arcing.estimate.total === '$150–$450' && arcing.estimate.safetyOverride !== undefined },
+    { name: 'Same estimator inputs return identical outputs', passed: JSON.stringify(deterministicA) === JSON.stringify(deterministicB) },
+    { name: 'Every completed scenario displays a preliminary dollar range', passed: allResults.every((result) => hasDollarRange(result.estimate)) },
+    { name: 'Every fallback recommends professional review as a secondary qualification', passed: [flooring, kitchenRemodel, tenantImprovement, residentialAppliance, commercialAppliance, assessment, residentialOther, commercialOther, plumbingWork].every((result) => result.estimate.manualReviewRequired && result.estimate.manualReviewReasons?.length) },
+    { name: 'No calculated result range contains negative values', passed: allRanges.every((range) => range.minimum >= 0 && range.typical >= 0 && range.maximum >= 0) },
+    { name: 'All calculated ranges preserve low, typical, and high ordering', passed: allRanges.every((range) => range.minimum <= range.typical && range.typical <= range.maximum) },
+    { name: 'Trip charges display separately on every result', passed: allResults.every((result) => /^\$/.test(result.estimate.tripChargeTotal ?? '')) },
+    { name: 'Commercial pricing receives no second multiplier', passed: commercialOther.estimate.calculationRanges?.laborCost.minimum === (commercialOther.estimate.calculationRanges?.laborHours.minimum ?? -1) * COMPANY_STANDARDS.laborRates.commercial && commercialDrywall.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercial },
+    { name: 'Emergency pricing receives no second multiplier', passed: gasOdor.estimate.calculationRanges?.laborCost.minimum === COMPANY_STANDARDS.laborRates.residentialEmergency && gasOdor.estimate.calculationRanges.laborCost.maximum === COMPANY_STANDARDS.laborRates.residentialEmergency * 4 },
+    { name: 'Residential standard profile calculation still uses $50 per hour', passed: residentialDrywall.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residential },
+    { name: 'Supported profile calculations do not use the legacy fallback', passed: hotWater.metadata.supportedProfile && !hotWater.metadata.fallbackUsed },
     { name: 'Existing step validation still functions', passed: validate(0, data({ projectType: undefined })) === 'Select a project type to continue.' && validate(3, data({ description: '' })) !== '' },
-    { name: 'Scenario A: residential standard drywall produces a deterministic estimate', passed: residentialDrywall.estimate.status === 'estimate' && residentialDrywall.estimate.pricingContext === 'Residential' },
-    { name: 'Scenario B: commercial ceiling tiles use the commercial rate and one visit', passed: oneVisit.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercial && oneVisit.engineSummary.expectedSiteVisits === 1 },
-    { name: 'Scenario C: residential emergency minor plumbing leak uses the emergency rate', passed: residentialEmergencyPlumbing.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residentialEmergency },
-    { name: 'Scenario D: residential water heater preserves its minimum and trip charge', passed: (waterHeater.engineSummary?.laborHours.minimum ?? 0) >= 4 && waterHeater.engineSummary?.tripCharges === COMPANY_STANDARDS.billing.tripChargePerVisit },
-    { name: 'Scenario E: commercial light fixture uses $75 without a second multiplier', passed: commercialLightFixture.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.commercial },
-    { name: 'Scenario F: managed single-family work uses residential pricing', passed: pmResidential.estimate.pricingContext === 'Residential' },
-    { name: 'Scenario G: managed common-area work uses commercial pricing', passed: pmCommercial.estimate.pricingContext === 'Commercial' },
-    { name: 'Scenario H: remodeling shows review-only output without a fabricated total', passed: calculateIntegratedEstimate(data({ category: 'Remodel', service: 'Kitchen Remodeling' })).estimate.total === 'Professional review required' },
-    { name: 'Scenario I: appliance repair shows review-only output', passed: calculateIntegratedEstimate(data({ service: 'Appliance Repair' })).estimate.total === 'Professional review required' },
-    { name: 'Scenario J: HVAC gas odor suppresses the ordinary estimate presentation', passed: gasOdor.estimate.status === 'safetyOverride' && gasOdor.estimate.total === 'Safety review required' },
-    { name: 'Scenario K: active electrical arcing suppresses the ordinary estimate presentation', passed: arcing.estimate.status === 'safetyOverride' && arcing.estimate.total === 'Safety review required' },
   ]
   return { passed: checks.every((check) => check.passed), checks }
 }

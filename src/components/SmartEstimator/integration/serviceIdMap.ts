@@ -33,25 +33,25 @@ export const VISIBLE_SERVICE_ID_MAP: Readonly<Record<string, string>> = {
 }
 
 const MANUAL_REVIEW_REASONS: Readonly<Record<string, string>> = {
-  Flooring: 'Select a specific flooring system before a meaningful preliminary range can be provided.',
+  Flooring: 'Flooring type, measurements, substrate, and material selection require confirmation.',
   Plumbing: 'Select a specific plumbing service so regulated work and materials can be reviewed correctly.',
   Electrical: 'Electrical work requires a specific service and qualified professional review.',
   HVAC: 'HVAC work requires a specific service and equipment review.',
-  'Appliance Repair': 'A dedicated appliance-repair service profile is not yet available.',
-  'Doors and Hardware': 'Select a specific door or lock service before pricing.',
-  'Kitchen Remodeling': 'Remodeling profiles are not yet available and require professional scope review.',
-  'Bathroom Remodeling': 'Remodeling profiles are not yet available and require professional scope review.',
-  'Cabinets and Countertops': 'Cabinet and countertop profiles are not yet available.',
-  Tile: 'Select tile repair or grout and caulk repair before pricing.',
+  'Appliance Repair': 'A dedicated appliance-repair profile is not available, so the range covers diagnostic or initial-service planning only.',
+  'Doors and Hardware': 'The specific door, lock, hardware, and repair scope require confirmation.',
+  'Kitchen Remodeling': 'The broad remodel range requires professional scope, design, and material review.',
+  'Bathroom Remodeling': 'The broad remodel range requires professional scope, design, and material review.',
+  'Cabinets and Countertops': 'Cabinet and countertop scope, measurements, and materials require professional review.',
+  Tile: 'The range requires confirmation of tile repair versus grout or caulk work.',
   'Exterior Repairs': 'The exterior repair scope is too broad for automatic pricing.',
   'Water Damage Repair': 'Water damage may involve concealed, structural, electrical, or hazardous conditions.',
   Other: 'The selected work does not have a sufficiently specific service profile.',
-  'Commercial Property Maintenance': 'Commercial maintenance requires a clearly defined, non-regulated task before automatic pricing.',
-  'Preventative Maintenance': 'Select a specific maintenance task before pricing.',
+  'Commercial Property Maintenance': 'The category-level range requires an itemized maintenance scope and regulated-work review.',
+  'Preventative Maintenance': 'The specific maintenance tasks and materials require confirmation.',
   'Tenant Improvements': 'Tenant improvements require professional scope, permit, and trade review.',
-  'Rental Turnover': 'Rental turnover work requires an itemized scope before pricing.',
+  'Rental Turnover': 'Rental turnover work requires an itemized scope and site review.',
   'Property Inspection': 'Property Assessment is scheduled as a professional assessment and is not priced as a repair.',
-  'Emergency Repair': 'Emergency Repair requires a specific underlying service before pricing.',
+  'Emergency Repair': 'The initial-service range requires confirmation of the underlying repair service.',
 }
 
 export function resolveServiceProfile(serviceId: string): MasterServiceTemplate | undefined {
@@ -63,7 +63,7 @@ export function selectionRequiresManualReview(visibleService: string): boolean {
 }
 
 export function manualReviewReasonForSelection(visibleService: string): string {
-  return MANUAL_REVIEW_REASONS[visibleService] ?? 'A dedicated service profile is not yet available for the selected project.'
+  return MANUAL_REVIEW_REASONS[visibleService] ?? 'The category-level range requires confirmation because a dedicated service profile is not available for the selected project.'
 }
 
 export function resolveVisibleService(visibleService: string | undefined): ServiceResolution {

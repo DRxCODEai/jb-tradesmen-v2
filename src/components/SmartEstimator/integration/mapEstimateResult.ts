@@ -34,7 +34,6 @@ function customerFacingReason(reason: string): string {
 }
 
 export function mapEstimateResult(summary: EstimateSummaryResult, data: Data, mapped: MappedEstimatorInput): Estimate {
-  const safety = summary.safetyOverride
   const manualReviewReasons = [...new Set([...mapped.manualReviewReasons, ...summary.manualReviewFlags.map(customerFacingReason)])]
   const recommendations = summary.recommendations.map((item) => item.text)
   const common: Pick<Estimate, 'serviceName'|'serviceProfileId'|'applicableLaborRate'|'tripChargeTotal'|'tripChargePerVisit'|'expectedSiteVisits'|'equipmentCostRange'|'schedulingWindow'|'manualReviewRequired'|'manualReviewReasons'|'pricingContext'|'fallbackUsed'|'engineVersion'|'assumptions'|'recommendations'|'missingInformation'|'disclaimer'|'projectDetails'> = {
@@ -58,14 +57,6 @@ export function mapEstimateResult(summary: EstimateSummaryResult, data: Data, ma
     projectDetails: projectDetails(data),
   }
 
-  if (safety) {
-    return {
-      laborHours: 'Not calculated — safety review required', labor: 'Not calculated', materials: 'Not calculated', total: 'Safety review required',
-      duration: 'Direct professional review required', confidence: summary.confidence, considerations: [safety.guidance], status: 'safetyOverride',
-      safetyOverride: { guidance: safety.guidance, reasons: [...safety.reasons] }, ...common, manualReviewRequired: true,
-    }
-  }
-
   return {
     laborHours: numericRange(summary.laborHours, 'technician hour', 'technician hours'),
     labor: moneyRange(summary.laborCost),
@@ -74,18 +65,8 @@ export function mapEstimateResult(summary: EstimateSummaryResult, data: Data, ma
     duration: numericRange(summary.calendarDurationDays, 'calendar day', 'calendar days'),
     confidence: summary.confidence,
     considerations: [...new Set([...mapped.warnings, ...summary.exclusions, ...summary.missingInformation.map((item) => `Additional information requested: ${item}`)])],
-    status: 'estimate',
+    status: 'estimate', resultHeading: 'Preliminary Estimate', resultLabel: `${summary.service.name} Preliminary Estimate`,
+    calculationRanges: { laborHours: summary.laborHours, laborCost: summary.laborCost, tripCharges: { minimum: summary.tripCharges, typical: summary.tripCharges, maximum: summary.tripCharges }, materials: summary.materials, equipment: summary.equipment, total: summary.total, visits: { minimum: summary.expectedSiteVisits, typical: summary.expectedSiteVisits, maximum: summary.expectedSiteVisits } },
     ...common,
-  }
-}
-
-export function createManualReviewEstimate(data: Data, reasons: readonly string[]): Estimate {
-  const uniqueReasons = [...new Set(reasons)]
-  return {
-    laborHours: 'Not calculated — professional review required', labor: 'Not calculated', materials: 'Not calculated', total: 'Professional review required',
-    duration: 'To be confirmed after scope review', confidence: 'Preliminary', considerations: uniqueReasons, status: 'manualReview',
-    manualReviewRequired: true, manualReviewReasons: uniqueReasons, fallbackUsed: false, engineVersion: 'v1',
-    recommendations: ['Schedule Professional Assessment', 'Request Formal Estimate', 'Call JBTRADESMENLLC'], disclaimer: INTEGRATED_ESTIMATE_DISCLAIMER,
-    projectDetails: projectDetails(data),
   }
 }

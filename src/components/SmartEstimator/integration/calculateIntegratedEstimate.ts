@@ -1,46 +1,79 @@
 import type { Data } from '../types/estimator'
+import type { SafetyOverrideResult } from '../types/v1/guardrails'
 import { createEstimateSummary } from '../engines/estimateSummaryEngine'
-import { calculateEstimate as calculateLegacyEstimate } from '../utils/calculateEstimate'
-import type { IntegratedEstimateResult, IntegrationErrorCode } from './integrationTypes'
+import { SAFETY_OVERRIDE_GUIDANCE } from '../engines/guardrailEngine'
+import type { IntegratedEstimateResult, MappedEstimatorInput } from './integrationTypes'
+import { calculateFallbackEstimate, emergencyFallback, selectCategoryFallback } from './calculateFallbackEstimate'
+import { resolveServiceFromDescription, type DescriptionServiceResolution } from './descriptionServiceResolver'
 import { mapEstimatorInput } from './mapEstimatorInput'
-import { createManualReviewEstimate, INTEGRATED_ESTIMATE_DISCLAIMER, mapEstimateResult } from './mapEstimateResult'
-import { resolveVisibleService } from './serviceIdMap'
+import { mapEstimateResult } from './mapEstimateResult'
+import { manualReviewReasonForSelection, resolveServiceProfile, resolveVisibleService } from './serviceIdMap'
 
-function manualReview(data: Data, reasons: readonly string[], errorCode: IntegrationErrorCode = 'unsupportedService'): IntegratedEstimateResult {
-  return { estimate: createManualReviewEstimate(data, reasons), metadata: { engineVersion: 'v1', supportedProfile: false, profileId: null, fallbackUsed: false, errorCode, warnings: reasons }, engineSummary: null }
+type ResolutionSource = 'exactSelection' | 'description'
+
+function inferredSafetyOverride(mapped: MappedEstimatorInput): SafetyOverrideResult | null {
+  const answers = mapped.engineInput.answers
+  const active = ['gasOdor', 'carbonMonoxideAlarm', 'activeArcing', 'electricalArcing', 'smoke', 'burningOdor', 'meltedComponents', 'waterContactingElectrical', 'activeFlooding']
+    .filter((field) => answers[field] === true)
+  if (!active.length) return null
+  return { active: true, suppressOrdinaryPricing: true, guidance: SAFETY_OVERRIDE_GUIDANCE, reasons: ['The supplied project description reports a potential immediate safety concern.'], manualReviewFlags: ['immediateSafetyConcern'] }
 }
 
-function categoryReviewReason(data: Data): string | null {
-  if (data.category === 'Remodel') return 'Remodeling profiles are not yet available. This project requires professional scope review before a meaningful preliminary range can be provided.'
-  if (data.category === 'Property Assessment') return 'Property Assessment is scheduled as a professional assessment and is not priced as a repair.'
-  if (data.service === 'Emergency Repair') return 'Emergency Repair requires a specific underlying service before pricing.'
-  return null
+function cleanReviewReason(reason: string): string { return reason.replace(/^[a-zA-Z]+Required:\s*/, '') }
+
+function calculateProfileEstimate(data: Data, serviceId: string, source: ResolutionSource, descriptionResolution?: DescriptionServiceResolution): IntegratedEstimateResult | null {
+  const profile = resolveServiceProfile(serviceId)
+  if (!profile) return null
+  const mapped = mapEstimatorInput(data, serviceId)
+  try {
+    const summary = createEstimateSummary(mapped.engineInput, profile)
+    if (summary.safetyOverride) {
+      const reviewReasons = [...mapped.manualReviewReasons, ...summary.manualReviewFlags.map(cleanReviewReason), 'The complete repair scope must be assessed after the immediate condition is addressed.']
+      const estimate = calculateFallbackEstimate(data, mapped, emergencyFallback(mapped), { reviewReasons, serviceName: profile.identity.name, safetyOverride: summary.safetyOverride, forceEmergency: true })
+      return { estimate, metadata: { engineVersion: 'v1', supportedProfile: true, profileId: serviceId, fallbackUsed: false, errorCode: null, warnings: mapped.warnings, resolutionSource: source, descriptionConfidence: descriptionResolution?.confidence, matchedKeywords: descriptionResolution?.matchedKeywords }, engineSummary: summary }
+    }
+    const estimate = mapEstimateResult(summary, data, mapped)
+    if (source === 'description' && estimate.confidence === 'Strong') estimate.confidence = 'Moderate'
+    if (source === 'description') {
+      estimate.manualReviewRequired = true
+      estimate.manualReviewReasons = [...new Set([...(estimate.manualReviewReasons ?? []), `Service profile resolved from the project description using: ${descriptionResolution?.matchedKeywords.join(', ')}. Confirm the final scope before approval.`])]
+    }
+    return { estimate, metadata: { engineVersion: 'v1', supportedProfile: true, profileId: serviceId, fallbackUsed: false, errorCode: mapped.manualReviewReasons.length ? 'propertyContextUncertain' : null, warnings: mapped.warnings, resolutionSource: source, descriptionConfidence: descriptionResolution?.confidence, matchedKeywords: descriptionResolution?.matchedKeywords }, engineSummary: summary }
+  } catch {
+    const notice = 'The service-specific calculation could not be completed, so a broad preliminary range is shown and requires professional review.'
+    const definition = selectCategoryFallback(data, mapped)
+    const estimate = calculateFallbackEstimate(data, mapped, definition, { reviewReasons: [notice, ...mapped.manualReviewReasons], serviceName: data.service })
+    return { estimate, metadata: { engineVersion: 'v1', supportedProfile: true, profileId: serviceId, fallbackUsed: false, errorCode: 'engineFailure', warnings: [notice], resolutionSource: 'categoryFallback' }, engineSummary: null }
+  }
 }
 
 export function calculateIntegratedEstimate(data: Data): IntegratedEstimateResult {
-  const categoryReason = categoryReviewReason(data)
-  if (categoryReason) return manualReview(data, [categoryReason])
+  const exact = resolveVisibleService(data.service)
+  if (exact.serviceId && exact.profile) {
+    const result = calculateProfileEstimate(data, exact.serviceId, 'exactSelection')
+    if (result) return result
+  }
 
-  const resolution = resolveVisibleService(data.service)
-  if (!resolution.serviceId) return manualReview(data, resolution.manualReviewReasons)
-  if (!resolution.profile) return manualReview(data, resolution.manualReviewReasons, 'missingProfile')
+  const descriptionResolution = resolveServiceFromDescription(data)
+  if (descriptionResolution.serviceId && !descriptionResolution.ambiguous) {
+    const result = calculateProfileEstimate(data, descriptionResolution.serviceId, 'description', descriptionResolution)
+    if (result) return result
+  }
 
-  const mapped = mapEstimatorInput(data, resolution.serviceId)
-  try {
-    const summary = createEstimateSummary(mapped.engineInput, resolution.profile)
-    const estimate = mapEstimateResult(summary, data, mapped)
-    return {
-      estimate,
-      metadata: { engineVersion: 'v1', supportedProfile: true, profileId: resolution.serviceId, fallbackUsed: false, errorCode: mapped.manualReviewReasons.length ? 'propertyContextUncertain' : null, warnings: mapped.warnings },
-      engineSummary: summary,
-    }
-  } catch {
-    const fallback = calculateLegacyEstimate(data)
-    const notice = 'A deterministic service calculation could not be completed. This temporary planning range requires professional review.'
-    return {
-      estimate: { ...fallback, status: 'estimate', serviceName: data.service, serviceProfileId: resolution.serviceId, manualReviewRequired: true, manualReviewReasons: [notice], fallbackUsed: true, engineVersion: 'legacy-fallback', disclaimer: INTEGRATED_ESTIMATE_DISCLAIMER },
-      metadata: { engineVersion: 'v1', supportedProfile: true, profileId: resolution.serviceId, fallbackUsed: true, errorCode: 'engineFailure', warnings: [notice] },
-      engineSummary: null,
-    }
+  const mapped = mapEstimatorInput(data, 'category-fallback')
+  const safety = inferredSafetyOverride(mapped)
+  const reviewReasons = [
+    manualReviewReasonForSelection(data.service ?? 'Not selected'),
+    ...mapped.manualReviewReasons,
+    ...(descriptionResolution.ambiguous ? ['The supplied description matches more than one service profile.'] : []),
+    ...(!mapped.engineInput.measurementsProvided ? ['Measurements are missing or not sufficiently defined.'] : []),
+    'The exact scope, material selection, and site conditions require confirmation.',
+  ]
+  const definition = safety ? emergencyFallback(mapped) : selectCategoryFallback(data, mapped)
+  const estimate = calculateFallbackEstimate(data, mapped, definition, { reviewReasons, safetyOverride: safety, forceEmergency: Boolean(safety), serviceName: data.service })
+  return {
+    estimate,
+    metadata: { engineVersion: 'v1', supportedProfile: false, profileId: null, fallbackUsed: false, errorCode: 'unsupportedService', warnings: mapped.warnings, resolutionSource: 'categoryFallback', descriptionConfidence: descriptionResolution.confidence, matchedKeywords: descriptionResolution.matchedKeywords },
+    engineSummary: null,
   }
 }

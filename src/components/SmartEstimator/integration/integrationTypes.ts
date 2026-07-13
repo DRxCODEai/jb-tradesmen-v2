@@ -27,6 +27,9 @@ export interface IntegrationMetadata {
   fallbackUsed: boolean
   errorCode: IntegrationErrorCode | null
   warnings: readonly string[]
+  resolutionSource: 'exactSelection' | 'description' | 'categoryFallback' | 'legacyFallback'
+  descriptionConfidence?: number
+  matchedKeywords?: readonly string[]
 }
 
 export interface IntegratedEstimateResult {
