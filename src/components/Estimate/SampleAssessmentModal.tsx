@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { ChevronLeft, ChevronRight, Printer, X } from 'lucide-react'
 import logo from '../../assets/logo.png'
 import { KOALENDAR_URL } from '../../config/links'
 import './SampleAssessmentModal.css'
+import './SampleAssessmentPolish.css'
 
 type Props = { isOpen: boolean; onClose: () => void }
 const findings = [
@@ -17,10 +18,15 @@ const findings = [
 function SampleMark() { return <div className="sample-report__mark"><strong>SAMPLE REPORT</strong><span>For Demonstration Purposes Only</span></div> }
 function List({ items }: { items: string[] }) { return <ul className="sample-report__list">{items.map((item) => <li key={item}>✓ {item}</li>)}</ul> }
 
-export default function SampleAssessmentModal({ isOpen, onClose }: Props) {
+export default function SampleAssessmentModal({ isOpen, onClose: closeParent }: Props) {
   const [page, setPage] = useState(0)
   const closeRef = useRef<HTMLButtonElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
+  const onClose = useCallback(() => { setPage(0); closeParent() }, [closeParent])
+  useLayoutEffect(() => {
+    if (!isOpen) return
+    modalRef.current?.querySelector<HTMLElement>('.sample-modal__scroll')?.scrollTo({ top: 0, left: 0, behavior: 'auto' })
+  }, [isOpen])
   useEffect(() => {
     if (!isOpen) return
     const originalOverflow = document.body.style.overflow
@@ -41,7 +47,7 @@ export default function SampleAssessmentModal({ isOpen, onClose }: Props) {
     return () => { document.body.style.overflow = originalOverflow; window.removeEventListener('keydown', onKeyDown) }
   }, [isOpen, onClose])
   if (!isOpen) return null
-  const changePage = (next: number) => setPage(Math.max(0, Math.min(7, next)))
+  const changePage = (next: number) => { setPage(Math.max(0, Math.min(7, next))); modalRef.current?.querySelector<HTMLElement>('.sample-modal__scroll')?.scrollTo({ top: 0, left: 0, behavior: 'auto' }) }
   const pageContent = [
     <section className="sample-report__cover" key="cover"><SampleMark /><img src={logo} alt="JBTRADESMENLLC" /><div className="sample-report__gold-line" /><p className="sample-report__kicker">Professional Property Assessment Report</p><h1>Sample Property</h1><p>123 Example Street<br />Las Vegas, Nevada 89139</p><div className="sample-report__cover-meta"><span>Assessment Type<br /><strong>Residential Property Assessment</strong></span><span>Prepared By<br /><strong>JBTRADESMENLLC</strong></span><span>Report Status<br /><strong>Sample / Demonstration</strong></span></div><footer>Licensed &amp; Insured · OSHA 30 Certified · EPA 608 &amp; 609 Certified<br />Federal Contractor · CAGE Code: 13SR1 · UEI: PKT6EMEN5BJ9</footer></section>,
     <section key="summary"><SampleMark /><h1>Executive Summary</h1><p>This sample assessment documents visible property conditions observed during a general property evaluation. The report identifies maintenance concerns, recommended repairs, priority levels and estimated project costs to help the property owner make informed maintenance decisions.</p><div className="sample-report__dashboard"><div><strong>18</strong><span>Total Items Reviewed</span></div><div><strong>2</strong><span>Immediate Priority Items</span></div><div><strong>6</strong><span>Recommended Repairs</span></div><div><strong>5</strong><span>Preventative Maintenance Items</span></div><div className="sample-report__dashboard-total"><strong>$2,450–$4,100</strong><span>Estimated Repair Range</span></div></div><aside className="sample-report__note">These figures are fictional examples provided only to demonstrate the format of a JBTRADESMENLLC Property Assessment Report.</aside></section>,

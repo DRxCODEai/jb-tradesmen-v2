@@ -1,0 +1,23 @@
+.sample-report__cover {
+  isolation: isolate;
+}
+
+.sample-report__cover::before {
+  position: absolute;
+  z-index: 0;
+  top: 19%;
+  left: 50%;
+  width: 190px;
+  height: 78px;
+  content: '';
+  pointer-events: none;
+  background: rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  filter: blur(34px);
+  transform: translateX(-50%);
+}
+
+.sample-report__cover > img {
+  position: relative;
+  z-index: 1;
+}
