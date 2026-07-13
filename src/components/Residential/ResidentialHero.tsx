@@ -1,5 +1,6 @@
 import logo from '../../assets/logo.png'
 import { KOALENDAR_URL } from '../../config/links'
+import LogoGlow from '../Layout/LogoGlow'
 import './ResidentialHero.css'
 
 export default function ResidentialHero() {
@@ -59,7 +60,9 @@ export default function ResidentialHero() {
 
         <div className="residential-hero__card-wrap">
           <aside className="residential-hero__card" aria-label="JBTRADESMENLLC Residential Services details">
-            <img src={logo} alt="JBTRADESMENLLC" className="residential-hero__logo" />
+            <LogoGlow centered>
+              <img src={logo} alt="JBTRADESMENLLC" className="residential-hero__logo" />
+            </LogoGlow>
             <div className="residential-hero__divider" />
             <h2>JBTRADESMENLLC</h2>
             <p className="residential-hero__subtitle">Residential Services</p>

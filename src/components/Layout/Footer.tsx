@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
+import LogoGlow from './LogoGlow'
 
 const quickLinks = [
   { label: 'Residential Services', href: '/residential-services' },
@@ -30,7 +31,9 @@ export default function Footer() {
     <footer className="site-footer">
       <div className="footer-grid">
         <div className="footer-brand">
-          <Logo />
+          <LogoGlow>
+            <Logo />
+          </LogoGlow>
           <h2>JBTRADESMENLLC</h2>
           <p>Professional residential and commercial maintenance with the responsiveness and accountability your property deserves.</p>
         </div>

@@ -1,5 +1,6 @@
 import logo from '../../assets/logo.png'
 import { KOALENDAR_URL } from '../../config/links'
+import LogoGlow from '../Layout/LogoGlow'
 import './CommercialHero.css'
 
 const capabilities = [
@@ -36,7 +37,9 @@ export default function CommercialHero() {
         </div>
       </div>
       <div className="commercial-hero__card-wrap"><aside className="commercial-hero__card" aria-label="JBTRADESMENLLC commercial capabilities">
-        <img src={logo} alt="JBTRADESMENLLC" className="commercial-hero__logo" />
+        <LogoGlow centered>
+          <img src={logo} alt="JBTRADESMENLLC" className="commercial-hero__logo" />
+        </LogoGlow>
         <div className="commercial-hero__divider" />
         <h2>JBTRADESMENLLC</h2><p className="commercial-hero__subtitle">Commercial Services</p>
         <div className="commercial-hero__stats">

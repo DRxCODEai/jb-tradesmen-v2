@@ -1,0 +1,27 @@
+.logo-glow {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.logo-glow--centered {
+  margin-inline: auto;
+}
+
+.logo-glow::before {
+  position: absolute;
+  z-index: -1;
+  inset: 24% 7% 28%;
+  content: '';
+  background: rgba(212, 175, 55, 0.14);
+  border-radius: 50%;
+  filter: blur(clamp(20px, 2vw, 30px));
+  pointer-events: none;
+}
+
+.logo-glow > * {
+  position: relative;
+  z-index: 1;
+}

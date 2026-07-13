@@ -4,6 +4,7 @@ import './EstimateHero.css';
 import logo from '../../assets/logo.png';
 import { KOALENDAR_URL } from '../../config/links';
 import SampleAssessmentModal from '../Estimate/SampleAssessmentModal';
+import LogoGlow from '../Layout/LogoGlow';
 
 export default function EstimateHero() {
   const [isSampleOpen, setIsSampleOpen] = useState(false);
@@ -105,11 +106,13 @@ export default function EstimateHero() {
 
           <div className="brand-card">
 
-            <img
-              src={logo}
-              alt="JBTRADESMENLLC"
-              className="brand-logo"
-            />
+            <LogoGlow centered>
+              <img
+                src={logo}
+                alt="JBTRADESMENLLC"
+                className="brand-logo"
+              />
+            </LogoGlow>
 
             <div className="brand-divider"></div>
 
