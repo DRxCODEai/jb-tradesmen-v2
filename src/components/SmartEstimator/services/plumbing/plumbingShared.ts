@@ -17,7 +17,7 @@ export const PLUMBING_PERMIT_REVIEW: PermitAndCodeRequirements = {
 }
 
 export const PLUMBING_DIRECT_CONTACT_MODIFIERS: readonly ServiceModifier[] = [
-  { id: 'plumbing-active-flooding', name: 'Active flooding', description: 'Active flooding requires immediate direct contact.', conditions: [{ field: 'activeFlooding', operator: 'equals', value: true }], effects: { requiresManualReview: true, recommendationsToAdd: ['Contact JBTRADESMENLLC directly for active flooding or an uncontrolled leak.'] }, customerExplanation: 'Active flooding requires immediate direct coordination.', internalNotes: [] },
+  { id: 'plumbing-active-flooding', name: 'Active flooding', description: 'Active flooding requires immediate direct contact.', conditions: [{ field: 'activeFlooding', operator: 'equals', value: true }], effects: { requiresManualReview: true, manualReviewFlags: ['immediateSafetyConcern'], safetyOverride: { reason: 'Reported active uncontrolled flooding.' }, recommendationsToAdd: ['Contact the appropriate utility, emergency service, or qualified professional based on the observed condition.'] }, customerExplanation: 'Active flooding requires immediate direct coordination.', internalNotes: [] },
   { id: 'plumbing-uncontrolled-leak', name: 'Uncontrolled leak', description: 'An uncontrolled leak requires immediate direct contact.', conditions: [{ field: 'uncontrolledLeak', operator: 'equals', value: true }], effects: { requiresManualReview: true, recommendationsToAdd: ['Contact JBTRADESMENLLC directly for active flooding or an uncontrolled leak.'] }, customerExplanation: 'An uncontrolled leak requires immediate direct coordination.', internalNotes: [] },
 ]
 

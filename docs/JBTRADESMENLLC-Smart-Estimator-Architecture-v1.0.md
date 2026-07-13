@@ -243,3 +243,16 @@ AI may later help interpret free-text descriptions, categorize requests, suggest
 - [x] Safety override operational
 - [x] Production build passes
 - [x] Existing visible estimator unchanged
+
+## Phase 3A Integration Status
+
+- The Phase 2 v1 service registry is connected to the existing estimator through a dedicated adapter layer under `src/components/SmartEstimator/integration/`.
+- The existing estimator interface, seven customer-input steps, hero wording, navigation, validation, photo handling, and conversion actions are preserved.
+- Unambiguous supported services use deterministic Phase 2 pricing, timeline, confidence, scope, recommendation, manual-review, and safety-override output.
+- Broad, unsupported, assessment, remodeling, appliance, tenant-improvement, and insufficiently defined regulated services produce professional-review output without fabricated pricing.
+- Safety overrides replace ordinary estimate presentation with the approved direct-contact safety guidance while preserving entered project details.
+- Trip charges are displayed separately from labor, including the approved $50 charge per expected site visit.
+- The applicable residential, commercial, emergency, or after-hours pricing context is disclosed in supported results. Property Management context is derived from the entered property type rather than automatically classified as commercial.
+- The original placeholder engine remains unchanged and is retained only as a temporary, explicit, review-required fallback if a normally supported deterministic calculation fails unexpectedly.
+- Phase 3B will add service-specific guided questions and narrower customer-facing service selections.
+- Phase 3C will remove fallback reliance after final production validation.
