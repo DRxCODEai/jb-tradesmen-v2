@@ -6,7 +6,6 @@ import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
 import ResidentialServices from './pages/ResidentialServices'
 import CommercialServices from './pages/CommercialServices'
-import ProjectGallery from './pages/ProjectGallery'
 import Gallery from './pages/Gallery'
 import WhoWeWorkWith from './pages/WhoWeWorkWith'
 import Resources from './pages/Resources'
@@ -48,7 +47,7 @@ function App() {
 
           <Route
             path="/project-gallery"
-            element={<ProjectGallery />}
+            element={<Gallery />}
           />
 
           <Route
