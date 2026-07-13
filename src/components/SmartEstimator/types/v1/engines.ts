@@ -100,6 +100,8 @@ export interface EstimateSummaryResult {
   total: NumericRange
   expectedSiteVisits: number
   calendarDurationDays: NumericRange
+  dryingOrCuringTimeHours?: NumericRange
+  materialLeadTimeDays?: NumericRange
   schedulingWindow: MinimumMaximumRange | 'Direct confirmation required'
   confidence: ConfidenceLabel
   confidenceScore: number

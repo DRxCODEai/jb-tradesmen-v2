@@ -35,16 +35,22 @@ function calculateProfileEstimate(data: Data, serviceId: string, source: Resolut
     const estimate = mapEstimateResult(summary, data, mapped)
     if (source === 'description' && estimate.confidence === 'Strong') estimate.confidence = 'Moderate'
     if (source === 'description') {
+      estimate.resolvedByDescription = true
       estimate.manualReviewRequired = true
       estimate.manualReviewReasons = [...new Set([...(estimate.manualReviewReasons ?? []), `Service profile resolved from the project description using: ${descriptionResolution?.matchedKeywords.join(', ')}. Confirm the final scope before approval.`])]
+      estimate.manualReviewRecommended = true
     }
     return { estimate, metadata: { engineVersion: 'v1', supportedProfile: true, profileId: serviceId, fallbackUsed: false, errorCode: mapped.manualReviewReasons.length ? 'propertyContextUncertain' : null, warnings: mapped.warnings, resolutionSource: source, descriptionConfidence: descriptionResolution?.confidence, matchedKeywords: descriptionResolution?.matchedKeywords }, engineSummary: summary }
-  } catch {
-    const notice = 'The service-specific calculation could not be completed, so a broad preliminary range is shown and requires professional review.'
-    const definition = selectCategoryFallback(data, mapped)
-    const estimate = calculateFallbackEstimate(data, mapped, definition, { reviewReasons: [notice, ...mapped.manualReviewReasons], serviceName: data.service })
-    return { estimate, metadata: { engineVersion: 'v1', supportedProfile: true, profileId: serviceId, fallbackUsed: false, errorCode: 'engineFailure', warnings: [notice], resolutionSource: 'categoryFallback' }, engineSummary: null }
-  }
+  } catch { return calculateIntegrationFailureFallback(data, mapped) }
+}
+
+export function calculateIntegrationFailureFallback(data: Data, existingMapped?: MappedEstimatorInput): IntegratedEstimateResult {
+  const mapped = existingMapped ?? mapEstimatorInput(data, 'category-fallback')
+  const safety = inferredSafetyOverride(mapped)
+  const notice = 'A detailed service profile could not be applied to this request, so this result uses broader category-level assumptions.'
+  const definition = safety ? emergencyFallback(mapped) : selectCategoryFallback(data, mapped)
+  const estimate = calculateFallbackEstimate(data, mapped, definition, { reviewReasons: [notice, ...mapped.manualReviewReasons], serviceName: data.service, safetyOverride: safety, forceEmergency: Boolean(safety) })
+  return { estimate, metadata: { engineVersion: 'v1', supportedProfile: false, profileId: null, fallbackUsed: false, errorCode: 'engineFailure', warnings: [notice], resolutionSource: 'categoryFallback' }, engineSummary: null }
 }
 
 export function calculateIntegratedEstimate(data: Data): IntegratedEstimateResult {

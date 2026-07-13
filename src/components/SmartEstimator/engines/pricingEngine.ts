@@ -119,11 +119,13 @@ export function calculateServicePricing(input: ServiceEstimateInput, profile: Ma
   laborHours = clampRangeMinimum(laborHours, minimumLaborHours)
 
   const laborRate = selectLaborRate(input)
-  const laborCost = mapRange(laborHours, (hours) => hours * laborRate)
+  const laborCost = roundCurrencyRange(mapRange(laborHours, (hours) => hours * laborRate))
+  materials = roundCurrencyRange(materials)
+  equipment = roundCurrencyRange(equipment)
   const tripRate = profile.pricing.tripChargePerVisitOverride ?? COMPANY_STANDARDS.billing.tripChargePerVisit
   const tripCharges = profile.pricing.applyTripCharge ? siteVisits * tripRate : 0
   const tripRange = { minimum: tripCharges, typical: tripCharges, maximum: tripCharges }
-  const total = addRanges(laborCost, materials, equipment, tripRange)
+  const total = roundCurrencyRange(addRanges(laborCost, materials, equipment, tripRange))
 
   if (profile.pricing.manualReviewThreshold !== undefined && total.maximum >= profile.pricing.manualReviewThreshold) {
     manualReviewFlags.push('Estimated range meets the service manual-review threshold')
@@ -135,11 +137,11 @@ export function calculateServicePricing(input: ServiceEstimateInput, profile: Ma
 
   return {
     laborHours: normalizeRange(laborHours),
-    laborCost: roundCurrencyRange(laborCost),
+    laborCost,
     tripCharges,
-    materials: roundCurrencyRange(materials),
-    equipment: roundCurrencyRange(equipment),
-    total: roundCurrencyRange(total),
+    materials,
+    equipment,
+    total,
     siteVisits,
     laborRate,
     appliedModifiers: activeModifiers.map(({ id, name }) => ({ id, name })),

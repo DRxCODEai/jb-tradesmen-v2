@@ -29,6 +29,10 @@ function scheduling(summary: EstimateSummaryResult): string {
   return `${summary.schedulingWindow.minimum}–${summary.schedulingWindow.maximum} business days`
 }
 
+function timeRange(range: NumericRange, unit: string): string {
+  return range.minimum === range.maximum ? `${number(range.minimum)} ${unit}` : `${number(range.minimum)}–${number(range.maximum)} ${unit}`
+}
+
 function customerFacingReason(reason: string): string {
   return reason.replace(/^[a-zA-Z]+Required:\s*/, '')
 }
@@ -65,8 +69,18 @@ export function mapEstimateResult(summary: EstimateSummaryResult, data: Data, ma
     duration: numericRange(summary.calendarDurationDays, 'calendar day', 'calendar days'),
     confidence: summary.confidence,
     considerations: [...new Set([...mapped.warnings, ...summary.exclusions, ...summary.missingInformation.map((item) => `Additional information requested: ${item}`)])],
-    status: 'estimate', resultHeading: 'Preliminary Estimate', resultLabel: `${summary.service.name} Preliminary Estimate`,
+    status: 'estimate', resultHeading: 'Preliminary Project Estimate', resultType: 'supported', resultLabel: `${summary.service.name} Preliminary Estimate`,
+    resolvedServiceName: summary.service.name, selectedServiceName: data.service ?? 'Not selected',
+    serviceTiming: summary.serviceTiming === 'standard' && !summary.projectInput.emergency && !summary.projectInput.afterHours ? 'Standard' : 'Emergency / After Hours',
+    onsiteLaborDescription: numericRange(summary.laborHours, 'technician hour', 'technician hours'),
+    calendarDuration: numericRange(summary.calendarDurationDays, 'calendar day', 'calendar days'),
+    curingTime: summary.dryingOrCuringTimeHours ? timeRange(summary.dryingOrCuringTimeHours, 'hours') : undefined,
+    materialLeadTime: summary.materialLeadTimeDays ? timeRange(summary.materialLeadTimeDays, 'calendar days') : undefined,
+    confidenceImprovingFactors: [...summary.improvingConfidenceFactors], confidenceReducingFactors: [...summary.reducingConfidenceFactors],
+    scopeSteps: [...summary.scopeSteps], exclusions: [...summary.exclusions], customerSuppliedMaterials: data.materials || summary.projectInput.customerSuppliedMaterials,
+    manualReviewRecommended: manualReviewReasons.length > 0, broadFallbackUsed: false,
     calculationRanges: { laborHours: summary.laborHours, laborCost: summary.laborCost, tripCharges: { minimum: summary.tripCharges, typical: summary.tripCharges, maximum: summary.tripCharges }, materials: summary.materials, equipment: summary.equipment, total: summary.total, visits: { minimum: summary.expectedSiteVisits, typical: summary.expectedSiteVisits, maximum: summary.expectedSiteVisits } },
+    laborHoursRange: summary.laborHours, laborCostRange: summary.laborCost, expectedVisitRange: { minimum: summary.expectedSiteVisits, typical: summary.expectedSiteVisits, maximum: summary.expectedSiteVisits }, tripChargeRange: { minimum: summary.tripCharges, typical: summary.tripCharges, maximum: summary.tripCharges }, materialCostRange: summary.materials, equipmentRange: summary.equipment, totalRange: summary.total,
     ...common,
   }
 }

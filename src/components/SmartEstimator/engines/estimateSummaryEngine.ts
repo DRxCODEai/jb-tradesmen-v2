@@ -37,6 +37,8 @@ export function createEstimateSummary(input: ServiceEstimateInput, profile: Mast
     total: pricing.total,
     expectedSiteVisits: timeline.expectedSiteVisits,
     calendarDurationDays: timeline.calendarDurationDays,
+    dryingOrCuringTimeHours: timeline.dryingOrCuringTimeHours,
+    materialLeadTimeDays: timeline.materialLeadTimeDays,
     schedulingWindow: timeline.schedulingMessage === 'Direct confirmation required'
       ? 'Direct confirmation required'
       : timeline.schedulingWindowBusinessDays,

@@ -3,9 +3,10 @@ export type Category='Maintenance'|'Repair'|'Remodel'|'Property Assessment'|'Eme
 export type Photo={file:File;url:string}
 import type { ServiceAnswers } from '../dynamicQuestions/dynamicQuestionTypes'
 export type Data={projectType?:ProjectType;category?:Category;service?:string;serviceAnswers:ServiceAnswers;description:string;condition:string;quantity:string;dimensions:string;outcome:string;materials:boolean;matching:boolean;accessNotes:string;propertyType:string;city:string;state:string;zip:string;occupancy:string;location:string;floor:string;access:string;urgency:string;timing:string;photos:Photo[];firstName:string;lastName:string;email:string;phone:string;contact:string;company:string;consent:boolean}
-export type PricingContext = 'Residential' | 'Commercial' | 'Residential Emergency / After Hours' | 'Commercial Emergency / After Hours' | 'Residential assumption — review required'
+export type PricingContext = 'Residential' | 'Commercial' | 'Residential Emergency / After Hours' | 'Commercial Emergency / After Hours' | 'Residential assumption — review recommended'
 export type EstimateStatus = 'estimate' | 'manualReview' | 'safetyOverride'
-export type EstimateResultHeading = 'Preliminary Estimate' | 'Broad Preliminary Planning Range' | 'Preliminary Diagnostic Range' | 'Emergency Diagnostic / Initial Service Range'
+export type EstimateResultHeading = 'Preliminary Project Estimate' | 'Broad Preliminary Planning Range' | 'Preliminary Diagnostic / Initial Service Range' | 'Emergency Diagnostic / Initial Service Range'
+export type EstimateResultType = 'supported' | 'broadFallback' | 'diagnostic' | 'emergency'
 export type EstimateNumericRange = {minimum:number;typical:number;maximum:number}
 export type Estimate={
   laborHours:string
@@ -16,10 +17,13 @@ export type Estimate={
   confidence:'Preliminary'|'Moderate'|'Strong'
   considerations:string[]
   resultHeading?:EstimateResultHeading
+  resultType?:EstimateResultType
   resultLabel?:string
   rangeBasisNote?:string
   status?:EstimateStatus
   serviceName?:string
+  resolvedServiceName?:string
+  selectedServiceName?:string
   serviceProfileId?:string
   applicableLaborRate?:number
   tripChargeTotal?:string
@@ -27,15 +31,28 @@ export type Estimate={
   expectedSiteVisits?:string
   equipmentCostRange?:string
   schedulingWindow?:string
+  serviceTiming?:'Standard'|'Emergency / After Hours'
+  onsiteLaborDescription?:string
+  calendarDuration?:string
+  curingTime?:string
+  materialLeadTime?:string
   manualReviewRequired?:boolean
   manualReviewReasons?:string[]
   safetyOverride?:{guidance:string;reasons:string[]}
   pricingContext?:PricingContext
   fallbackUsed?:boolean
+  broadFallbackUsed?:boolean
+  resolvedByDescription?:boolean
   engineVersion?:string
   assumptions?:string[]
   recommendations?:string[]
   missingInformation?:string[]
+  confidenceImprovingFactors?:string[]
+  confidenceReducingFactors?:string[]
+  scopeSteps?:string[]
+  exclusions?:string[]
+  customerSuppliedMaterials?:boolean
+  manualReviewRecommended?:boolean
   disclaimer?:string
   projectDetails?:{
     summary:string
@@ -54,4 +71,11 @@ export type Estimate={
     total:EstimateNumericRange
     visits:EstimateNumericRange
   }
+  laborHoursRange?:EstimateNumericRange
+  laborCostRange?:EstimateNumericRange
+  expectedVisitRange?:EstimateNumericRange
+  tripChargeRange?:EstimateNumericRange
+  materialCostRange?:EstimateNumericRange
+  equipmentRange?:EstimateNumericRange
+  totalRange?:EstimateNumericRange
 }

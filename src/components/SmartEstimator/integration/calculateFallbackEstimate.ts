@@ -65,18 +65,28 @@ export function calculateFallbackEstimate(data: Data, mapped: MappedEstimatorInp
   const flooringBasis = definition.id === 'residentialFlooring' && mapped.engineInput.squareFeet !== undefined
     ? [`Materials are calculated at $2–$9 per supplied square foot using ${number(mapped.engineInput.squareFeet)} square feet.`]
     : []
+  const resultType = safety ? 'emergency' : definition.kind === 'broad' ? 'broadFallback' : 'diagnostic'
+  const improvingFactors = [mapped.engineInput.measurementsProvided ? 'Measurements supplied' : '', (mapped.engineInput.quantity ?? mapped.engineInput.itemCount ?? 0) > 0 ? 'Quantity supplied' : '', mapped.engineInput.photoCount > 0 ? 'Photos included' : '', mapped.engineInput.accessDifficulty !== 'unknown' ? 'Access described' : ''].filter(Boolean)
+  const missingInformation = [...new Set(['Exact scope, quantity, materials, and site conditions require confirmation.', ...(!mapped.engineInput.measurementsProvided ? ['Exact measurements'] : []), ...(mapped.engineInput.photoCount === 0 ? ['Project photos'] : [])])]
+  const scopeSteps = ['Inspect visible project conditions.', 'Confirm the included accessible scope and materials.', 'Protect the accessible work area.', 'Complete approved initial service or included work.', 'Document visible concerns and unresolved conditions.', 'Clean the work area and remove included debris.']
+  const exclusions = ['Permit fees unless specifically included', 'Engineering or structural repair', 'Hazardous-material remediation', 'Major concealed damage', 'Utility-company work', 'Major regulated-system changes unless specifically included']
 
   return {
     laborHours: numericRange(laborHours, 'technician hours'), labor: moneyRange(laborCost), materials: moneyRange(materials), total: moneyRange(total), duration: definition.duration,
     confidence: 'Preliminary', considerations: [...new Set([definition.basisNote, ...reviewReasons])], status: safety ? 'safetyOverride' : 'estimate',
-    resultHeading: definition.heading, resultLabel: definition.label, rangeBasisNote: definition.basisNote, serviceName: options.serviceName ?? data.service ?? definition.label,
+    resultHeading: definition.heading, resultType, resultLabel: definition.label, rangeBasisNote: definition.basisNote, serviceName: options.serviceName ?? data.service ?? definition.label,
+    resolvedServiceName: options.serviceName ?? definition.label, selectedServiceName: data.service ?? 'Not selected',
     applicableLaborRate: laborRate, tripChargeTotal: moneyRange(tripCharges), tripChargePerVisit: FALLBACK_TRIP_CHARGE_PER_VISIT,
     expectedSiteVisits: visits.minimum === visits.maximum ? number(visits.minimum) : `${number(visits.minimum)}–${number(visits.maximum)}`,
     equipmentCostRange: undefined, schedulingWindow: forceEmergency ? 'Direct confirmation required' : `${COMPANY_STANDARDS.scheduling.standardSchedulingWindowBusinessDays.minimum}–${COMPANY_STANDARDS.scheduling.standardSchedulingWindowBusinessDays.maximum} business days`,
     manualReviewRequired: true, manualReviewReasons: reviewReasons, safetyOverride: safety ? { guidance: safety.guidance, reasons: [...safety.reasons] } : undefined,
-    pricingContext: forceEmergency ? emergencyPricingContext(mapped) : mapped.pricingContext, fallbackUsed: false, engineVersion: 'v1-category-fallback',
-    assumptions: [...definition.assumptions, ...flooringBasis], recommendations, missingInformation: ['Exact scope, quantity, materials, and site conditions require confirmation.'],
+    pricingContext: forceEmergency ? emergencyPricingContext(mapped) : mapped.pricingContext, serviceTiming: forceEmergency ? 'Emergency / After Hours' : 'Standard', fallbackUsed: false, broadFallbackUsed: true, resolvedByDescription: false, engineVersion: 'v1-category-fallback',
+    onsiteLaborDescription: numericRange(laborHours, 'technician hours'), calendarDuration: definition.duration,
+    assumptions: [...definition.assumptions, ...flooringBasis], exclusions, scopeSteps, recommendations, missingInformation,
+    confidenceImprovingFactors: improvingFactors, confidenceReducingFactors: missingInformation, customerSuppliedMaterials: mapped.engineInput.customerSuppliedMaterials,
+    manualReviewRecommended: true,
     disclaimer: INTEGRATED_ESTIMATE_DISCLAIMER, projectDetails: projectDetails(data),
     calculationRanges: { laborHours, laborCost, tripCharges, materials, equipment, total, visits },
+    laborHoursRange: laborHours, laborCostRange: laborCost, expectedVisitRange: visits, tripChargeRange: tripCharges, materialCostRange: materials, equipmentRange: equipment, totalRange: total,
   }
 }

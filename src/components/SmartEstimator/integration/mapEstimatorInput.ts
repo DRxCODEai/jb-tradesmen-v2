@@ -59,7 +59,7 @@ function serviceTiming(data: Data): ServiceTiming {
 }
 
 function pricingContextLabel(context: PropertyContext, timing: ServiceTiming, review: boolean): PricingContext {
-  if (review) return 'Residential assumption — review required'
+  if (review) return 'Residential assumption — review recommended'
   if (context === 'commercial') return timing === 'standard' ? 'Commercial' : 'Commercial Emergency / After Hours'
   return timing === 'standard' ? 'Residential' : 'Residential Emergency / After Hours'
 }

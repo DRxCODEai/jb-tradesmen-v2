@@ -1,0 +1,3 @@
+import type { Estimate } from '../types/estimator'
+
+export default function EstimateReviewNotice({ estimate }: { estimate: Estimate }) { if (!estimate.manualReviewRecommended && !estimate.manualReviewRequired) return null; return <section className="estimate-review-notice" aria-labelledby="estimate-review-title"><h3 id="estimate-review-title">Professional Review Recommended</h3><p>Your preliminary price remains available above. Review will help confirm final scope, access, materials, and regulated-work requirements.</p>{estimate.manualReviewReasons?.length ? <ul>{[...new Set(estimate.manualReviewReasons)].map((reason) => <li key={reason}>{reason}</li>)}</ul> : null}</section> }

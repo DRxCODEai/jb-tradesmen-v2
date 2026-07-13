@@ -266,3 +266,28 @@ AI may later help interpret free-text descriptions, categorize requests, suggest
 - Broad category estimates use a small generic question set and remain available when measurements or other optional details are unknown.
 - Every completed submission continues to receive a preliminary dollar range; professional review remains a secondary qualification.
 - Phase 3C will focus on results-report polish, fallback removal, production validation, and final pricing review.
+
+## Phase 3C Completion Status
+
+- The customer-facing results report has been upgraded into focused overview, pricing, timeline, confidence, scope, assumptions, exclusions, recommendations, review, safety, and action sections.
+- Labor, materials, equipment, total pricing, applicable labor rate, expected visits, and trip charges are displayed clearly, with trip charges remaining separate.
+- Estimated technician labor and likely calendar duration are displayed as separate planning values.
+- Confidence includes a plain-language explanation, improving information, and information still needed.
+- Deterministic scope, assumptions, exclusions, and recommendations are visible in the report.
+- Broad category fallbacks have been confirmed to return preliminary dollar ranges.
+- Safety conditions retain emergency diagnostic or initial-service pricing calculated from approved rates and trip charges.
+- Professional review remains a secondary recommendation and never replaces pricing.
+- The legacy placeholder engine has been removed from normal runtime calculation paths and remains only as explicitly deprecated, inactive source.
+- Production validation covers profile, broad fallback, safety, rate, trip, range-ordering, integration-failure, reset, and dynamic-answer scenarios.
+- Future Project Estimator Update v1.0 is ready for final pricing review and release review.
+
+## Production Maintenance Notes
+
+- Compare service assumptions with completed JBTRADESMENLLC jobs.
+- Review labor-hour ranges quarterly.
+- Review material allowances quarterly.
+- Update company rates only in `COMPANY_STANDARDS`.
+- Add future services through `MasterServiceTemplate`.
+- Do not place pricing calculations inside UI components.
+- Keep all calculations deterministic.
+- Preserve safety and regulated-work guardrails.
