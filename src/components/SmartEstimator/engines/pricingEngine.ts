@@ -87,7 +87,7 @@ export function calculateServicePricing(input: ServiceEstimateInput, profile: Ma
 
   for (const modifier of activeModifiers) {
     const effects = modifier.effects
-    if (effects.laborHoursOverride !== undefined) laborHours = addFlatAmount(effects.laborHoursOverride, fixedHours)
+    if (effects.laborHoursOverride !== undefined) laborHours = addFlatAmount(multiplyRange(effects.laborHoursOverride, factor), fixedHours)
     if (effects.materialCostOverride !== undefined) materials = normalizeRange(effects.materialCostOverride)
     if (effects.laborMultiplier !== undefined) laborHours = multiplyRange(laborHours, effects.laborMultiplier)
     if (effects.laborMultiplierRange !== undefined) laborHours = multiplyRanges(laborHours, effects.laborMultiplierRange)

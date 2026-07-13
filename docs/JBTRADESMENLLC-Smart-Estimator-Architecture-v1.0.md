@@ -256,3 +256,13 @@ AI may later help interpret free-text descriptions, categorize requests, suggest
 - The original placeholder engine remains unchanged and is retained only as a temporary, explicit, review-required fallback if a normally supported deterministic calculation fails unexpectedly.
 - Phase 3B will add service-specific guided questions and narrower customer-facing service selections.
 - Phase 3C will remove fallback reliance after final production validation.
+
+## Phase 3B Guided Question Status
+
+- A reusable Service Details step now presents dynamic service-specific questions after service selection.
+- Questions resolve from the registered Phase 2 service profiles through the Phase 3A visible-service and description resolvers.
+- Typed conditional visibility is supported, and values from questions that become hidden are removed before calculation.
+- Guided answers feed the existing deterministic pricing, timeline, confidence, scope, recommendation, manual-review, and safety engines.
+- Broad category estimates use a small generic question set and remain available when measurements or other optional details are unknown.
+- Every completed submission continues to receive a preliminary dollar range; professional review remains a secondary qualification.
+- Phase 3C will focus on results-report polish, fallback removal, production validation, and final pricing review.

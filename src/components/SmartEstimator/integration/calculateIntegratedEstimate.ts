@@ -9,7 +9,7 @@ import { mapEstimatorInput } from './mapEstimatorInput'
 import { mapEstimateResult } from './mapEstimateResult'
 import { manualReviewReasonForSelection, resolveServiceProfile, resolveVisibleService } from './serviceIdMap'
 
-type ResolutionSource = 'exactSelection' | 'description'
+type ResolutionSource = 'exactSelection' | 'guidedQuestions' | 'description'
 
 function inferredSafetyOverride(mapped: MappedEstimatorInput): SafetyOverrideResult | null {
   const answers = mapped.engineInput.answers
@@ -51,6 +51,12 @@ export function calculateIntegratedEstimate(data: Data): IntegratedEstimateResul
   const exact = resolveVisibleService(data.service)
   if (exact.serviceId && exact.profile) {
     const result = calculateProfileEstimate(data, exact.serviceId, 'exactSelection')
+    if (result) return result
+  }
+
+  const guidedServiceId = data.serviceAnswers.fallbackSubtype
+  if (typeof guidedServiceId === 'string' && resolveServiceProfile(guidedServiceId)) {
+    const result = calculateProfileEstimate(data, guidedServiceId, 'guidedQuestions')
     if (result) return result
   }
 

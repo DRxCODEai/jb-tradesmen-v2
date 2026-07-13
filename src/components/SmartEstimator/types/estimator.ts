@@ -1,7 +1,8 @@
 export type ProjectType='Residential'|'Commercial'|'Property Management'
 export type Category='Maintenance'|'Repair'|'Remodel'|'Property Assessment'|'Emergency Service'
 export type Photo={file:File;url:string}
-export type Data={projectType?:ProjectType;category?:Category;service?:string;description:string;condition:string;quantity:string;dimensions:string;outcome:string;materials:boolean;matching:boolean;accessNotes:string;propertyType:string;city:string;state:string;zip:string;occupancy:string;location:string;floor:string;access:string;urgency:string;timing:string;photos:Photo[];firstName:string;lastName:string;email:string;phone:string;contact:string;company:string;consent:boolean}
+import type { ServiceAnswers } from '../dynamicQuestions/dynamicQuestionTypes'
+export type Data={projectType?:ProjectType;category?:Category;service?:string;serviceAnswers:ServiceAnswers;description:string;condition:string;quantity:string;dimensions:string;outcome:string;materials:boolean;matching:boolean;accessNotes:string;propertyType:string;city:string;state:string;zip:string;occupancy:string;location:string;floor:string;access:string;urgency:string;timing:string;photos:Photo[];firstName:string;lastName:string;email:string;phone:string;contact:string;company:string;consent:boolean}
 export type PricingContext = 'Residential' | 'Commercial' | 'Residential Emergency / After Hours' | 'Commercial Emergency / After Hours' | 'Residential assumption — review required'
 export type EstimateStatus = 'estimate' | 'manualReview' | 'safetyOverride'
 export type EstimateResultHeading = 'Preliminary Estimate' | 'Broad Preliminary Planning Range' | 'Preliminary Diagnostic Range' | 'Emergency Diagnostic / Initial Service Range'

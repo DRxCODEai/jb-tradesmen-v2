@@ -3,6 +3,7 @@ import type { EstimatorQuestionValue } from '../templates/estimatorQuestionTempl
 import type { AccessDifficulty, ProjectCondition, ServiceEstimateInput } from '../types/v1/engines'
 import type { PropertyContext, ServiceTiming } from '../types/v1/company'
 import type { MappedEstimatorInput } from './integrationTypes'
+import { mapQuestionValues } from '../dynamicQuestions/questionValueMapper'
 
 function parseExplicitNumber(value: string): number | undefined {
   const match = value.trim().match(/^(\d+(?:\.\d+)?)(?:\s|$)/)
@@ -71,33 +72,35 @@ export function mapEstimatorInput(data: Data, serviceId: string): MappedEstimato
   const property = propertyContext(data)
   const timing = serviceTiming(data)
   const dimensions = parseDimensions(data.dimensions)
-  const quantity = parseExplicitNumber(data.quantity)
-  const ceilingHeightFeet = parseCeilingHeight(data)
+  const serviceValues = mapQuestionValues(data)
+  const quantity = serviceValues.quantity ?? parseExplicitNumber(data.quantity)
+  const ceilingHeightFeet = serviceValues.ceilingHeightFeet ?? parseCeilingHeight(data)
   const combined = `${data.description} ${data.condition} ${data.accessNotes}`
   const occupied = data.occupancy === 'Occupied'
   const answers: Record<string, EstimatorQuestionValue> = {
+    ...serviceValues.answers,
     originalDimensions: data.dimensions,
     originalCondition: data.condition,
     propertyType: data.propertyType,
     city: data.city,
     state: data.state,
     zip: data.zip,
-    exposure: data.location.toLowerCase(),
+    exposure: serviceValues.answers.exposure ?? data.location.toLowerCase(),
     occupancyAffectsWork: occupied,
     photos: data.photos.length > 0,
-    gasOdor: phrase(combined, /\b(gas odor|smell(?:s|ing)? of gas)\b/),
-    carbonMonoxideAlarm: phrase(combined, /\b(carbon monoxide alarm|co alarm)\b/),
-    activeArcing: phrase(combined, /\b(active arcing|active sparking|sparking now)\b|\b(outlet|switch|fixture|wire|electrical)[^.!?]{0,24}\b(sparking|arcing)\b/),
-    electricalArcing: phrase(combined, /\b(active arcing|active sparking|sparking now)\b|\b(outlet|switch|fixture|wire|electrical)[^.!?]{0,24}\b(sparking|arcing)\b/),
-    smoke: phrase(combined, /\bsmoke|smoking\b/),
-    burningOdor: phrase(combined, /\b(burning odor|burning smell)\b/),
-    meltedComponents: phrase(combined, /\b(melted component|melted wiring|melted insulation)\b/),
-    waterContactingElectrical: phrase(combined, /\b(water (?:contacting|on|in) (?:electrical|outlet|switch|panel)|electrical equipment is wet)\b/),
-    activeFlooding: phrase(combined, /\b(active flooding|uncontrolled flooding)\b/),
-    fixtureCount: quantity ?? 1,
-    deviceCount: quantity ?? 1,
+    gasOdor: serviceValues.answers.gasOdor === true || phrase(combined, /\b(gas odor|smell(?:s|ing)? of gas)\b/),
+    carbonMonoxideAlarm: serviceValues.answers.carbonMonoxideAlarm === true || phrase(combined, /\b(carbon monoxide alarm|co alarm)\b/),
+    activeArcing: serviceValues.answers.activeArcing === true || phrase(combined, /\b(active arcing|active sparking|sparking now)\b|\b(outlet|switch|fixture|wire|electrical)[^.!?]{0,24}\b(sparking|arcing)\b/),
+    electricalArcing: serviceValues.answers.activeArcing === true || phrase(combined, /\b(active arcing|active sparking|sparking now)\b|\b(outlet|switch|fixture|wire|electrical)[^.!?]{0,24}\b(sparking|arcing)\b/),
+    smoke: serviceValues.answers.smoke === true || phrase(combined, /\bsmoke|smoking\b/),
+    burningOdor: serviceValues.answers.burningOdor === true || phrase(combined, /\b(burning odor|burning smell)\b/),
+    meltedComponents: serviceValues.answers.meltedComponents === true || phrase(combined, /\b(melted component|melted wiring|melted insulation)\b/),
+    waterContactingElectrical: serviceValues.answers.waterContactingElectrical === true || phrase(combined, /\b(water (?:contacting|on|in) (?:electrical|outlet|switch|panel)|electrical equipment is wet)\b/),
+    activeFlooding: serviceValues.answers.activeFlooding === true || phrase(combined, /\b(active flooding|uncontrolled flooding)\b/),
+    fixtureCount: serviceValues.answers.fixtureCount ?? quantity ?? 1,
+    deviceCount: serviceValues.answers.deviceCount ?? quantity ?? 1,
     additionalDeviceCount: Math.max(0, (quantity ?? 1) - 1),
-    affectedLocationCount: quantity ?? 1,
+    affectedLocationCount: serviceValues.answers.affectedLocationCount ?? quantity ?? 1,
     additionalSystemCount: Math.max(0, (quantity ?? 1) - 1),
   }
   if (ceilingHeightFeet !== undefined) answers.ceilingHeightFeet = ceilingHeightFeet
@@ -106,30 +109,31 @@ export function mapEstimatorInput(data: Data, serviceId: string): MappedEstimato
   const manualReviewReasons: string[] = []
   if (data.dimensions.trim() && !dimensions.available) warnings.push('The original dimensions were preserved but were not converted into an exact measurement.')
   if (property.pricingContextReview) manualReviewReasons.push('Property Management pricing context is unclear; a residential assumption is displayed and requires review.')
+  manualReviewReasons.push(...serviceValues.reviewReasons)
 
   const engineInput: ServiceEstimateInput = {
     serviceId,
     propertyContext: property.context,
     serviceTiming: timing,
     quantity,
-    squareFeet: dimensions.squareFeet,
-    linearFeet: dimensions.linearFeet,
-    itemCount: quantity,
-    condition: mapCondition(data.condition),
-    accessDifficulty: mapAccess(data.access),
-    ceilingOrElevatedWork: ceilingHeightFeet !== undefined || data.floor === '3+',
+    squareFeet: serviceValues.squareFeet ?? dimensions.squareFeet,
+    linearFeet: serviceValues.linearFeet ?? dimensions.linearFeet,
+    itemCount: serviceValues.itemCount ?? quantity,
+    condition: serviceValues.condition ?? mapCondition(data.condition),
+    accessDifficulty: serviceValues.accessDifficulty ?? mapAccess(data.access),
+    ceilingOrElevatedWork: serviceValues.answers.ceilingOrElevatedWork === true || ceilingHeightFeet !== undefined || data.floor === '3+',
     ceilingHeightFeet,
     floorLevel: data.floor === '3+' ? 3 : parseExplicitNumber(data.floor),
-    occupied,
-    finishMatching: data.matching,
-    customerSuppliedMaterials: data.materials,
+    occupied: serviceValues.occupied ?? occupied,
+    finishMatching: serviceValues.finishMatching ?? data.matching,
+    customerSuppliedMaterials: serviceValues.customerSuppliedMaterials ?? data.materials,
     materialPickupRequired: false,
-    emergency: timing === 'emergency',
+    emergency: timing === 'emergency' || serviceValues.emergency === true,
     afterHours: timing === 'afterHours',
     answers,
     photoCount: data.photos.length,
     descriptionLength: data.description.trim().length,
-    measurementsProvided: dimensions.available,
+    measurementsProvided: serviceValues.measurementsProvided || dimensions.available,
     locationProvided: Boolean(data.city.trim() && data.state.trim()),
     concealedDamagePossible: phrase(combined, /\b(concealed|hidden|inside (?:the )?wall|water damage)\b/),
     permitRequirementsResolved: false,

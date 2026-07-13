@@ -8,7 +8,7 @@ export interface IntegrationValidationCheck { name: string; passed: boolean }
 export interface IntegrationValidationResult { passed: boolean; checks: readonly IntegrationValidationCheck[] }
 
 function data(overrides: Partial<Data> = {}): Data {
-  return { projectType: 'Residential', category: 'Repair', service: 'Other', description: 'Other minor repair with accessible normal site conditions.', condition: 'Normal condition', quantity: '1', dimensions: '', outcome: 'Complete repair', materials: false, matching: false, accessNotes: '', propertyType: 'Single-family home', city: 'Fort Collins', state: 'Colorado', zip: '80521', occupancy: 'Occupied', location: 'Interior', floor: '1', access: 'Easy', urgency: 'Routine', timing: 'Flexible', photos: [], firstName: 'Test', lastName: 'Customer', email: 'test@example.com', phone: '9702865993', contact: 'Phone', company: '', consent: true, ...overrides }
+  return { projectType: 'Residential', category: 'Repair', service: 'Other', serviceAnswers: {}, description: 'Other minor repair with accessible normal site conditions.', condition: 'Normal condition', quantity: '1', dimensions: '', outcome: 'Complete repair', materials: false, matching: false, accessNotes: '', propertyType: 'Single-family home', city: 'Fort Collins', state: 'Colorado', zip: '80521', occupancy: 'Occupied', location: 'Interior', floor: '1', access: 'Easy', urgency: 'Routine', timing: 'Flexible', photos: [], firstName: 'Test', lastName: 'Customer', email: 'test@example.com', phone: '9702865993', contact: 'Phone', company: '', consent: true, ...overrides }
 }
 
 function hasDollarRange(estimate: Estimate): boolean { return /^\$[\d,]+(?:–\$[\d,]+)?$/.test(estimate.total) }
@@ -61,7 +61,7 @@ export function validateEstimatorIntegration(): IntegrationValidationResult {
     { name: 'Emergency pricing receives no second multiplier', passed: gasOdor.estimate.calculationRanges?.laborCost.minimum === COMPANY_STANDARDS.laborRates.residentialEmergency && gasOdor.estimate.calculationRanges.laborCost.maximum === COMPANY_STANDARDS.laborRates.residentialEmergency * 4 },
     { name: 'Residential standard profile calculation still uses $50 per hour', passed: residentialDrywall.engineSummary?.laborRate === COMPANY_STANDARDS.laborRates.residential },
     { name: 'Supported profile calculations do not use the legacy fallback', passed: hotWater.metadata.supportedProfile && !hotWater.metadata.fallbackUsed },
-    { name: 'Existing step validation still functions', passed: validate(0, data({ projectType: undefined })) === 'Select a project type to continue.' && validate(3, data({ description: '' })) !== '' },
+    { name: 'Existing step validation still functions', passed: validate(0, data({ projectType: undefined })) === 'Select a project type to continue.' && validate(4, data({ description: '' })) !== '' },
   ]
   return { passed: checks.every((check) => check.passed), checks }
 }
