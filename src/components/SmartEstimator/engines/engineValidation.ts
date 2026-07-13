@@ -5,10 +5,14 @@ import { luxuryVinylPlankFlooring } from '../services/flooring/luxuryVinylPlankF
 import { tileRepair } from '../services/tile/tileRepair'
 import { faucetReplacement } from '../services/plumbing/faucetReplacement'
 import { waterHeaterReplacement } from '../services/plumbing/waterHeaterReplacement'
+import { SERVICE_REGISTRY } from '../knowledge/serviceRegistry'
+import { electricalTroubleshooting, lightFixtureReplacement, switchOutletReplacement } from '../services/electrical'
+import { hvacDiagnosticMinorRepair, thermostatReplacement } from '../services/hvac'
 import type { MasterServiceTemplate } from '../templates/masterServiceTemplate'
 import type { ServiceEstimateInput } from '../types/v1/engines'
 import type { NumericRange } from '../types/v1/pricing'
 import { calculateServicePricing } from './pricingEngine'
+import { createEstimateSummary } from './estimateSummaryEngine'
 
 export interface EngineValidationCheck {
   name: string
@@ -99,6 +103,29 @@ export function validateDeterministicEngines(): EngineValidationResult {
   const deterministicLvpB = calculateServicePricing(lvpInput, luxuryVinylPlankFlooring)
   const phase2BRanges = [lvp.laborHours, lvp.laborCost, lvp.materials, lvp.equipment, lvp.total, suppliedLvp.materials, tileTwoVisits.total, residentialFaucet.total, commercialFaucet.total, waterHeater.total]
   const ranges = [drywallTwoVisits.laborHours, drywallTwoVisits.laborCost, drywallTwoVisits.materials, drywallTwoVisits.equipment, drywallTwoVisits.total, ...phase2BRanges]
+  const activeProfiles = SERVICE_REGISTRY.filter((profile) => profile.availability.active)
+  const fixtureAboveSixteen = createEstimateSummary(representativeInput({ serviceId: 'light-fixture-replacement', ceilingOrElevatedWork: true, ceilingHeightFeet: 17 }), lightFixtureReplacement)
+  const burnedDevice = createEstimateSummary(representativeInput({ serviceId: 'switch-outlet-replacement', answers: { burnedWiring: true } }), switchOutletReplacement)
+  const activeArcing = createEstimateSummary(representativeInput({ serviceId: 'electrical-troubleshooting', answers: { activeArcing: true } }), electricalTroubleshooting)
+  const lineVoltageThermostat = createEstimateSummary(representativeInput({ serviceId: 'thermostat-replacement', answers: { lineVoltage: true } }), thermostatReplacement)
+  const refrigerantHvac = createEstimateSummary(representativeInput({ serviceId: 'hvac-diagnostic-minor-repair', answers: { refrigerantHandling: true } }), hvacDiagnosticMinorRepair)
+  const gasOdorHvac = createEstimateSummary(representativeInput({ serviceId: 'hvac-diagnostic-minor-repair', answers: { gasOdor: true } }), hvacDiagnosticMinorRepair)
+  const profileLaborRanges = activeProfiles.map((profile) => profile.labor.baseHours)
+  const profileMaterialRanges = activeProfiles.flatMap((profile) => [profile.materials.costRange, ...(profile.materials.costComponents?.map((component) => component.costRange) ?? [])])
+  const profileTimelineRanges = activeProfiles.flatMap((profile) => [profile.timeline.onsiteLaborHours, profile.timeline.calendarDurationDays, ...(profile.timeline.dryingOrCuringTimeHours ? [profile.timeline.dryingOrCuringTimeHours] : []), ...(profile.timeline.materialLeadTimeDays ? [profile.timeline.materialLeadTimeDays] : [])])
+  const allProfileRanges = [...profileLaborRanges, ...profileMaterialRanges, ...profileTimelineRanges]
+  const activeProfileFieldsComplete = activeProfiles.every((profile) => Boolean(
+    profile.identity.id && profile.identity.slug && profile.identity.name && profile.identity.category && profile.identity.trade &&
+    profile.availability && profile.crew && profile.labor && profile.materials && profile.timeline &&
+    profile.estimatorQuestions.length && profile.assumptions.length && profile.exclusions.length && profile.researchMetadata,
+  ))
+  const noCodeComplianceClaims = activeProfiles.every((profile) => !/(code[- ]compliant|complies with code|guaranteed code compliance)/i.test(JSON.stringify(profile)))
+  const electricalPanelWorkExcluded = [lightFixtureReplacement, switchOutletReplacement, electricalTroubleshooting].every((profile) =>
+    profile.exclusions.some((item) => /panel/i.test(item)) && profile.modifiers.some((modifier) => modifier.conditions.some((condition) => condition.field === 'panelWork') && modifier.effects.requiresManualReview),
+  )
+  const majorHvacReplacementExcluded = [thermostatReplacement, hvacDiagnosticMinorRepair].every((profile) =>
+    profile.exclusions.some((item) => /equipment (repair|replacement)|major hvac diagnosis/i.test(item)) && profile.modifiers.some((modifier) => modifier.conditions.some((condition) => condition.field === 'majorEquipmentReplacement') && modifier.effects.requiresManualReview),
+  )
 
   const checks: EngineValidationCheck[] = [
     { name: 'Residential one-hour minimum is approved labor plus one trip charge', passed: residential.laborCost.minimum === COMPANY_STANDARDS.laborRates.residential && residential.tripCharges === COMPANY_STANDARDS.billing.tripChargePerVisit },
@@ -123,6 +150,25 @@ export function validateDeterministicEngines(): EngineValidationResult {
     { name: 'Phase 2B low ranges never exceed typical ranges', passed: phase2BRanges.every((range) => range.minimum <= range.typical) },
     { name: 'Phase 2B typical ranges never exceed high ranges', passed: phase2BRanges.every(ordered) },
     { name: 'Phase 2B values are nonnegative', passed: phase2BRanges.every(nonnegative) && tileTwoVisits.tripCharges >= 0 },
+    { name: 'Registry contains exactly 25 active profiles with unique service IDs', passed: activeProfiles.length === 25 && new Set(activeProfiles.map((profile) => profile.identity.id)).size === 25 },
+    { name: 'Registry contains exactly 25 unique service slugs', passed: new Set(activeProfiles.map((profile) => profile.identity.slug)).size === 25 },
+    { name: 'All registered profiles conform to the typed MasterServiceTemplate registry', passed: SERVICE_REGISTRY.length === 25 },
+    { name: 'Every active profile contains the required identity, configuration, question, content, and research fields', passed: activeProfileFieldsComplete },
+    { name: 'Every profile labor range is ordered', passed: profileLaborRanges.every(ordered) },
+    { name: 'Every profile material range is ordered', passed: profileMaterialRanges.every(ordered) },
+    { name: 'Every profile timeline range is ordered', passed: profileTimelineRanges.every(ordered) },
+    { name: 'No profile pricing, material, labor-hour, or timeline range is negative', passed: allProfileRanges.every(nonnegative) },
+    { name: 'No profile minimum billable labor falls below one hour', passed: activeProfiles.every((profile) => (profile.labor.minimumBillableHoursOverride ?? COMPANY_STANDARDS.billing.minimumLaborHours) >= 1 && (profile.pricing.minimumLaborHoursOverride ?? COMPANY_STANDARDS.billing.minimumLaborHours) >= 1) },
+    { name: 'Light fixture replacement above 16 feet requires manual review', passed: fixtureAboveSixteen.manualReviewFlags.some((flag) => /Height over 16 feet/i.test(flag)) },
+    { name: 'Switch or outlet replacement with burned wiring requires manual review', passed: burnedDevice.manualReviewFlags.some((flag) => /Burned or melted wiring/i.test(flag)) },
+    { name: 'Electrical troubleshooting with active arcing produces a safety override', passed: activeArcing.safetyOverride?.active === true && activeArcing.safetyOverride.suppressOrdinaryPricing },
+    { name: 'Thermostat replacement with line voltage requires manual review', passed: lineVoltageThermostat.manualReviewFlags.some((flag) => /Line-voltage thermostat/i.test(flag)) },
+    { name: 'HVAC refrigerant work requires certification and manual review', passed: refrigerantHvac.manualReviewFlags.some((flag) => /refrigerantCertificationRequired/i.test(flag)) },
+    { name: 'HVAC gas odor produces a safety override', passed: gasOdorHvac.safetyOverride?.active === true && gasOdorHvac.safetyOverride.suppressOrdinaryPricing },
+    { name: 'HVAC diagnostic ordinary materials do not include refrigerant', passed: hvacDiagnosticMinorRepair.materials.typicalMaterials.every((material) => !/refrigerant/i.test(material)) },
+    { name: 'No profile silently claims code compliance', passed: noCodeComplianceClaims },
+    { name: 'Electrical profiles do not calculate panel work as minor repair', passed: electricalPanelWorkExcluded },
+    { name: 'HVAC profiles do not calculate major equipment replacement as minor repair', passed: majorHvacReplacementExcluded },
   ]
 
   return { passed: checks.every((check) => check.passed), checks }

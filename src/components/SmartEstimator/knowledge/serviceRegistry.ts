@@ -5,6 +5,8 @@ import { exteriorPainting, interiorPainting } from '../services/painting'
 import { laminateFlooring, luxuryVinylPlankFlooring } from '../services/flooring'
 import { groutCaulkRepair, tileRepair } from '../services/tile'
 import { faucetReplacement, hoseBibRepairReplacement, minorPlumbingLeakRepair, shutoffValveReplacement, toiletRepairReplacement, waterHeaterReplacement } from '../services/plumbing'
+import { electricalTroubleshooting, lightFixtureReplacement, switchOutletReplacement } from '../services/electrical'
+import { hvacDiagnosticMinorRepair, thermostatReplacement } from '../services/hvac'
 
 export const SERVICE_REGISTRY: readonly MasterServiceTemplate[] = [
   drywallRepair,
@@ -27,4 +29,9 @@ export const SERVICE_REGISTRY: readonly MasterServiceTemplate[] = [
   minorPlumbingLeakRepair,
   waterHeaterReplacement,
   hoseBibRepairReplacement,
+  lightFixtureReplacement,
+  switchOutletReplacement,
+  electricalTroubleshooting,
+  thermostatReplacement,
+  hvacDiagnosticMinorRepair,
 ]

@@ -211,3 +211,35 @@ AI may later help interpret free-text descriptions, categorize requests, suggest
 - Nationally informed planning assumptions still require comparison against completed JBTRADESMENLLC jobs before final production approval.
 - The existing visible Smart Project Estimator remains unconnected to the Phase 2 engines and profiles.
 - Phase 2C will add electrical and HVAC profiles, cross-profile validation, and final engine hardening.
+
+## Phase 2C Implementation Status
+
+- Five electrical and HVAC profiles have been added: light fixture replacement, switch or outlet replacement, electrical troubleshooting, thermostat replacement, and HVAC diagnostic or minor repair.
+- The strictly typed service registry now contains 25 active profiles in deterministic roadmap order.
+- Typed development validation covers all 25 profiles and the regulated-work and safety conditions defined for Phase 2C.
+- Reusable regulated-work guardrails explain jurisdiction, licensing, permit, electrical, refrigerant-certification, combustion-safety, life-safety, utility, structural, hazardous-material, and immediate-safety review requirements.
+- A typed safety override can suppress an ordinary pricing recommendation, preserve the submitted project input, and provide direct-contact guidance without diagnosing a reported hazard.
+- Approved residential, commercial, emergency, and after-hours labor rates remain centrally referenced from `COMPANY_STANDARDS`; no profile duplicates company rates.
+- The $50 trip charge per expected site visit and return-visit handling have been verified.
+- Nationally informed planning assumptions remain subject to comparison against completed JBTRADESMENLLC jobs before final production approval.
+- The visible Smart Project Estimator remains unchanged and unconnected to the v1 registry and deterministic engines.
+- Phase 2 is complete. Phase 3 will integrate the v1 service registry and deterministic engines with the visible Smart Project Estimator through a controlled implementation.
+
+## Phase 2 Completion Checklist
+
+- [x] 25 profiles registered
+- [x] Company rates centrally referenced
+- [x] No duplicate commercial multiplier
+- [x] No duplicate emergency multiplier
+- [x] One-hour minimum enforced
+- [x] Service-specific minimums enforced
+- [x] $50 trip charge per expected site visit
+- [x] Materials and retained consumables supported
+- [x] Timeline separated from labor hours
+- [x] Confidence engine operational
+- [x] Scope engine operational
+- [x] Recommendation engine operational
+- [x] Manual-review flags operational
+- [x] Safety override operational
+- [x] Production build passes
+- [x] Existing visible estimator unchanged

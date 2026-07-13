@@ -1,6 +1,7 @@
 import type { EstimatorQuestionValue } from '../../templates/estimatorQuestionTemplate'
 import type { PropertyContext, ServiceTiming } from './company'
 import type { MinimumMaximumRange, NumericRange } from './pricing'
+import type { SafetyOverrideResult } from './guardrails'
 
 export type ProjectCondition = 'light' | 'standard' | 'extensive' | 'unknown'
 export type AccessDifficulty = 'easy' | 'standard' | 'difficult' | 'unknown'
@@ -81,6 +82,7 @@ export interface RecommendationItem {
 }
 
 export interface EstimateSummaryResult {
+  projectInput: ServiceEstimateInput
   service: {
     id: string
     name: string
@@ -90,6 +92,7 @@ export interface EstimateSummaryResult {
   propertyContext: PropertyContext
   serviceTiming: ServiceTiming
   laborHours: NumericRange
+  laborRate: number
   laborCost: NumericRange
   tripCharges: number
   materials: NumericRange
@@ -99,10 +102,15 @@ export interface EstimateSummaryResult {
   calendarDurationDays: NumericRange
   schedulingWindow: MinimumMaximumRange | 'Direct confirmation required'
   confidence: ConfidenceLabel
+  confidenceScore: number
+  improvingConfidenceFactors: readonly string[]
+  reducingConfidenceFactors: readonly string[]
+  missingInformation: readonly string[]
   assumptions: readonly string[]
   exclusions: readonly string[]
   scopeSteps: readonly string[]
   recommendations: readonly RecommendationItem[]
   manualReviewFlags: readonly string[]
+  safetyOverride: SafetyOverrideResult | null
   disclaimer: string
 }

@@ -1,4 +1,5 @@
 import type { NumericRange } from '../types/v1/pricing'
+import type { ManualReviewFlag, SafetyOverrideDefinition } from '../types/v1/guardrails'
 
 export type ServiceModifierValue = string | number | boolean | readonly string[]
 
@@ -30,6 +31,8 @@ export interface ServiceModifierEffects {
   extraVisits?: number
   confidenceAdjustment?: number
   requiresManualReview?: boolean
+  manualReviewFlags?: readonly ManualReviewFlag[]
+  safetyOverride?: SafetyOverrideDefinition
   recommendationsToAdd?: readonly string[]
   scopeStepsToAdd?: readonly string[]
 }
