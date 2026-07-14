@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
+import logo from '../../assets/logo.png'
 
 export default function Logo() {
   return (
     <Link to="/" className="navbar-logo" aria-label="JBTRADESMENLLC home">
       <img
-        src="/src/assets/logo.png"
+        src={logo}
         alt="JBTRADESMENLLC"
       />
     </Link>
