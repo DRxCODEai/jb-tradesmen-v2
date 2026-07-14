@@ -3,6 +3,7 @@ import './App.css'
 
 import MainLayout from './layouts/MainLayout'
 import ScrollToTop from './components/ScrollToTop'
+import RouteSeo from './components/RouteSeo'
 
 import Home from './pages/Home'
 import ResidentialServices from './pages/ResidentialServices'
@@ -101,6 +102,7 @@ function App() {
           />
         </Route>
       </Routes>
+      <RouteSeo />
     </BrowserRouter>
   )
 }
