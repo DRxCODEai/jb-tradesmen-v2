@@ -26,11 +26,17 @@
 
 .navbar-logo {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   min-height: 110px;
   padding: 0;
   text-decoration: none;
+}
+
+.navbar-logo:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
 }
 
 .navbar-logo img {
@@ -75,6 +81,7 @@
 
 .navbar-call-now {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   padding: 10px 18px;
@@ -93,11 +100,12 @@ transition: all .25s ease;
 }
 
 .navbar-menu-toggle,
+.navbar-mobile-home,
 .navbar-mobile-call {
   display: none;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1150px) {
   .navbar-inner {
     position: relative;
     height: 80px;
@@ -144,6 +152,7 @@ transition: all .25s ease;
     background: #111;
     border-top: 1px solid rgba(212,175,55,.25);
     border-bottom: 1px solid rgba(212,175,55,.35);
+    border-radius: 0 0 16px 16px;
     box-shadow: 0 22px 40px rgba(0,0,0,.38);
     opacity: 0;
     pointer-events: none;
@@ -190,6 +199,10 @@ transition: all .25s ease;
   .navbar-mobile-call {
     display: block;
     margin-top: 8px;
+  }
+
+  .navbar-mobile-home {
+    display: block;
   }
 
   .navbar-mobile-call a {

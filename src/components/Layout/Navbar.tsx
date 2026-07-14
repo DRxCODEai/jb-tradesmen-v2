@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import Logo from './Logo'
 import './navbar.css'
 
@@ -18,6 +18,12 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navbarRef = useRef<HTMLElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    const closeAfterNavigation = window.setTimeout(() => setIsMenuOpen(false), 0)
+    return () => window.clearTimeout(closeAfterNavigation)
+  }, [pathname])
 
   useEffect(() => {
     if (!isMenuOpen) return
@@ -33,7 +39,7 @@ export default function Navbar() {
       if (!navbarRef.current?.contains(event.target as Node)) closeMenu()
     }
     const handleResize = () => {
-      if (window.innerWidth > 1100) closeMenu()
+      if (window.innerWidth > 1150) closeMenu()
     }
 
     document.body.style.overflow = 'hidden'
@@ -70,6 +76,9 @@ export default function Navbar() {
 
         <nav id="primary-navigation" className={`navbar-nav${isMenuOpen ? ' navbar-nav--open' : ''}`} aria-label="Primary">
           <ul className="navbar-links">
+            <li className="navbar-mobile-home">
+              <NavLink to="/" end onClick={closeMenu}>Home</NavLink>
+            </li>
             {links.map((link) => (
               <li key={link.to}>
                 <NavLink to={link.to} onClick={closeMenu}>{link.label}</NavLink>
