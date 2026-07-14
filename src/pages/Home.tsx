@@ -1,5 +1,6 @@
 import heroImage from "../assets/hero-homepage-v1.png";
 import ReviewCarousel from "../components/UI/ReviewCarousel";
+import "./Home.css";
 
 import {
   Star,

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MapPin } from 'lucide-react'
 import type { GalleryProject } from '../../types/gallery'
+import GalleryProjectImage from './GalleryProjectImage'
 
 export default function GalleryFeaturedProject({ project, onOpen }: { project: GalleryProject; onOpen: (button: HTMLButtonElement) => void }) {
   const [imageFailed, setImageFailed] = useState(false)
@@ -9,7 +10,7 @@ export default function GalleryFeaturedProject({ project, onOpen }: { project: G
       <div className="gallery-shell gallery-featured__layout">
         <div className="gallery-featured__media">
           {imageFailed ? <div className="gallery-image-fallback"><strong>{project.title}</strong><span>Project image unavailable</span></div> :
-            <img src={project.coverImage.src} alt={project.coverImage.alt} onError={() => setImageFailed(true)} />}
+            <GalleryProjectImage image={project.coverImage} projectTitle={project.title} onError={() => setImageFailed(true)} />}
         </div>
         <div className="gallery-featured__content">
           <p className="gallery-eyebrow">Featured Project · {project.category}</p>

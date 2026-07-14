@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Logo from './Logo'
 import LogoGlow from './LogoGlow'
+import './Footer.css'
 
 const quickLinks = [
   { label: 'Residential Services', href: '/residential-services' },

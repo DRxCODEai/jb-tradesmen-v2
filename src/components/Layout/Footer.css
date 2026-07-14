@@ -1,0 +1,23 @@
+@media (max-width: 640px) {
+  .site-footer {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer-grid > div,
+  .footer-list li,
+  .footer-list a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .footer-list a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+}

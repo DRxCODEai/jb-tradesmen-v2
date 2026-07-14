@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { KOALENDAR_URL } from '../../config/links'
 import type { GalleryProject } from '../../types/gallery'
+import GalleryProjectImage from './GalleryProjectImage'
 
 interface ProjectModalProps {
   project: GalleryProject | null
@@ -51,7 +52,7 @@ export default function ProjectModal({ project, opener, onClose }: ProjectModalP
         <div className="gallery-modal__scroll">
           <div className="gallery-modal__viewer">
             <div className="gallery-modal__active-image">
-              {failedImages.has(activeImage) ? <div className="gallery-image-fallback"><strong>{project.title}</strong><span>Project image unavailable</span></div> : <img src={image.src} alt={image.alt} onError={() => markFailed(activeImage)} />}
+              {failedImages.has(activeImage) ? <div className="gallery-image-fallback"><strong>{project.title}</strong><span>Project image unavailable</span></div> : <GalleryProjectImage image={image} projectTitle={project.title} onError={() => markFailed(activeImage)} />}
               {image.label && <span className="gallery-modal__image-label">{image.label}</span>}
               <button type="button" className="gallery-modal__previous" aria-label="Previous project image" onClick={() => selectRelative(-1)}><ChevronLeft aria-hidden="true" /></button>
               <button type="button" className="gallery-modal__next" aria-label="Next project image" onClick={() => selectRelative(1)}><ChevronRight aria-hidden="true" /></button>

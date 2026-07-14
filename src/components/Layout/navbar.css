@@ -91,3 +91,129 @@ transition: all .25s ease;
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgba(212,175,55,.40);
 }
+
+.navbar-menu-toggle,
+.navbar-mobile-call {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .navbar-inner {
+    position: relative;
+    height: 80px;
+    padding: 0 20px;
+  }
+
+  .navbar-logo {
+    min-height: 80px;
+  }
+
+  .navbar-logo img {
+    height: 110px;
+  }
+
+  .navbar-menu-toggle {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    margin-left: auto;
+    color: #f4d770;
+    cursor: pointer;
+    background: #181818;
+    border: 1px solid rgba(212,175,55,.55);
+    border-radius: 12px;
+    place-items: center;
+  }
+
+  .navbar-menu-toggle:focus-visible,
+  .navbar-nav a:focus-visible {
+    outline: 3px solid #d4af37;
+    outline-offset: 3px;
+  }
+
+  .navbar-nav {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: block;
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    visibility: hidden;
+    background: #111;
+    border-top: 1px solid rgba(212,175,55,.25);
+    border-bottom: 1px solid rgba(212,175,55,.35);
+    box-shadow: 0 22px 40px rgba(0,0,0,.38);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+  }
+
+  .navbar-nav--open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .navbar-links {
+    display: flex;
+    width: min(100%, 720px);
+    padding: 12px 20px 20px;
+    margin: 0 auto;
+    flex-direction: column;
+    gap: 2px;
+    align-items: stretch;
+  }
+
+  .navbar-links a {
+    display: flex;
+    min-height: 48px;
+    padding: 12px 14px;
+    align-items: center;
+    color: #fff;
+    font-size: 1rem;
+    white-space: normal;
+    border-left: 3px solid transparent;
+    border-radius: 8px;
+  }
+
+  .navbar-links a:hover,
+  .navbar-links a.active {
+    color: #f4d770;
+    background: rgba(212,175,55,.08);
+    border-left-color: #d4af37;
+  }
+
+  .navbar-mobile-call {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .navbar-mobile-call a {
+    justify-content: center;
+    color: #111;
+    font-weight: 800;
+    background: #d4af37;
+    border-left: 0;
+    border-radius: 999px;
+  }
+
+  .navbar-mobile-call a:hover,
+  .navbar-mobile-call a:focus-visible {
+    color: #111;
+    background: #e3c766;
+  }
+
+  .navbar-call-now {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar-nav {
+    transition: none;
+  }
+}
