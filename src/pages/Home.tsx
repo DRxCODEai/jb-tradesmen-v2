@@ -176,6 +176,25 @@ export default function Home() {
       className="hero-image"
     />
 
+    <div className="hero-mobile-content">
+      <p className="hero-mobile-eyebrow">JBTRADESMENLLC</p>
+      <h1>Your Trusted Residential <b>&amp;</b> Commercial Maintenance Partner</h1>
+      <p className="hero-mobile-copy">
+        Trusted maintenance and repair solutions for homeowners, property managers, financial institutions,
+        retail facilities, HOA communities, and commercial properties across Colorado, Wyoming, and Nevada.
+      </p>
+      <div className="hero-mobile-actions">
+        <a href="/request-estimate">Get a Free Estimate</a>
+        <a href="tel:9702865993">Call Now</a>
+      </div>
+      <ul className="hero-mobile-trust" aria-label="Service qualifications">
+        <li>Licensed</li>
+        <li>Insured</li>
+        <li>Reliable</li>
+        <li>Professional</li>
+      </ul>
+    </div>
+
    <a
   href="/request-estimate"
   className="hero-overlay hero-estimate"
