@@ -10,12 +10,7 @@ type NewContentField =
   | 'projectScopeNotes'
 
 interface LegacyServiceRecord extends Omit<ServiceHubService, NewContentField> {
-  includedServices: string[]
-  commonConcerns: string[]
-  helpfulTips: string[]
-  whenToCallProfessional: string[]
-  regulatedWorkNotes: string[]
-  assumptions: string[]
+  capabilitySeed: string[]
 }
 
 interface ServiceContentPlan {
@@ -76,10 +71,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Practical recurring upkeep, preventative maintenance, corrective repairs, and documented property support for commercial facilities.',
     overview: [
       'Commercial maintenance brings routine observations, planned upkeep, and corrective repair work into one organized property-care process. In Las Vegas, heat, heavy use, tenant activity, and around-the-clock operations can make small finish or fixture problems more disruptive when they are left unresolved. JBTRADESMENLLC supports offices, retail locations, banks, warehouses, managed properties, and shared commercial areas with work that can be scheduled around the property’s access requirements and operating priorities.',
-      'A typical scope may combine inspection notes, preventative tasks, interior and exterior repairs, plumbing fixture attention, drywall and paint correction, door hardware work, ceiling tiles, flooring, and fixture replacement. The approach starts with the visible condition and the customer’s maintenance goals, then separates immediate concerns from work that can be planned. Before-and-after documentation can help facility teams track completion, identify recurring failures by location or asset, and communicate clearly with owners, tenants, or other vendors.',
-      'Not every condition can be fully defined from a work order or photograph. Active water intrusion, concealed damage, access restrictions, equipment shutdowns, hazardous materials, or regulated systems may require a site assessment and coordination with an appropriately qualified specialty provider. JBTRADESMENLLC develops the practical repair scope it can responsibly complete, identifies limitations early, and helps customers plan phased or scheduled maintenance without representing an observation as an engineering, code-compliance, or specialty-trade determination.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Preventative maintenance',
       'Interior repairs',
       'Exterior repairs',
@@ -91,27 +84,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Fixture replacement',
       'Property condition observations',
     ],
-    commonConcerns: [
-      'Recurring repair requests without a documented history',
-      'Water-stained finishes or ceiling tiles',
-      'Worn doors, hardware, walls, and flooring in high-traffic areas',
-      'Tenant and common-area punch lists',
-      'Deferred maintenance affecting daily operations',
-      'Multiple small repairs requiring coordinated access',
-    ],
-    helpfulTips: [
-      'Maintain a documented inspection schedule.',
-      'Resolve water intrusion before replacing damaged finishes.',
-      'Track recurring failures by location and asset.',
-      'Coordinate disruptive work outside peak operating hours where practical.',
-      'Photograph and document conditions before and after repair.',
-    ],
-    whenToCallProfessional: [
-      'A condition is recurring, spreading, or affecting customers, tenants, or operations.',
-      'Several trades or repair areas need to be evaluated and prioritized together.',
-      'Access, shutdowns, high work areas, or occupied spaces require coordination.',
-      'The visible damage may be connected to concealed moisture or a regulated system.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: [
       'facility-maintenance',
@@ -122,13 +94,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial maintenance services',
-    regulatedWorkNotes: [
-      'Regulated electrical, plumbing, HVAC, fire-life-safety, structural, or permit-required work may require additional review and an appropriate specialty trade.',
-    ],
-    assumptions: [
-      'Final scope depends on site conditions, access, operating schedules, and the customer’s approved priorities.',
-      'Condition observations are not engineering, environmental, or code-compliance inspections.',
-    ],
     active: true,
   },
   {
@@ -150,9 +115,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Practical help with general repairs, punch lists, installations, and routine maintenance throughout the home.',
     overview: [
       'Handyman service helps homeowners and residential property managers complete a varied list of repairs without turning each small item into a separate project. A Las Vegas home may need door adjustments, trim correction, drywall patches, caulking, hardware replacement, shelving, fixture installation, TV mounting, or general upkeep at the same time. JBTRADESMENLLC reviews the list, groups related work, and identifies materials or access questions before the service visit whenever possible.',
-      'The typical scope is practical, visible, and accessible. Work may involve walls, doors, cabinets, trim, hardware, sealants, mounted accessories, and other finish items that can be evaluated from the room and mounting surface. Regulated electrical, concealed or major plumbing, HVAC, gas, structural, hazardous-material, and permit-required work may require qualified specialty review rather than general handyman service.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'General home punch lists',
       'Door and trim repairs',
       'Drywall patches',
@@ -162,38 +126,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Fixture replacement where appropriate',
       'TV and wall-mounted item installation',
     ],
-    commonConcerns: [
-      'Several small repairs accumulating throughout the home',
-      'Loose or misaligned doors, cabinets, and hardware',
-      'Wall damage after moving furniture or accessories',
-      'Failed caulking around finishes',
-      'Shelving or equipment needing secure mounting',
-      'Punch-list work before move-in, sale, or turnover',
-    ],
-    helpfulTips: [
-      'Make one room-by-room list and identify the highest-priority items.',
-      'Photograph repairs and include dimensions or product labels where possible.',
-      'Keep matching paint, trim, and hardware information on file.',
-      'Report moisture, burning odors, gas odors, or active leakage separately and promptly.',
-      'Confirm that customer-provided fixtures fit the intended location.',
-    ],
-    whenToCallProfessional: [
-      'The list includes secure mounting, high access, or several material types.',
-      'Cracks, leaks, or movement continue after a prior repair.',
-      'A task may involve a concealed utility or regulated system.',
-      'Damage affects safe access, doors, stairs, or occupied living areas.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['home-repairs', 'property-maintenance', 'drywall-repair', 'tv-mounting'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential handyman services',
-    regulatedWorkNotes: [
-      'Electrical, major or concealed plumbing, gas, HVAC, structural, hazardous-material, and permit-required work may require appropriate specialty review.',
-    ],
-    assumptions: [
-      'Service scope depends on accessible conditions, mounting surfaces, material availability, and product compatibility.',
-    ],
     active: true,
   },
   {
@@ -215,9 +152,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Thoughtful correction of everyday damage, wear, and maintenance concerns in occupied, vacant, and rental homes.',
     overview: [
       'Home repair service addresses wear, damage, and incomplete maintenance that can affect how a property looks and functions. Interior and exterior finishes in Las Vegas homes experience daily use, temperature changes, movement, and occasional water exposure. JBTRADESMENLLC works with homeowners, rental owners, and property managers to document visible concerns and organize repairs by urgency, access, material needs, and the source of the damage.',
-      'A typical scope may include doors, windows, trim, walls, fixtures, flooring details, minor carpentry, exterior finish concerns, and related punch-list work. Widespread cracking, sagging, active water entry, suspected hazardous materials, damaged electrical components, gas concerns, structural movement, and permit-required alterations should be evaluated by an appropriately qualified professional before finish repairs proceed.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Interior wall and finish repairs',
       'Selected exterior finish repairs',
       'Door and window adjustments',
@@ -227,38 +163,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Drywall and paint correction',
       'Move-in and turnover punch lists',
     ],
-    commonConcerns: [
-      'Normal wear and tear throughout the home',
-      'Impact damage to walls, trim, or doors',
-      'Sticking or misaligned doors and windows',
-      'Loose fixtures, transitions, or finish details',
-      'Water-related damage after the source is corrected',
-      'Repair lists before occupancy, sale, or rental turnover',
-    ],
-    helpfulTips: [
-      'Photograph damage before finishes are removed.',
-      'Resolve active moisture before repairing walls, ceilings, or flooring.',
-      'Save paint colors, product labels, and flooring information for matching.',
-      'Watch for repeated cracks or movement after a prior repair.',
-      'Separate urgent water or safety concerns from cosmetic punch-list items.',
-    ],
-    whenToCallProfessional: [
-      'Damage is recurring, widespread, or connected to moisture.',
-      'A door, floor, wall, or fixture condition affects safe use.',
-      'The repair may conceal a structural, electrical, plumbing, or material concern.',
-      'Several areas need coordinated repair and finish matching.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['handyman', 'drywall-repair', 'interior-painting', 'flooring-installation'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential home repair services',
-    regulatedWorkNotes: [
-      'Structural, electrical, gas, major plumbing, hazardous-material, and permit-required conditions need appropriate professional review.',
-    ],
-    assumptions: [
-      'Repair recommendations are based on visible and accessible conditions.',
-    ],
     active: true,
   },
   {
@@ -280,9 +189,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Planned home upkeep, seasonal observations, turnover support, and preventative repair for residential properties.',
     overview: [
       'Residential property maintenance is the ongoing process of noticing change, completing routine upkeep, and addressing small concerns before they become larger repair projects. Las Vegas homes and rentals face intense sun, dry air, seasonal temperature changes, water risks, and normal occupancy wear. JBTRADESMENLLC helps homeowners and property managers organize maintenance observations and practical repairs around the property’s age, equipment instructions, occupancy, and known service history.',
-      'A maintenance visit may include doors and windows, exterior caulking, visible water concerns, HVAC-filter observations, fixture condition, walls and trim, general hardware, turnover items, and other accessible components. Observations do not replace licensed system diagnostics, environmental testing, structural evaluation, or required inspections, and unsafe or regulated conditions require appropriate professional attention.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Seasonal property observations',
       'Rental turnover maintenance',
       'Exterior caulking observations and replacement',
@@ -292,38 +200,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Interior finish and hardware repairs',
       'General preventative upkeep',
     ],
-    commonConcerns: [
-      'Cracked exterior sealant around doors and windows',
-      'Recurring stains, moisture, or minor leaks',
-      'Deferred turnover or seasonal maintenance',
-      'Doors, windows, and hardware changing with use or weather',
-      'Unknown filter, fixture, or equipment service history',
-      'Multiple small concerns without a prioritized plan',
-    ],
-    helpfulTips: [
-      'Inspect exterior caulking around doors and windows.',
-      'Test sump pumps where installed according to manufacturer guidance.',
-      'Follow manufacturer guidance for HVAC-filter replacement.',
-      'Watch for stains, moisture, and recurring leaks.',
-      'Document maintenance history, product models, and prior repairs.',
-    ],
-    whenToCallProfessional: [
-      'A stain, leak, odor, or equipment problem is new or recurring.',
-      'Maintenance requires access beyond a safe, visible, routine scope.',
-      'A condition involves gas, electricity, structure, refrigerant, or hazardous material.',
-      'A turnover list needs coordinated repairs across several areas.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['home-repairs', 'handyman', 'plumbing-repair', 'water-heater-replacement'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential property maintenance services',
-    regulatedWorkNotes: [
-      'System diagnostics, energized equipment, gas, refrigerant, structural conditions, hazardous materials, and permit-required work need appropriate professional review.',
-    ],
-    assumptions: [
-      'Maintenance frequency follows property conditions and manufacturer guidance rather than a universal interval.',
-    ],
     active: true,
   },
   {
@@ -345,9 +226,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Site-specific planning for conventional tank water-heater removal and replacement, including access and surrounding installation conditions.',
     overview: [
       'Water heater replacement requires more planning than selecting a tank with a similar appearance. Fuel type, capacity, dimensions, installation location, access path, drain pan, expansion tank, shutoff valve, connections, venting, and electrical conditions can all affect the scope. JBTRADESMENLLC documents the existing conventional tank unit and surrounding area so the visible replacement considerations are understood before equipment and scheduling decisions are finalized.',
-      'Gas and electric units have different requirements, and existing installations may require utility, venting, electrical, plumbing, permit, or access review. Active leakage should be addressed promptly. Customers should not drain, disconnect, relight, alter gas components, or perform electrical work based on this page; qualified specialty providers may be required after site review.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Existing tank and location assessment',
       'Fuel type and capacity documentation',
       'Access-path and removal planning',
@@ -357,38 +237,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Replacement-equipment compatibility planning',
       'Removal and replacement scope development',
     ],
-    commonConcerns: [
-      'Active tank or connection leakage',
-      'Limited access or incompatible replacement dimensions',
-      'Unknown fuel type, capacity, model, or service history',
-      'Damaged pans, valves, or surrounding finishes',
-      'Expansion, drainage, venting, gas, or electrical concerns',
-      'Permit or jurisdictional review affecting the project',
-    ],
-    helpfulTips: [
-      'Identify fuel type, tank capacity, model, and installation location before requesting service.',
-      'Address active leaks promptly.',
-      'Keep the area around the unit accessible.',
-      'Follow manufacturer maintenance instructions.',
-      'Expansion tanks, pans, drainage, venting, gas, and electrical conditions may affect scope.',
-    ],
-    whenToCallProfessional: [
-      'The tank or a connection is actively leaking.',
-      'Hot-water availability, temperature, sound, or operation changes unexpectedly.',
-      'The installation includes gas, venting, electrical, drainage, or access concerns.',
-      'The replacement may require permits or corrective work beyond the tank itself.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['plumbing-repair', 'property-maintenance', 'home-repairs', 'appliance-repair'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Water heater replacement services',
-    regulatedWorkNotes: [
-      'Permits, gas systems, venting, electrical work, concealed piping, and jurisdictional requirements may require appropriately qualified specialty providers.',
-    ],
-    assumptions: [
-      'Final equipment selection and scope depend on site measurements, utilities, access, manufacturer instructions, and required reviews.',
-    ],
     active: true,
   },
   {
@@ -410,9 +263,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Careful wall and ceiling repair with attention to the damage source, texture, primer, and surrounding finish.',
     overview: [
       'Drywall repair restores walls and ceilings after impact, fastener movement, fixture changes, cracking, access cuts, or corrected water damage. The surrounding board, framing support, moisture condition, texture, primer, paint, and lighting all influence how the finished repair will look. JBTRADESMENLLC evaluates those details before recommending a patch size and finish sequence for a Las Vegas home.',
-      'Water-damaged drywall should not be closed until the moisture source is corrected. Sagging ceilings, widespread staining, repeated cracking, structural movement, contamination, or older suspect textures may require specialty or hazardous-material review before disturbance. Finish matching remains subject to existing texture, paint age, sheen, and lighting.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Small and moderate hole repair',
       'Crack and impact-damage repair',
       'Selected ceiling drywall repair',
@@ -422,38 +274,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Paint touch-up or coordinated repainting',
       'Water-damage repair after source correction',
     ],
-    commonConcerns: [
-      'Holes from impact, anchors, or removed fixtures',
-      'Cracks returning after prior repair',
-      'Ceiling stains, sagging, or damaged board',
-      'Texture that is difficult to match',
-      'Water damage with an uncertain source',
-      'Older materials that should be reviewed before disturbance',
-    ],
-    helpfulTips: [
-      'Repair the moisture source before closing damaged drywall.',
-      'Photograph texture in natural light.',
-      'Keep matching paint information where possible.',
-      'Sagging ceilings or widespread water damage require inspection.',
-      'Older textures may require hazardous-material review before disturbance.',
-    ],
-    whenToCallProfessional: [
-      'A ceiling is sagging, soft, wet, or changing shape.',
-      'Cracks are widespread, recurring, or associated with movement.',
-      'The repair requires texture blending across a larger area.',
-      'The material or moisture condition is unknown.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['interior-painting', 'home-repairs', 'handyman', 'property-maintenance'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential drywall repair services',
-    regulatedWorkNotes: [
-      'Suspect hazardous materials, structural movement, active leaks, contamination, and widespread ceiling damage require appropriate review before disturbance.',
-    ],
-    assumptions: [
-      'Moisture sources and specialty-system work are corrected before drywall closure.',
-    ],
     active: true,
   },
   {
@@ -475,10 +300,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Efficient completion of small-to-medium commercial repair lists across multiple practical maintenance categories.',
     overview: [
       'Commercial handyman service is useful when a property has a collection of practical repairs that do not justify coordinating a separate visit for every item. Retail stores, offices, professional suites, common areas, and managed facilities often accumulate door adjustments, wall damage, loose hardware, shelving needs, minor carpentry, fixture replacements, and finish corrections. JBTRADESMENLLC organizes these items into a clear punch list so access, materials, priorities, and completion expectations can be discussed before work begins.',
-      'The service is suited to small-to-medium repair lists and routine property needs that fall within an accessible, non-specialty scope. A visit may include door and cabinet hardware, drywall patches, caulking, trim, wall-mounted accessories, shelving, signs, fixtures, or minor finish work. Each item is evaluated for surrounding damage and practical access rather than treated as an isolated cosmetic task. This helps identify whether the requested repair is straightforward or whether a recurring failure, concealed condition, or separate system needs attention first.',
-      'A handyman work order is not a substitute for regulated trade review. Electrical systems, concealed or major plumbing, HVAC and refrigerant equipment, structural modifications, fire-life-safety components, hazardous materials, and permit-required projects may need qualified specialty providers or jurisdictional coordination. When a request crosses that boundary, JBTRADESMENLLC can document the observed condition, complete appropriate related items, and help the customer separate the general repair scope from work requiring additional authorization or expertise.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Commercial punch-list completion',
       'Door and cabinet hardware adjustments',
       'Drywall patches and wall repairs',
@@ -487,27 +310,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Caulking and finish corrections',
       'Fixture and hardware replacement',
       'Wall-mounted item installation',
-    ],
-    commonConcerns: [
-      'A growing list of unrelated minor repairs',
-      'Loose, worn, or misaligned doors and hardware',
-      'Wall damage after tenant or fixture changes',
-      'Shelving, accessories, or fixtures needing secure installation',
-      'Finish defects that affect customer-facing presentation',
-      'Punch-list items delaying turnover or closeout',
-    ],
-    helpfulTips: [
-      'Group repair items by room or access area before scheduling.',
-      'Photograph each item and note dimensions when possible.',
-      'Identify replacement finishes, hardware, or brand standards in advance.',
-      'Separate operationally urgent items from cosmetic improvements.',
-      'Confirm occupied-area and after-hours access requirements early.',
-    ],
-    whenToCallProfessional: [
-      'The repair list includes multiple materials, mounting conditions, or occupied work areas.',
-      'A door, wall, ceiling, or fixture problem continues after prior adjustment.',
-      'Damage may be connected to moisture, movement, or a concealed system.',
-      'Secure mounting, elevated access, or operational coordination is required.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -519,13 +321,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial handyman services',
-    regulatedWorkNotes: [
-      'Regulated electrical, plumbing, HVAC, structural, fire-life-safety, and permit-required work may require an appropriate specialty trade or additional review.',
-    ],
-    assumptions: [
-      'Service scope is confirmed after reviewing site conditions, mounting surfaces, materials, and access.',
-      'Customer-provided fixtures and hardware must be compatible with the intended installation.',
-    ],
     active: true,
   },
   {
@@ -547,10 +342,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Organized maintenance support for building conditions, work orders, preventative tasks, and multi-site facility needs.',
     overview: [
       'Facility maintenance connects day-to-day work orders with the longer view of how a building is being used and cared for. For facility teams and multi-site operators in Las Vegas, the challenge is often not a single repair but the volume of recurring requests, service intervals, access needs, and vendor responsibilities. JBTRADESMENLLC supports this process through practical condition observations, routine maintenance tasks, repair completion, documentation, and coordination around occupied commercial operations.',
-      'A facility scope can include preventative task lists, interior finish repairs, doors and hardware, ceiling systems, accessible plumbing fixtures, common-area needs, and follow-up on reported conditions. Work is organized so urgent failures are distinguished from planned maintenance and cosmetic improvements. Service records, photographs, asset locations, and clear completion notes give facility managers useful information for future planning without turning a maintenance visit into an unsupported engineering or system-performance conclusion.',
-      'Some equipment and building systems have manufacturer requirements or regulated service boundaries that general facility maintenance cannot replace. Electrical panels, gas systems, refrigerant equipment, fire protection, structural concerns, hazardous materials, and permit-related work require the appropriate review. JBTRADESMENLLC can help identify visible concerns, maintain safe access, address approved general repairs, and coordinate its scope with other vendors while leaving specialty diagnostics and final technical determinations to qualified providers.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Preventative maintenance task support',
       'Work-order completion',
       'Asset condition observations',
@@ -560,28 +353,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Door, hardware, and ceiling maintenance',
       'Vendor access and scope coordination',
       'Multi-site maintenance support',
-    ],
-    commonConcerns: [
-      'Work-order backlogs with mixed urgency',
-      'Incomplete asset or service records',
-      'Recurring failures at the same equipment location',
-      'Water-prone areas and ceiling staining',
-      'Access conflicts in occupied facilities',
-      'Maintenance needs spread across multiple sites',
-    ],
-    helpfulTips: [
-      'Maintain asset and service records.',
-      'Separate urgent failures from planned maintenance.',
-      'Track manufacturer service intervals.',
-      'Review HVAC filters and ventilation maintenance regularly according to equipment requirements.',
-      'Inspect water-prone areas and ceiling systems.',
-      'Maintain safe and clear access to service equipment.',
-    ],
-    whenToCallProfessional: [
-      'A work order affects safe access, business operations, or multiple building areas.',
-      'The same condition returns after routine maintenance.',
-      'Equipment access, shutdowns, or vendor coordination require planning.',
-      'A visible concern may involve a regulated system or concealed damage.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -593,13 +364,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Facility maintenance services',
-    regulatedWorkNotes: [
-      'Manufacturer-required service, regulated systems, engineering, environmental review, and permit-related work remain outside a general maintenance determination.',
-    ],
-    assumptions: [
-      'Facility representatives provide current access rules, asset information, and known service history where available.',
-      'Observations support maintenance planning and do not certify system performance or code compliance.',
-    ],
     active: true,
   },
   {
@@ -621,10 +385,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Responsive interior and exterior maintenance support for property managers, mixed-use sites, and multi-unit commercial properties.',
     overview: [
       'Commercial property maintenance focuses on the shared spaces, tenant areas, exterior interfaces, and recurring repair needs that influence how a managed property operates and presents. Property managers in the Las Vegas Valley often need consistent support across common areas, turnovers, scheduled observations, vendor reporting, and small corrective projects. JBTRADESMENLLC helps organize those needs into defined work orders that can be prioritized by urgency, access, tenant impact, and approved budget.',
-      'Typical work may involve walls and paint, doors and hardware, flooring transitions, ceiling tiles, accessible plumbing fixtures, exterior sealant or finish concerns, turnover punch lists, and documentation of visible property conditions. The service can support one-time repairs or a recurring maintenance plan. Clear photographs and completion notes help managers communicate with ownership and tenants, while grouping related tasks can reduce repeated access disruptions and make material planning more practical.',
-      'A property-wide maintenance visit does not replace specialty inspections or determine the condition of concealed systems. Active leaks, significant movement, structural concerns, electrical or HVAC problems, hazardous materials, fire-life-safety systems, and permit-required alterations need appropriate professional review. JBTRADESMENLLC identifies the portion of the scope suitable for general property maintenance, documents limitations, and coordinates the timing of approved repairs with occupants and other providers when needed.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Common-area repairs',
       'Tenant-turnover punch lists',
       'Interior wall and finish repairs',
@@ -634,27 +396,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Minor exterior finish repairs',
       'Maintenance condition observations',
       'Vendor reporting and photo documentation',
-    ],
-    commonConcerns: [
-      'Turnover items that must be completed before occupancy',
-      'Common-area wear affecting multiple tenants',
-      'Recurring repair requests without location history',
-      'Interior and exterior tasks requiring one coordinated schedule',
-      'Deferred finish damage around leaks or failed sealants',
-      'Multi-unit access and communication requirements',
-    ],
-    helpfulTips: [
-      'Use unit, suite, and common-area identifiers on every work order.',
-      'Document preexisting conditions before turnover work begins.',
-      'Correct active moisture sources before repairing finishes.',
-      'Track recurring requests to reveal broader maintenance patterns.',
-      'Confirm tenant access and quiet-hour requirements before scheduling.',
-    ],
-    whenToCallProfessional: [
-      'Damage is repeated across units or common areas.',
-      'Turnover work involves several repair categories or tight scheduling.',
-      'A condition is affecting occupancy, access, or property operations.',
-      'The visible repair may depend on specialty diagnosis or concealed conditions.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -666,13 +407,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial property maintenance services',
-    regulatedWorkNotes: [
-      'Specialty systems, structural conditions, hazardous materials, fire-life-safety work, and permit-required alterations require appropriate review.',
-    ],
-    assumptions: [
-      'Property management provides access authorization and communicates occupant restrictions.',
-      'Repair priorities and recurring-service frequency are established with the customer after site review.',
-    ],
     active: true,
   },
   {
@@ -694,10 +428,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Customer-conscious repair and upkeep for stores, showrooms, service counters, and other active retail environments.',
     overview: [
       'Retail maintenance has to balance repair quality with customer access, brand presentation, and operating schedules. A worn door, damaged wall, stained ceiling tile, loose fixture, or flooring transition may be a small construction item, but it is highly visible in a customer-facing environment. JBTRADESMENLLC supports Las Vegas retail properties with planned maintenance and corrective work organized around store access, peak traffic, work-zone control, and the finish expectations supplied by the customer.',
-      'Common scopes include doors and hardware, wall and paint repairs, store fixtures, shelving, flooring details, ceiling tiles, accessible plumbing fixtures, and punch-list completion. Existing finishes and replacement requirements are reviewed before materials are selected, especially where brand standards or matching products matter. When practical, disruptive work can be coordinated outside peak hours, and completed conditions can be photographed so store and facility teams have a clear service record.',
-      'Retail environments may contain specialty lighting, fire-life-safety equipment, security systems, structural displays, regulated plumbing, or electrical connections that require separate expertise. Work near customers, employees, high shelving, or active merchandise also requires site-specific planning. JBTRADESMENLLC defines a safe general maintenance scope, communicates access limitations, and separates routine finish or fixture work from conditions that need manufacturer direction, specialty trades, or additional jurisdictional review.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Customer-facing wall and paint repairs',
       'Door and hardware adjustments',
       'Store fixture and shelving support',
@@ -707,27 +439,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Minor carpentry and trim work',
       'Opening, closing, and turnover punch lists',
       'After-hours coordination where practical',
-    ],
-    commonConcerns: [
-      'Visible finish damage in customer areas',
-      'Doors or hardware receiving heavy daily use',
-      'Loose fixtures, shelving, or wall-mounted accessories',
-      'Stained ceiling tiles or damaged flooring transitions',
-      'Repair work that must avoid peak shopping periods',
-      'Replacement materials that must match brand standards',
-    ],
-    helpfulTips: [
-      'Record brand finish standards and approved materials before repair.',
-      'Photograph customer-facing damage under normal store lighting.',
-      'Correct moisture sources before replacing stained finishes.',
-      'Plan work zones and material movement around operating hours.',
-      'Keep replacement ceiling tile, paint, and flooring information on file.',
-    ],
-    whenToCallProfessional: [
-      'A repair creates a trip, access, or customer-safety concern.',
-      'Finish damage is spreading or returning after prior work.',
-      'Store operations or after-hours access must be coordinated.',
-      'Fixtures or displays require secure mounting to an unknown substrate.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -739,13 +450,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Retail maintenance services',
-    regulatedWorkNotes: [
-      'Specialty electrical, plumbing, security, fire-life-safety, structural, and permit-required work may need separate qualified providers.',
-    ],
-    assumptions: [
-      'The customer supplies current brand standards and approves finish selections.',
-      'Work-zone and access planning are coordinated with the site representative.',
-    ],
     active: true,
   },
   {
@@ -767,10 +471,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Workplace repairs and practical improvements planned to limit disruption in occupied and transitioning office environments.',
     overview: [
       'Office maintenance supports the everyday details that keep workplaces functional and presentable for employees, tenants, and visitors. In an occupied office, even routine wall, door, ceiling, or fixture work can affect meetings, circulation, noise, and access. JBTRADESMENLLC plans office repair scopes around these constraints, whether the need is a small punch list, recurring maintenance, a suite turnover, or coordinated finish improvements across several rooms.',
-      'Typical work includes doors and hardware, drywall and paint, suspended ceiling tiles, accessible plumbing fixtures, furniture assembly, wall-mounted items, trim, flooring details, and selected tenant-improvement tasks. The existing condition, desired finish, mounting substrate, and room use are reviewed before work proceeds. Sequencing dusty or noisy tasks separately from finish work and confirming access to offices or shared areas can reduce disruption and help the customer understand what will be completed during each phase.',
-      'Office buildings also contain regulated and specialty systems that are not part of general maintenance. Electrical connections, concealed plumbing, HVAC controls, fire-rated assemblies, fire-life-safety equipment, structural changes, and permit-related tenant improvements may need qualified specialty review. JBTRADESMENLLC can complete appropriate general repairs, document observed limitations, and coordinate its phase with property management or other vendors without claiming that routine maintenance verifies building-system or code performance.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Door and hardware repairs',
       'Drywall patching and paint touch-ups',
       'Ceiling tile replacement',
@@ -780,27 +482,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Flooring detail and transition repairs',
       'Office turnover punch lists',
       'Selected finish improvements',
-    ],
-    commonConcerns: [
-      'Repairs that may interrupt occupied work areas',
-      'Wall damage after furniture or tenant changes',
-      'Misaligned doors and worn hardware',
-      'Ceiling stains or damaged acoustical tiles',
-      'Fixtures and accessories requiring secure mounting',
-      'Multiple rooms needing phased completion',
-    ],
-    helpfulTips: [
-      'Identify noise-sensitive rooms and operating hours before scheduling.',
-      'Save paint, ceiling tile, and hardware specifications for future matching.',
-      'Correct active leaks before repairing ceilings or walls.',
-      'Confirm wall construction before selecting mounting hardware.',
-      'Group work by area to reduce repeated access interruptions.',
-    ],
-    whenToCallProfessional: [
-      'A door, wall, ceiling, or fixture issue affects safe use of the workplace.',
-      'Repairs need after-hours access or coordination with building management.',
-      'Damage suggests moisture, movement, or a concealed utility condition.',
-      'A tenant-improvement request may involve specialty systems or permitting.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -812,13 +493,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Office maintenance services',
-    regulatedWorkNotes: [
-      'Lighting fixture work is limited to permitted scope; regulated electrical, plumbing, HVAC, fire-life-safety, structural, and permit-required work needs appropriate review.',
-    ],
-    assumptions: [
-      'Building and tenant access requirements are supplied before scheduling.',
-      'Finish and fixture selections remain subject to compatibility and site conditions.',
-    ],
     active: true,
   },
   {
@@ -840,10 +514,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Assessment and repair support for accessible commercial plumbing fixtures and visible localized maintenance concerns.',
     overview: [
       'Commercial plumbing maintenance often begins with an accessible fixture that leaks, runs, drips, will not shut off correctly, or no longer supports normal use. Faucets, toilets, exposed shutoff valves, hose bibs, filtration components, and water-heater related items can affect customers, employees, sanitation, and daily operations. JBTRADESMENLLC reviews visible conditions, access, fixture type, connection points, and shutdown requirements before defining an appropriate repair or replacement scope.',
-      'The service is focused on accessible maintenance and repair rather than every type of plumbing system work. A typical request may involve fixture replacement, a visible localized leak, a worn valve, a filtration concern, a drain component where appropriate, or planning for water-heater service. Model information, photographs, observed symptoms, and the location of available shutoffs help determine materials and whether a scheduled repair can proceed without broader diagnostic or building coordination.',
-      'Commercial plumbing conditions can extend beyond the visible fixture. Licensing, permits, shutdown coordination, concealed piping, gas systems, major drain or sewer work, and jurisdictional requirements may require additional professional review. Active leaks, suspected contamination, significant water damage, or conditions affecting multiple fixtures should be addressed promptly and may need a specialty plumbing provider. JBTRADESMENLLC communicates these limits before work and does not represent accessible fixture service as a complete diagnosis of concealed building piping.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Faucet repair or replacement',
       'Toilet component and fixture service',
       'Accessible shutoff valve review',
@@ -853,27 +525,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Hose bib service',
       'Accessible fixture replacement',
       'Selected drain-component service where appropriate',
-    ],
-    commonConcerns: [
-      'Dripping or continuously running fixtures',
-      'Visible water around accessible connections',
-      'A shutoff valve that is damaged or not operating normally',
-      'Fixture wear affecting customer or employee use',
-      'Water-heater or filtration concerns needing assessment',
-      'Plumbing work requiring building shutdown coordination',
-    ],
-    helpfulTips: [
-      'Record the fixture manufacturer and model when visible.',
-      'Photograph the fixture, connections, and surrounding damage.',
-      'Report active leaks promptly and protect the affected area from use.',
-      'Confirm the building contact authorized to coordinate water shutdowns.',
-      'Do not cover recurring water damage without identifying its source.',
-    ],
-    whenToCallProfessional: [
-      'Water is actively leaking, spreading, or affecting electrical equipment or occupied areas.',
-      'Several fixtures are affected or drainage problems are recurring.',
-      'The work involves concealed piping, gas, sewer, major drains, or a required permit.',
-      'A building shutdown or jurisdictional coordination is necessary.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -885,13 +536,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial plumbing repair services',
-    regulatedWorkNotes: [
-      'Licensing, permits, shutdown coordination, concealed piping, gas systems, major drain or sewer work, and jurisdictional requirements may require additional professional review.',
-    ],
-    assumptions: [
-      'The final scope depends on accessible conditions, fixture compatibility, shutoff operation, and evidence of concealed damage.',
-      'No step-by-step customer work on pressurized, gas, concealed, or energized systems is represented by this service information.',
-    ],
     active: true,
   },
   {
@@ -913,10 +557,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Multi-trade corrective repairs organized around damage, priority, access, and commercial operating needs.',
     overview: [
       'Commercial repair work begins when normal wear, impact, failure, water exposure, or tenant activity leaves a property item damaged or unusable. The visible result may involve a wall, door, ceiling, fixture, floor, trim detail, or minor exterior finish, while the underlying cause may be less obvious. JBTRADESMENLLC starts by documenting the condition and separating immediate operational concerns from cosmetic restoration and planned follow-up work.',
-      'A repair scope can combine several practical trades so customers do not have to treat every finish item as a separate project. Typical work includes drywall and paint, doors and hardware, ceiling tile replacement, accessible fixtures, flooring details, minor carpentry, and selected exterior repairs. Materials, matching requirements, occupant access, work-zone needs, and the sequence of correction are reviewed before completion. If damage came from moisture or another active source, that source should be addressed before finishes are closed or replaced.',
-      'Corrective repair is different from diagnosing every concealed building condition. Widespread movement, continuing water entry, structural damage, hazardous materials, energized equipment, regulated plumbing or HVAC systems, and permit-related work require appropriate professional review. JBTRADESMENLLC can complete the defined general repair scope, identify visible limitations, and provide completion documentation while avoiding unsupported conclusions about concealed systems, engineering, or code compliance.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Damage and repair-scope observations',
       'Drywall and paint repairs',
       'Door and hardware correction',
@@ -926,27 +568,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Minor carpentry and trim work',
       'Selected minor exterior repairs',
       'Work-order documentation',
-    ],
-    commonConcerns: [
-      'Impact or wear damage in active commercial areas',
-      'Water-damaged finishes after source correction',
-      'Doors, ceilings, or fixtures that no longer function normally',
-      'Mixed repair lists requiring prioritization',
-      'Matching existing materials and finishes',
-      'Corrective work needing occupied-site coordination',
-    ],
-    helpfulTips: [
-      'Document the condition and surrounding area before materials are removed.',
-      'Correct active moisture or movement before finish replacement.',
-      'Preserve product labels and finish information for matching.',
-      'Prioritize access, water, and operational concerns before cosmetic work.',
-      'Confirm whether damage affects tenant or public circulation.',
-    ],
-    whenToCallProfessional: [
-      'Damage is spreading, recurring, or interfering with normal operation.',
-      'The cause is unclear or may be concealed behind a finish.',
-      'Several repair categories need coordinated sequencing.',
-      'The condition may involve structural, regulated, hazardous, or permit-related work.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -958,13 +579,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial repair services',
-    regulatedWorkNotes: [
-      'Structural, electrical, HVAC, major plumbing, hazardous-material, fire-life-safety, and permit-required conditions require appropriate specialty review.',
-    ],
-    assumptions: [
-      'Repair recommendations are based on visible and accessible conditions at the time of review.',
-      'Finish matching depends on product availability, age, lighting, and existing wear.',
-    ],
     active: true,
   },
   {
@@ -986,10 +600,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Planned interior improvements and finish updates for offices, retail spaces, break rooms, restrooms, and tenant areas.',
     overview: [
       'Commercial remodeling updates a space so it better supports current operations, presentation, occupancy, or tenant needs. Projects may range from a focused office refresh to coordinated finish improvements across retail, break-room, restroom, or shared areas. JBTRADESMENLLC helps Las Vegas customers define the visible scope, confirm existing conditions, organize materials, and phase work around property access rather than treating every improvement as an open-ended construction project.',
-      'Typical work can include flooring, drywall, painting, doors, trim, fixtures, cabinetry or counters where appropriate, break-room updates, and restroom finish improvements. Early planning considers demolition limits, substrate conditions, material lead times, occupied areas, dust and noise, and the order in which related work should occur. A clear scope also distinguishes owner-selected finishes from items that require field verification, specialty installation, or coordination with building management and other providers.',
-      'Commercial remodeling may be affected by permits, plans, engineering, specialty trades, accessibility requirements, fire-rated assemblies, and jurisdictional review. Existing buildings can also reveal concealed damage or utilities after work begins. JBTRADESMENLLC identifies assumptions and visible limitations during planning, completes the approved scope it is qualified to perform, and coordinates as needed without promising permit approval, code compliance, or a final schedule before applicable reviews and site conditions are understood.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Office and suite refreshes',
       'Retail interior improvements',
       'Drywall and painting',
@@ -999,27 +611,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Break-room finish updates',
       'Restroom finish improvements',
       'Phased work and site coordination',
-    ],
-    commonConcerns: [
-      'Outdated or damaged commercial finishes',
-      'Tenant spaces needing reconfiguration or refresh work',
-      'Occupied areas requiring phased construction',
-      'Unknown substrate conditions beneath existing finishes',
-      'Material selections with long lead times or matching requirements',
-      'Scope items affected by specialty systems or jurisdictional review',
-    ],
-    helpfulTips: [
-      'Define operational priorities and must-complete areas before selecting finishes.',
-      'Confirm material availability and lead times before scheduling demolition.',
-      'Document existing conditions and items intended to remain.',
-      'Plan dust, noise, access, and temporary protection for occupied spaces.',
-      'Allow for review when work may affect accessibility or regulated systems.',
-    ],
-    whenToCallProfessional: [
-      'The improvement affects multiple rooms, trades, or operating phases.',
-      'Existing damage or concealed conditions may change the finish scope.',
-      'The project may involve plans, permits, accessibility, or specialty systems.',
-      'Material selections and work sequencing need coordinated planning.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -1031,13 +622,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial remodeling and tenant improvement services',
-    regulatedWorkNotes: [
-      'Permits, plans, engineering, specialty trades, accessibility requirements, and jurisdictional review may affect scope and scheduling.',
-    ],
-    assumptions: [
-      'Final scope is subject to field conditions, approved selections, building rules, and required reviews.',
-      'Concealed conditions discovered after authorized work begins may require separate evaluation.',
-    ],
     active: true,
   },
   {
@@ -1059,10 +643,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Careful replacement of damaged or stained tiles in existing suspended ceiling systems for offices, retail spaces, banks, and facilities.',
     overview: [
       'Suspended ceiling tiles provide an accessible finish below many commercial building systems, but they can become stained, broken, bowed, or damaged during maintenance and tenant activity. Replacement improves presentation only when the surrounding ceiling and the source of damage have been considered. JBTRADESMENLLC supports Las Vegas offices, retail spaces, banks, and facilities by documenting the existing tile, edge profile, dimensions, pattern, grid condition, access height, and nearby penetrations before ordering or cutting material.',
-      'A typical scope may include removing damaged tiles, matching available replacement products, cutting around lights or diffusers where the approved scope permits, fitting perimeter pieces, and noting minor visible grid concerns. Ceiling products that appear similar can differ in thickness, texture, edge detail, fire-rating information, and manufacturer availability. Recording a product label or retaining an undamaged sample can reduce guesswork, although aging and production changes may still make an exact visual match unavailable.',
-      'Stained tile should not be used to conceal an active roof, plumbing, HVAC, or condensation problem. High-access work, widespread grid damage, fire-rated ceiling systems, specialty fixtures, and suspect hazardous materials may require added review before disturbance. JBTRADESMENLLC limits work to observable and approved conditions, stops when the ceiling presents an unexpected safety or material concern, and does not claim that replacing a finish corrects concealed moisture or certifies the ceiling assembly.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Damaged tile replacement',
       'Stained tile replacement after source correction',
       'Tile size, pattern, and edge-profile documentation',
@@ -1071,27 +653,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Cutting around approved lights and diffusers',
       'Minor visible grid observations',
       'High-access planning and site protection',
-    ],
-    commonConcerns: [
-      'Water-stained tiles with an unresolved source',
-      'Broken, sagging, or missing panels',
-      'Unknown manufacturer, pattern, or edge profile',
-      'Visible grid damage or misalignment',
-      'High ceilings or occupied work areas',
-      'Fire-rated systems or suspect older materials',
-    ],
-    helpfulTips: [
-      'Correct active roof, plumbing, HVAC, or condensation sources before replacing stained tiles.',
-      'Record the tile manufacturer, pattern, dimensions, and edge profile before ordering.',
-      'Inspect the surrounding grid condition.',
-      'Do not disturb suspect hazardous materials.',
-      'High or fire-rated ceiling systems may require added review.',
-    ],
-    whenToCallProfessional: [
-      'Tiles are repeatedly staining, sagging, or falling out of position.',
-      'The ceiling is high, difficult to access, or above occupied areas.',
-      'Grid components, fixtures, or large ceiling areas appear damaged.',
-      'The material is unknown or may be part of a rated assembly.',
     ],
     serviceAreaCopy,
     relatedServiceIds: [
@@ -1103,13 +664,6 @@ const serviceHubRecords: LegacyServiceRecord[] = [
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Commercial ceiling tile replacement services',
-    regulatedWorkNotes: [
-      'Do not disturb suspect hazardous materials; high-access, fire-rated, damaged-grid, and specialty-system conditions may require additional review.',
-    ],
-    assumptions: [
-      'Active moisture sources are corrected before finish replacement.',
-      'Exact matching depends on available manufacturer products and the age of the existing ceiling.',
-    ],
     active: true,
   },
   {
@@ -1131,9 +685,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Prepared, protected, and carefully finished interior painting for occupied homes, vacant properties, and residential turnovers.',
     overview: [
       'Interior painting depends on more than color. Surface condition, previous coatings, sheen, patching, lighting, room use, and protection of the surrounding home all affect the finished result. JBTRADESMENLLC works with Las Vegas homeowners and property managers on walls, ceilings, trim, doors, touch-ups, and color changes after the intended scope and existing finish have been reviewed.',
-      'Preparation may include protecting floors and fixtures, filling minor defects, sanding approved areas, spot priming, and establishing clean finish boundaries. Paint should not conceal active moisture, widespread coating failure, contamination, or suspect hazardous materials. Older coatings and unusual substrates may require testing or specialty preparation before disturbance.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Wall painting',
       'Ceiling painting',
       'Trim and baseboard painting',
@@ -1143,38 +696,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Color and sheen changes',
       'Occupied and vacant property painting',
     ],
-    commonConcerns: [
-      'Scuffs, stains, fading, or uneven prior touch-ups',
-      'Minor wall defects visible through the finish',
-      'Peeling associated with moisture or adhesion failure',
-      'Color and sheen matching under different lighting',
-      'Furniture and flooring protection in occupied rooms',
-      'Older or unknown coatings needing additional review',
-    ],
-    helpfulTips: [
-      'Surface preparation strongly affects finish quality.',
-      'Confirm sheen and color before work begins.',
-      'Address active moisture or peeling causes.',
-      'Protect flooring, fixtures, and furniture.',
-      'Keep leftover labeled paint for future touch-ups.',
-    ],
-    whenToCallProfessional: [
-      'Walls or ceilings need significant patching before painting.',
-      'Peeling, staining, or moisture continues after prior coating work.',
-      'High areas or occupied rooms require coordinated protection.',
-      'Existing coatings or substrates are unknown.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['drywall-repair', 'home-repairs', 'flooring-installation', 'property-maintenance'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential interior painting services',
-    regulatedWorkNotes: [
-      'Suspect hazardous coatings, active moisture, contamination, and unusual substrate failures may require testing or specialty review before disturbance.',
-    ],
-    assumptions: [
-      'Colors, sheen, rooms, surfaces, and protection needs are approved before work begins.',
-    ],
     active: true,
   },
   {
@@ -1196,9 +722,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Careful planning and installation support for LVP, laminate, transitions, trim, and related residential flooring details.',
     overview: [
       'Flooring installation depends on the room, product, substrate, moisture conditions, transitions, and adjacent finishes working together. LVP and laminate products can have different acclimation, flatness, underlayment, expansion, and installation requirements. JBTRADESMENLLC reviews the selected product and visible site conditions before confirming removal, preparation, layout, trim, appliance, and transition work.',
-      'New flooring should not be installed over an active moisture condition or known structural subfloor damage. Widespread movement, rot, slab moisture, suspect hazardous flooring or adhesive, and significant substrate correction may require separate testing or specialty review. Final material quantities depend on verified measurements, layout, pattern, and appropriate waste allowance.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'LVP installation',
       'Laminate installation',
       'Existing flooring removal where appropriate',
@@ -1208,38 +733,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Door-clearance and finish-detail planning',
       'Appliance-area coordination',
     ],
-    commonConcerns: [
-      'Uneven, damaged, or moisture-affected substrates',
-      'Transitions between different floor heights',
-      'Door and appliance clearance changes',
-      'Insufficient material or omitted waste allowance',
-      'Baseboard and perimeter finish decisions',
-      'Unknown older flooring or adhesive materials',
-    ],
-    helpfulTips: [
-      'Measure each room and include waste allowance.',
-      'Confirm manufacturer acclimation and substrate requirements.',
-      'Address active moisture before installation.',
-      'Check transitions and door clearances.',
-      'Structural subfloor damage requires separate review.',
-    ],
-    whenToCallProfessional: [
-      'The subfloor is soft, uneven, moving, or moisture-damaged.',
-      'Several rooms, transitions, doors, or appliances affect the layout.',
-      'Older flooring or adhesive may need testing before removal.',
-      'Product substrate requirements have not been verified.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['home-repairs', 'interior-painting', 'handyman', 'property-maintenance'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential flooring installation services',
-    regulatedWorkNotes: [
-      'Structural subfloor damage, active moisture, and suspect hazardous flooring or adhesives require appropriate review before covering or disturbance.',
-    ],
-    assumptions: [
-      'The selected flooring is suitable for the location and installed according to manufacturer requirements.',
-    ],
     active: true,
   },
   {
@@ -1261,9 +759,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Secure display and soundbar mounting planned around equipment weight, bracket compatibility, wall construction, and viewing goals.',
     overview: [
       'Professional TV mounting begins with the display, bracket, wall, and intended viewing position. Equipment weight, mounting-hole pattern, bracket rating, stud location, wall material, furniture placement, and room use all influence a safe installation. JBTRADESMENLLC reviews these factors with Las Vegas homeowners before drilling so the selected mount and proposed location can be evaluated together.',
-      'Not every wall type supports every display or mounting method. Masonry, metal framing, unknown backing, fireplaces, specialty finishes, very large equipment, and commercial displays may require different anchors or added assessment. Concealed electrical work or cable routing may require separate review, and work will not proceed when adequate support cannot be established.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'TV bracket compatibility review',
       'Stud and wall-condition observations',
       'Viewing-height planning',
@@ -1273,38 +770,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Surface cable-management options',
       'Commercial display-mounting assessment',
     ],
-    commonConcerns: [
-      'An incompatible or underrated mounting bracket',
-      'Unknown wall construction or support location',
-      'Mounting over fireplaces or specialty finishes',
-      'Very large or heavy displays',
-      'Cable routing that may involve concealed electrical work',
-      'Viewing height conflicts with furniture or room layout',
-    ],
-    helpfulTips: [
-      'Confirm the TV model, weight, and mounting pattern before selecting a bracket.',
-      'Choose viewing height based on the primary seating position.',
-      'Keep mount hardware and manufacturer instructions together.',
-      'Discuss soundbar and cable-management goals before drilling.',
-      'Do not assume every wall material supports the same mounting method.',
-    ],
-    whenToCallProfessional: [
-      'The display is large, heavy, or mounted above occupied space.',
-      'Wall construction, framing, backing, or concealed utilities are uncertain.',
-      'A full-motion mount or specialty surface increases complexity.',
-      'Cable routing may require electrical or low-voltage review.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['handyman', 'home-repairs', 'drywall-repair', 'interior-painting'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'TV mounting services',
-    regulatedWorkNotes: [
-      'Concealed electrical, in-wall cable, specialty structural support, and regulated low-voltage work may require separate review.',
-    ],
-    assumptions: [
-      'The display, bracket, and accessories are compatible and within manufacturer ratings.',
-    ],
     active: true,
   },
   {
@@ -1326,9 +796,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Assessment and repair support for accessible fixtures, valves, visible localized leaks, filtration, and related maintenance needs.',
     overview: [
       'Residential plumbing repair often starts with a visible and localized problem such as a dripping faucet, running toilet, worn shutoff valve, leaking hose bib, filtration concern, or fixture that no longer operates normally. JBTRADESMENLLC reviews the accessible fixture, connections, surrounding condition, and available shutoffs before confirming a suitable repair scope.',
-      'Concealed piping, slab leaks, sewer or major drain work, gas systems, widespread pressure concerns, and permit-required plumbing can exceed an accessible repair scope. Active water near electrical equipment, uncontrolled leakage, sewage, or damage affecting several areas requires prompt qualified assistance. A localized repair is not represented as proof that concealed piping is free of defects.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Faucet repair or replacement',
       'Toilet component and fixture service',
       'Accessible shutoff valve repairs',
@@ -1338,38 +807,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Fixture replacement',
       'Garbage-disposal service',
     ],
-    commonConcerns: [
-      'Dripping, running, or loose fixtures',
-      'Visible leaks around accessible connections',
-      'Damaged or difficult-to-operate shutoff valves',
-      'Recurring cabinet, wall, or floor moisture',
-      'Filtration or fixture performance concerns',
-      'Conditions that may involve concealed piping',
-    ],
-    helpfulTips: [
-      'Know the location of the main water shutoff.',
-      'Address active leaks quickly.',
-      'Photograph visible pipe material and connections.',
-      'Do not conceal recurring leaks without identifying the source.',
-      'Concealed, slab, sewer, gas, major drain, or permit-required work needs additional review.',
-    ],
-    whenToCallProfessional: [
-      'Water is actively leaking or spreading into finishes or electrical areas.',
-      'Several fixtures are affected or a problem keeps returning.',
-      'The source is concealed or connected to sewer, gas, or major drains.',
-      'A shutoff is unavailable, damaged, or ineffective.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['water-heater-replacement', 'appliance-repair', 'property-maintenance', 'home-repairs'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Residential plumbing repair services',
-    regulatedWorkNotes: [
-      'Concealed piping, slab, sewer, gas, major drain, licensing, and permit-required work may require appropriately qualified specialty providers.',
-    ],
-    assumptions: [
-      'Final scope is based on accessible connections, shutoff operation, fixture compatibility, and evidence of concealed damage.',
-    ],
     active: true,
   },
   {
@@ -1391,9 +833,8 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Practical appliance condition assessment, maintenance, and installation support within verified equipment and connection limits.',
     overview: [
       'Appliance service starts with accurately identifying the equipment and observed problem. Model and serial numbers, error codes, utility availability, connection type, access, and manufacturer information help determine whether a service request fits the available scope. JBTRADESMENLLC provides selected condition assessment, maintenance, and installation support without claiming factory authorization or universal coverage for every brand and internal system.',
-      'An appliance showing smoke, sparking, gas odor, overheating, active leakage, or abnormal electrical behavior should be taken out of use without touching unsafe components, and the appropriate qualified or emergency provider should be contacted. Manufacturer-specific parts, sealed refrigeration, specialty gas connections, and electronic diagnostics may require another provider.',
     ],
-    includedServices: [
+    capabilitySeed: [
       'Appliance condition assessment',
       'Water-filter replacement',
       'Garbage-disposal service',
@@ -1403,38 +844,11 @@ const serviceHubRecords: LegacyServiceRecord[] = [
       'Commercial water and ice-machine cleaning where offered',
       'Appliance access and connection observations',
     ],
-    commonConcerns: [
-      'Unknown model, serial number, or error information',
-      'Appliances that do not fit the opening or available connections',
-      'Visible leakage around hoses or accessible connections',
-      'Manufacturer-specific parts or electronic diagnostics',
-      'Sealed refrigeration or specialty gas-system concerns',
-      'Smoke, sparking, overheating, or gas odor requiring urgent action',
-    ],
-    helpfulTips: [
-      'Record the appliance model and serial number.',
-      'Photograph error codes.',
-      'Confirm whether utilities are functioning without touching unsafe components.',
-      'Stop using an appliance showing smoke, sparking, gas odor, overheating, or active leakage.',
-      'Manufacturer-specific parts and diagnostics may affect scheduling.',
-    ],
-    whenToCallProfessional: [
-      'The appliance shows smoke, sparking, gas odor, overheating, or active leakage.',
-      'The issue involves gas, energized components, refrigerant, or sealed systems.',
-      'Installation requires utility changes beyond an accessible existing setup.',
-      'Manufacturer-specific diagnostics, parts, or authorization are needed.',
-    ],
     serviceAreaCopy,
     relatedServiceIds: ['plumbing-repair', 'water-heater-replacement', 'handyman', 'property-maintenance'],
     primaryCTA,
     secondaryCTA,
     schemaServiceType: 'Appliance assessment and installation support services',
-    regulatedWorkNotes: [
-      'Gas, electrical, sealed refrigeration, refrigerant, manufacturer-authorized, and permit-required work may require an appropriate specialty provider.',
-    ],
-    assumptions: [
-      'Service availability depends on appliance type, manufacturer requirements, utilities, access, symptoms, and parts.',
-    ],
     active: true,
   },
 ];
@@ -1470,6 +884,7 @@ const serviceContentPlans: Record<string, ServiceContentPlan> = {
     capabilityAdditions: [
       'Minor electrical and lighting repairs',
       'HVAC diagnostics and minor maintenance',
+      'Property assessment support',
       'Work-order completion photos and notes',
     ],
   },
@@ -1680,6 +1095,7 @@ const serviceContentPlans: Record<string, ServiceContentPlan> = {
         answer: 'Yes. We routinely organize multi-trade commercial repair lists involving walls, doors, ceilings, flooring, hardware, and fixtures.',
       },
     ],
+    capabilityAdditions: ['Welding and minor metal repair'],
   },
   'commercial-remodeling': {
     commonApplications: [
@@ -2117,7 +1533,7 @@ function buildFaqs(record: LegacyServiceRecord, plan: ServiceContentPlan): Servi
 }
 
 function confidentCapabilities(record: LegacyServiceRecord, plan: ServiceContentPlan) {
-  const existing = record.includedServices.map((item) =>
+  const existing = record.capabilitySeed.map((item) =>
     item
       .replace(/^Accessible /, '')
       .replace(/^Selected /, '')
@@ -2131,8 +1547,9 @@ function buildOverview(record: LegacyServiceRecord, plan: ServiceContentPlan) {
   const process = record.audience === 'commercial'
     ? 'Commercial service begins with the work order, operating priorities, and site requirements. Our technicians inspect visible conditions, identify the likely cause, confirm access and material needs, complete the approved work, test normal operation where applicable, and document additional concerns. The goal is a practical repair that supports reliability, presentation, and daily property operation—not simply a temporary cosmetic response.'
     : 'Residential service begins with a clear discussion of the issue, the desired result, and any prior repairs. Our technicians inspect visible and accessible conditions, identify the likely cause, confirm materials and repair options, complete the approved work, test normal operation where applicable, and review useful maintenance recommendations. This organized approach helps homeowners understand what was addressed and how the completed repair supports everyday use of the property.'
+  const applicationContext = `${record.category} customers commonly schedule ${record.shortTitle.toLowerCase()} for ${plan.commonApplications.slice(0, 3).join(', ').toLowerCase()}. Reviewing those related needs together helps our team prepare the right materials, coordinate the work area, and recommend a practical service sequence based on the property’s priorities.`
 
-  return [record.overview[0], process, plan.overviewClosing]
+  return [record.overview[0], process, applicationContext, plan.overviewClosing]
 }
 
 export const serviceHubServices: ServiceHubService[] = serviceHubRecords.map((record) => {
@@ -2140,22 +1557,10 @@ export const serviceHubServices: ServiceHubService[] = serviceHubRecords.map((re
   if (!plan) throw new Error(`Missing service content plan for ${record.id}`)
 
   const {
-    includedServices: _includedServices,
-    commonConcerns: _commonConcerns,
-    helpfulTips: _helpfulTips,
-    whenToCallProfessional: _whenToCallProfessional,
-    regulatedWorkNotes: _regulatedWorkNotes,
-    assumptions: _assumptions,
+    capabilitySeed: _capabilitySeed,
     ...service
   } = record
-  void [
-    _includedServices,
-    _commonConcerns,
-    _helpfulTips,
-    _whenToCallProfessional,
-    _regulatedWorkNotes,
-    _assumptions,
-  ]
+  void _capabilitySeed
 
   return {
     ...service,
