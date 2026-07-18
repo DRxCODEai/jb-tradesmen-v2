@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { activeServiceHubServices } from '../data/serviceHubServices'
 
 const SITE_URL = 'https://www.jbtradesmenllc.com'
 
@@ -15,6 +16,12 @@ const routeSeo: Record<string, RouteSeoConfig> = {
     description:
       'Professional residential repairs, commercial maintenance, remodeling, property assessments, and facility services.',
     canonicalPath: '/',
+  },
+  '/service-hub': {
+    title: 'Service Hub Las Vegas | JBTRADESMENLLC',
+    description:
+      'Explore residential and commercial maintenance, repair, remodeling, installation, and property services available throughout the Las Vegas Valley.',
+    canonicalPath: '/service-hub',
   },
   '/residential-services': {
     title: 'Residential Repair & Maintenance Services | JBTRADESMENLLC',
@@ -156,17 +163,44 @@ export default function RouteSeo() {
   const normalizedPath = pathname === '/' ? pathname : pathname.replace(/\/+$/, '')
 
   useEffect(() => {
-    const seo = routeSeo[normalizedPath] ?? notFoundSeo
+    const service = activeServiceHubServices.find(
+      (entry) => entry.route === normalizedPath,
+    )
+    const seo = routeSeo[normalizedPath] ?? (service ? {
+      title: service.metaTitle,
+      description: service.metaDescription,
+      canonicalPath: service.route,
+    } : notFoundSeo)
     const description = document.querySelector<HTMLMetaElement>(
       'meta[name="description"]',
     )
     const canonical = document.querySelector<HTMLLinkElement>(
       'link[rel="canonical"]',
     )
+    const canonicalUrl = `${SITE_URL}${seo.canonicalPath}`
+    const localBusinessSchema = document.getElementById(
+      'local-business-structured-data',
+    ) as HTMLScriptElement | null
 
     document.title = seo.title
     description?.setAttribute('content', seo.description)
-    canonical?.setAttribute('href', `${SITE_URL}${seo.canonicalPath}`)
+    canonical?.setAttribute('href', canonicalUrl)
+    document.querySelector<HTMLMetaElement>('meta[property="og:title"]')
+      ?.setAttribute('content', seo.title)
+    document.querySelector<HTMLMetaElement>('meta[property="og:description"]')
+      ?.setAttribute('content', seo.description)
+    document.querySelector<HTMLMetaElement>('meta[property="og:url"]')
+      ?.setAttribute('content', canonicalUrl)
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')
+      ?.setAttribute('content', seo.title)
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')
+      ?.setAttribute('content', seo.description)
+
+    if (localBusinessSchema) {
+      localBusinessSchema.type = normalizedPath === '/'
+        ? 'application/ld+json'
+        : 'application/json'
+    }
   }, [normalizedPath])
 
   return null

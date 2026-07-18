@@ -7,6 +7,7 @@ import './navbar.css'
 const links = [
   { to: '/residential-services', label: 'Residential' },
   { to: '/commercial-services', label: 'Commercial' },
+  { to: '/service-hub', label: 'Service Hub' },
   { to: '/project-gallery', label: 'Gallery' },
   { to: '/who-we-work-with', label: 'Clients' },
   { to: '/resources', label: 'Resources' },

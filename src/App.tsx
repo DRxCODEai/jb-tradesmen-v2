@@ -6,6 +6,8 @@ import ScrollToTop from './components/ScrollToTop'
 import RouteSeo from './components/RouteSeo'
 
 import Home from './pages/Home'
+import ServiceHub from './pages/ServiceHub'
+import ServiceDetail from './pages/ServiceDetail'
 import ResidentialServices from './pages/ResidentialServices'
 import CommercialServices from './pages/CommercialServices'
 import Gallery from './pages/Gallery'
@@ -37,6 +39,10 @@ function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
+
+          <Route path="/service-hub" element={<ServiceHub />} />
+
+          <Route path="/services/:slug" element={<ServiceDetail />} />
 
           <Route
             path="/residential-services"
