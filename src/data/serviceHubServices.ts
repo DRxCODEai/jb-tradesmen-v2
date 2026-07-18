@@ -1,9 +1,38 @@
-import type { ServiceHubService } from '../types/serviceHub'
+import type { ServiceFAQ, ServiceHubService } from '../types/serviceHub'
+
+type NewContentField =
+  | 'whatWeDo'
+  | 'commonApplications'
+  | 'whatToExpect'
+  | 'professionalInsights'
+  | 'preparationTips'
+  | 'faqs'
+  | 'projectScopeNotes'
+
+interface LegacyServiceRecord extends Omit<ServiceHubService, NewContentField> {
+  includedServices: string[]
+  commonConcerns: string[]
+  helpfulTips: string[]
+  whenToCallProfessional: string[]
+  regulatedWorkNotes: string[]
+  assumptions: string[]
+}
+
+interface ServiceContentPlan {
+  commonApplications: string[]
+  overviewClosing: string
+  workFocus: string
+  professionalInsights: string[]
+  preparationDetails: string[]
+  specificFaqs: ServiceFAQ[]
+  capabilityAdditions?: string[]
+  projectScopeNotes?: string[]
+}
 
 const siteUrl = 'https://www.jbtradesmenllc.com'
 
 const serviceAreaCopy =
-  'JBTRADESMENLLC serves Las Vegas, Henderson, North Las Vegas, Summerlin, Enterprise, Spring Valley, Paradise, Southern Highlands, and nearby Las Vegas Valley communities. Scheduled dispatch service also remains available for select clients in Cheyenne, Wyoming, and Fort Collins, Colorado; availability and timing for those markets are coordinated in advance rather than represented as immediate local dispatch.'
+  'JBTRADESMENLLC serves Las Vegas, Henderson, North Las Vegas, Summerlin, Enterprise, Spring Valley, Paradise, Southern Highlands, and nearby Las Vegas Valley communities. Scheduled dispatch support remains available for select clients in Cheyenne, Wyoming, and Fort Collins, Colorado.'
 
 const primaryCTA = {
   label: 'Request an Estimate',
@@ -27,7 +56,7 @@ export function getServiceById(id: string) {
   )
 }
 
-export const serviceHubServices: ServiceHubService[] = [
+const serviceHubRecords: LegacyServiceRecord[] = [
   {
     id: 'commercial-maintenance',
     slug: 'commercial-maintenance-las-vegas',
@@ -1409,3 +1438,739 @@ export const serviceHubServices: ServiceHubService[] = [
     active: true,
   },
 ];
+
+const serviceContentPlans: Record<string, ServiceContentPlan> = {
+  'commercial-maintenance': {
+    commonApplications: [
+      'Retail and office punch lists',
+      'Property-management work orders',
+      'Tenant and common-area repairs',
+      'Preventative facility upkeep',
+      'Plumbing, lighting, ceiling, flooring, and finish repairs',
+      'Corporate and multi-location service requests',
+    ],
+    overviewClosing:
+      'Our technicians review the work order, inspect visible conditions, confirm access and materials, complete the approved repairs, test normal operation where applicable, and provide useful completion documentation. Combining related tasks during planned visits helps limit downtime and gives property teams a clearer maintenance record.',
+    workFocus: 'maintenance, repair, and inspection work',
+    professionalInsights: [
+      'Tracking recurring failures by asset, suite, or location helps distinguish an isolated repair from a pattern that deserves preventative attention.',
+      'Water-stained finishes should be connected to the moisture source before replacement; otherwise, a clean finish can become another repeat work order.',
+      'Before-and-after photos and concise completion notes give corporate and property-management teams a dependable record across multiple locations.',
+    ],
+    preparationDetails: [
+      'Share the work order, priority level, suite or asset location, and completion-documentation requirements.',
+      'Note parking, security, loading, after-hours, and tenant-access procedures.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can you help build a preventative maintenance list?',
+        answer: 'Yes. We can document visible conditions, recurring repair needs, and practical maintenance priorities for the property team to review and schedule.',
+      },
+    ],
+    capabilityAdditions: [
+      'Minor electrical and lighting repairs',
+      'HVAC diagnostics and minor maintenance',
+      'Work-order completion photos and notes',
+    ],
+  },
+  'commercial-handyman': {
+    commonApplications: [
+      'Multi-item commercial punch lists',
+      'Door, lock, and hardware repairs',
+      'Drywall, trim, and finish corrections',
+      'Shelving, fixture, and display mounting',
+      'Minor plumbing, electrical, and lighting repairs',
+      'Turnover and closeout work orders',
+    ],
+    overviewClosing:
+      'We organize the repair list by location and material, verify mounting and access conditions, and complete approved items in a practical sequence. This multi-trade approach is especially useful when a facility needs one accountable service visit for several everyday repairs instead of separate appointments for each item.',
+    workFocus: 'multi-item punch-list and handyman repairs',
+    professionalInsights: [
+      'A grouped punch list is most efficient when each item includes a location, photo, dimensions, and any required replacement finish or hardware standard.',
+      'Repeated door, hardware, or wall-mounting failures often point to worn components, inadequate backing, alignment problems, or heavy-use conditions that should be corrected with the repair.',
+    ],
+    preparationDetails: [
+      'Provide a room-by-room or suite-by-suite punch list with photos.',
+      'Share approved hardware, fixture, paint, shelving, or brand-standard information when available.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can minor plumbing and lighting items be included with the punch list?',
+        answer: 'Yes. JBTRADESMENLLC handles many minor fixture, faucet, device, and lighting repairs within the approved project scope and applicable requirements.',
+      },
+    ],
+    capabilityAdditions: [
+      'Minor plumbing repairs',
+      'Minor electrical and lighting repairs',
+    ],
+    projectScopeNotes: [
+      'Project scope may vary based on access, existing conditions, equipment compatibility, and applicable permit or jurisdictional requirements.',
+    ],
+  },
+  'facility-maintenance': {
+    commonApplications: [
+      'Planned preventative maintenance visits',
+      'Facility condition inspections',
+      'Work-order backlog reduction',
+      'Asset and service-interval tracking',
+      'Vendor access and repair coordination',
+      'Multi-site maintenance support',
+    ],
+    overviewClosing:
+      'JBTRADESMENLLC helps facility teams turn observations into organized action. We review priorities, coordinate access, complete approved maintenance and repairs, document results, and identify follow-up items. That process supports consistent operations and gives managers better information for planning work before a minor condition becomes an emergency request.',
+    workFocus: 'planned facility maintenance and prioritized repairs',
+    professionalInsights: [
+      'Separating urgent failures, recurring issues, manufacturer service intervals, and planned finish work creates a maintenance list that is easier to budget and schedule.',
+      'Repeat failures are easier to reduce when service records include the asset location, observed condition, prior repair, material used, and result after testing.',
+    ],
+    preparationDetails: [
+      'Share asset lists, prior service records, recurring work orders, and current facility priorities.',
+      'Identify shutdown, security, escort, and vendor-coordination requirements before scheduling.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can you support more than one facility?',
+        answer: 'Yes. We support multi-site and corporate maintenance programs with location-specific work orders, coordinated access, and consistent completion documentation.',
+      },
+    ],
+    capabilityAdditions: [
+      'HVAC filter, thermostat, and airflow observations',
+      'Minor electrical and lighting maintenance',
+    ],
+  },
+  'commercial-property-maintenance': {
+    commonApplications: [
+      'Property-management work orders',
+      'Common-area maintenance',
+      'Tenant turnovers and vacant-space repairs',
+      'Interior and exterior upkeep',
+      'Recurring service programs',
+      'Condition reports and completion photos',
+    ],
+    overviewClosing:
+      'Our team coordinates with property managers, tenants, and site contacts to review each work order, document existing conditions, complete approved repairs, and provide completion photos. Grouping related turnover, common-area, and exterior items creates a more organized service plan and reduces repeated access to occupied properties.',
+    workFocus: 'property-management, turnover, and common-area repairs',
+    professionalInsights: [
+      'Using consistent suite, unit, and common-area identifiers on every work order makes recurring conditions easier to track across a property.',
+      'Turnover inspections are most useful when functional repairs, finish work, material needs, and owner decisions are separated into clear priorities before scheduling.',
+    ],
+    preparationDetails: [
+      'Provide unit or suite numbers, occupancy status, access authorization, and desired completion documentation.',
+      'Share turnover standards and identify owner-supplied finishes or fixtures.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Do you provide completion photos for property-management work orders?',
+        answer: 'Yes. Completion photos and concise notes can be included so property managers and owners have a clear record of the approved work.',
+      },
+    ],
+  },
+  'retail-maintenance': {
+    commonApplications: [
+      'Customer-facing wall and paint repairs',
+      'Store fixture and shelving service',
+      'Door and hardware maintenance',
+      'Flooring transition and ceiling tile repairs',
+      'Plumbing-fixture maintenance',
+      'After-hours punch lists and store refreshes',
+    ],
+    overviewClosing:
+      'We coordinate with store and facility contacts to understand brand standards, customer traffic, approved work hours, and protection requirements. Repairs are sequenced to control the work area, limit disruption, and leave the store clean, secure, and ready for normal use with completion documentation when requested.',
+    workFocus: 'customer-facing retail maintenance and repairs',
+    professionalInsights: [
+      'Matching paint, ceiling tile, flooring, and hardware is faster and more reliable when brand specifications or attic-stock materials are identified before the visit.',
+      'High-traffic doors, flooring transitions, fixtures, and wall corners often show recurring wear first; tracking those locations helps plan preventative attention.',
+    ],
+    preparationDetails: [
+      'Share brand standards, approved materials, blackout dates, and store operating hours.',
+      'Identify merchandise protection, loading access, security, and work-area requirements.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can work be coordinated outside peak retail hours?',
+        answer: 'Yes. When site access allows, we coordinate scheduling with the store or facility contact to reduce disruption during customer-facing hours.',
+      },
+    ],
+  },
+  'office-maintenance': {
+    commonApplications: [
+      'Door and hardware repairs',
+      'Drywall, paint, and ceiling-system work',
+      'Lighting and plumbing-fixture replacement',
+      'Wall mounting and furniture support',
+      'Break-room repairs',
+      'Office refreshes and tenant turnovers',
+    ],
+    overviewClosing:
+      'JBTRADESMENLLC plans office work around occupied rooms, meetings, noise-sensitive areas, and building access. We document the condition, confirm the repair and finish plan, complete approved work, test normal function where applicable, clean the work area, and communicate any useful maintenance follow-up to the office or property contact.',
+    workFocus: 'office repairs, fixture work, and finish improvements',
+    professionalInsights: [
+      'Door alignment, ceiling staining, wall cracks, and repeated fixture issues can reveal patterns that are easy to miss when every request is handled as an isolated cosmetic item.',
+      'Grouping noisy preparation work separately from finish, fixture, and cleanup tasks helps reduce disruption in occupied offices.',
+    ],
+    preparationDetails: [
+      'Identify occupied rooms, quiet hours, building access, and any confidential or restricted areas.',
+      'Provide paint, ceiling tile, hardware, lighting, or fixture information when matching is important.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can you complete lighting, plumbing-fixture, and wall repairs during one visit?',
+        answer: 'Yes. Multi-item office work orders can combine many minor lighting, fixture, drywall, hardware, and mounting repairs into one coordinated visit.',
+      },
+    ],
+    capabilityAdditions: ['Minor electrical and lighting repairs'],
+    projectScopeNotes: [
+      'Tenant-improvement scope may vary based on building requirements, existing conditions, and applicable permit or jurisdictional requirements.',
+    ],
+  },
+  'commercial-plumbing': {
+    commonApplications: [
+      'Faucet and toilet repairs',
+      'Shutoff-valve replacement',
+      'Visible localized leak diagnosis',
+      'Water filtration and hose-bib service',
+      'Water-heater maintenance',
+      'Commercial ice and water equipment maintenance',
+    ],
+    overviewClosing:
+      'Our technicians review the reported symptom, inspect accessible fixtures and connections, plan any required shutdown with the site contact, confirm parts, complete the approved repair, restore service, and test normal operation. Photos and completion notes help facility teams understand what was corrected and what should be monitored.',
+    workFocus: 'commercial fixture, valve, leak, and water-equipment repairs',
+    professionalInsights: [
+      'Recurring fixture leaks are often connected to worn shutoff valves, corrosion, pressure conditions, or repeated repairs to aging components; evaluating nearby connections helps prevent repeat calls.',
+      'A planned shutdown is more effective when the affected branch, occupied areas, replacement parts, and authorized building contact are confirmed before work begins.',
+    ],
+    preparationDetails: [
+      'Share fixture photos, model information, the exact leak location, and whether the condition is constant or intermittent.',
+      'Identify the building contact authorized to coordinate water access or shutdowns.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Do you test the fixture after the repair?',
+        answer: 'Yes. After restoring service, we test normal fixture operation and inspect accessible connections for leakage within the completed scope.',
+      },
+    ],
+    capabilityAdditions: ['Commercial ice and water equipment maintenance'],
+    projectScopeNotes: [
+      'Project scope may vary based on access, shutdown requirements, concealed piping, permits, and jurisdictional requirements.',
+    ],
+  },
+  'commercial-repairs': {
+    commonApplications: [
+      'Corrective work-order response',
+      'Door, wall, and ceiling repairs',
+      'Flooring and fixture damage',
+      'Minor exterior repairs',
+      'Water-damaged finish restoration',
+      'Repair documentation and completion photos',
+    ],
+    overviewClosing:
+      'We evaluate the visible damage, identify the likely cause, confirm materials and access, and sequence the approved repair so underlying corrections come before finish restoration. After completion, the work area is cleaned and the result can be documented for the owner, manager, tenant, or corporate account.',
+    workFocus: 'multi-trade corrective repairs and finish restoration',
+    professionalInsights: [
+      'The shape, location, and recurrence of damage often indicate whether a repair is simple wear, impact, movement, or a moisture-related condition.',
+      'Preserving product labels, paint information, ceiling samples, and flooring specifications can significantly improve finish matching on future repairs.',
+    ],
+    preparationDetails: [
+      'Share photos showing both the damaged item and the surrounding area.',
+      'Provide prior repair history, finish information, and the operational impact of the condition.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can several types of damage be repaired during the same visit?',
+        answer: 'Yes. We routinely organize multi-trade commercial repair lists involving walls, doors, ceilings, flooring, hardware, and fixtures.',
+      },
+    ],
+  },
+  'commercial-remodeling': {
+    commonApplications: [
+      'Tenant improvements',
+      'Office and suite refreshes',
+      'Retail finish improvements',
+      'Drywall, paint, flooring, and door updates',
+      'Break-room and restroom finish improvements',
+      'Phased occupied-space remodeling',
+    ],
+    overviewClosing:
+      'JBTRADESMENLLC develops the project around the approved finish scope, existing conditions, material selections, access, and business operations. We coordinate phases, protect occupied areas, complete approved demolition and installation work, manage finish details, and keep the customer informed when field conditions affect the next practical step.',
+    workFocus: 'commercial remodeling and tenant-improvement phases',
+    professionalInsights: [
+      'Material lead times, demolition limits, substrate condition, dust control, and occupied-area access often influence the schedule as much as the finish installation itself.',
+      'Confirming who approves selections and field changes before work begins keeps phased office and retail improvements moving without unnecessary delays.',
+    ],
+    preparationDetails: [
+      'Share the desired layout or finish changes, operating priorities, building rules, and target phasing.',
+      'Identify selected flooring, paint, doors, fixtures, cabinetry, counters, and other owner decisions.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can remodeling be phased around business operations?',
+        answer: 'Yes. We can organize approved work into practical phases based on access, material availability, occupied areas, and operational priorities.',
+      },
+    ],
+    projectScopeNotes: [
+      'Plans, permits, accessibility requirements, specialty trades, material lead times, and jurisdictional review may affect final scope and scheduling.',
+    ],
+  },
+  'ceiling-tile-replacement': {
+    commonApplications: [
+      'Stained or damaged acoustical tiles',
+      'Tile identification and pattern matching',
+      'Perimeter and fixture cutouts',
+      'Minor grid observations',
+      'High-access ceiling work',
+      'Occupied office, retail, bank, and facility coordination',
+    ],
+    overviewClosing:
+      'Our technicians identify the tile size, face pattern, thickness, edge profile, and available manufacturer markings; inspect the surrounding grid and stain source; plan safe access; cut and fit approved replacement tiles; and clean the area. The result is a more accurate match and a better record for future maintenance.',
+    workFocus: 'ceiling tile identification, fitting, and replacement',
+    professionalInsights: [
+      'Ceiling stains often provide the first visible sign of a roof leak, plumbing leak, or HVAC condensation issue. Documenting the source and grid condition helps prevent repeat damage.',
+      'Tiles with the same dimensions may still differ in pattern, thickness, edge profile, acoustic properties, and manufacturer availability, so an intact sample or product label is valuable.',
+    ],
+    preparationDetails: [
+      'Share photos of the tile face, edge, back markings, surrounding grid, and any stain pattern.',
+      'Identify ceiling height, occupied-area restrictions, attic stock, and prior leak or HVAC history.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can you match an existing ceiling tile?',
+        answer: 'We document the size, pattern, thickness, edge profile, and manufacturer markings to locate the closest available match. Exact availability depends on the existing product and current supply.',
+      },
+      {
+        question: 'Can tiles be cut around lights and diffusers?',
+        answer: 'Yes. Approved replacement tiles can be measured and cut around existing fixtures and diffusers as part of the replacement scope.',
+      },
+    ],
+    projectScopeNotes: [
+      'High-access, rated ceiling, specialty fixture, or suspect material conditions may affect the final service approach.',
+    ],
+  },
+  handyman: {
+    commonApplications: [
+      'Room-by-room home repair lists',
+      'Door, trim, drywall, and hardware repairs',
+      'Shelving, TV, and accessory mounting',
+      'Caulking and finish maintenance',
+      'Minor plumbing and lighting repairs',
+      'Move-in, turnover, and routine maintenance punch lists',
+    ],
+    overviewClosing:
+      'Our technicians review the repair list, inspect each accessible condition, confirm materials and mounting requirements, and organize the approved work in a practical sequence. After repairs are completed, we check normal function, clean the work areas, and review any maintenance recommendations that will help the homeowner plan the next step.',
+    workFocus: 'handyman repairs, mounting, and maintenance items',
+    professionalInsights: [
+      'A door that repeatedly drags, loose shelving, or recurring wall damage often has an alignment, backing, hardware, or heavy-use cause that should be corrected with the visible repair.',
+      'Grouping related tasks by room and material helps complete more of a household repair list efficiently while keeping the work organized.',
+    ],
+    preparationDetails: [
+      'Share a room-by-room list with photos, dimensions, and priority items.',
+      'Provide replacement fixtures, hardware, paint, shelving, or mounting equipment information when available.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can minor plumbing and lighting repairs be included?',
+        answer: 'Yes. JBTRADESMENLLC handles many minor faucet, fixture, device, and lighting repairs within the approved project scope and applicable requirements.',
+      },
+    ],
+    capabilityAdditions: ['Minor plumbing repairs', 'Minor electrical and lighting repairs'],
+    projectScopeNotes: [
+      'Project scope may vary based on access, wall construction, existing conditions, product compatibility, and applicable requirements.',
+    ],
+  },
+  'home-repairs': {
+    commonApplications: [
+      'Everyday wear-and-tear repairs',
+      'Door, window, and trim correction',
+      'Wall and ceiling damage',
+      'Flooring and transition repairs',
+      'Fixture and hardware replacement',
+      'Move-in, sale, and rental-turnover punch lists',
+    ],
+    overviewClosing:
+      'JBTRADESMENLLC evaluates the damaged item and surrounding area, identifies the likely cause, confirms the material and finish plan, completes the approved repair, and checks normal use. Coordinating adjacent work—such as trim, wall, paint, and flooring details—helps create a complete result instead of leaving disconnected finish items behind.',
+    workFocus: 'home repairs and coordinated finish restoration',
+    professionalInsights: [
+      'Crack pattern, door movement, staining, and repeated finish damage can provide useful clues about whether the condition is normal wear, impact, moisture, or movement.',
+      'Keeping paint colors, flooring labels, trim profiles, and hardware information makes future matching and turnover repairs more accurate.',
+    ],
+    preparationDetails: [
+      'Share photos of the damaged item and the surrounding wall, floor, door, or window.',
+      'Note when the condition appeared, any previous repair, and available finish information.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can several home repairs be grouped into one project?',
+        answer: 'Yes. We can review a combined repair list and organize compatible wall, door, trim, flooring, fixture, and finish items into an efficient scope.',
+      },
+    ],
+  },
+  'property-maintenance': {
+    commonApplications: [
+      'Rental-property turnovers',
+      'Seasonal home checks',
+      'Door, window, and exterior caulking maintenance',
+      'Filter, plumbing-fixture, and water-heater observations',
+      'Interior finish and hardware repairs',
+      'Maintenance records and recurring service lists',
+    ],
+    overviewClosing:
+      'Our technicians review the property’s maintenance history and current priorities, inspect visible and accessible conditions, complete approved upkeep and repairs, and document follow-up items. A consistent record of filters, fixtures, sealants, water concerns, finish repairs, and equipment models helps owners and managers plan preventative work with fewer surprises.',
+    workFocus: 'seasonal, turnover, and preventative property maintenance',
+    professionalInsights: [
+      'Recurring stains, failed caulking, changing door alignment, and repeated fixture issues are easier to manage when dates, locations, and prior repairs are documented.',
+      'Manufacturer guidance and actual property conditions are more useful than applying one maintenance interval to every filter, fixture, or appliance.',
+    ],
+    preparationDetails: [
+      'Share maintenance history, equipment models, turnover standards, and current priority items.',
+      'Identify recurring leaks, stains, seasonal changes, or areas that have received previous repairs.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can you help organize a recurring maintenance list?',
+        answer: 'Yes. We can document visible conditions and completed work so owners and property managers can build a practical recurring maintenance schedule.',
+      },
+    ],
+    capabilityAdditions: [
+      'Minor plumbing and lighting maintenance',
+      'HVAC filter, thermostat, and airflow observations',
+    ],
+  },
+  'water-heater-replacement': {
+    commonApplications: [
+      'Failed or leaking tank water heaters',
+      'No-hot-water complaints',
+      'Capacity or location changes',
+      'Expansion-tank and drain-pan replacement',
+      'Shutoff-valve and connection upgrades',
+      'Access, removal, drainage, and replacement planning',
+    ],
+    overviewClosing:
+      'We document the existing unit, fuel type, capacity, access path, pan, drainage, expansion control, shutoff, and visible connections before confirming the replacement approach. During approved service, the team coordinates removal and installation, checks accessible connections, restores the system, tests normal operation, cleans the area, and reviews the new equipment information with the customer.',
+    workFocus: 'water-heater removal, replacement, connection, and testing',
+    professionalInsights: [
+      'Tank capacity, fuel type, access, drainage, expansion control, and connection condition all influence replacement planning and equipment selection.',
+      'Photographing the rating label, full installation area, pan, piping, venting, and access path before the visit helps reduce unexpected material and handling changes.',
+    ],
+    preparationDetails: [
+      'Share photos of the full installation, model and rating labels, connections, pan, and access path.',
+      'Note whether the issue is leakage, no hot water, temperature change, sound, or planned replacement.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Does tank size affect installation?',
+        answer: 'Yes. Capacity and physical dimensions affect equipment selection, available clearances, connections, access, handling, and the replacement plan.',
+      },
+      {
+        question: 'Can access affect the replacement scope?',
+        answer: 'Yes. Stairs, narrow doors, closets, platforms, finished floors, and limited drainage access can change removal and installation planning.',
+      },
+    ],
+    projectScopeNotes: [
+      'Final scope may vary based on fuel type, connections, access, equipment compatibility, permits, and jurisdictional requirements.',
+    ],
+  },
+  'drywall-repair': {
+    commonApplications: [
+      'Impact holes and anchor damage',
+      'Cracks and seam repairs',
+      'Wall and ceiling patches',
+      'Access-opening closure',
+      'Water-damaged drywall after source correction',
+      'Texture, primer, and paint restoration',
+    ],
+    overviewClosing:
+      'Our technicians evaluate the damage type, patch size, wall or ceiling location, moisture history, texture, and surrounding paint. We protect the work area, remove loose material, build the approved repair, blend texture, prime and paint as scoped, control dust, and leave the area clean. The finish plan is discussed before work begins so expectations are clear.',
+    workFocus: 'drywall patching, texture blending, and finish restoration',
+    professionalInsights: [
+      'Crack shape and location matter. Straight seams, corner cracks, impact damage, fastener movement, and moisture deterioration each call for a different repair and finish plan.',
+      'Texture matching is influenced by pattern, application method, lighting, paint sheen, and the age of the surrounding finish—not only the patch itself.',
+    ],
+    preparationDetails: [
+      'Share photos in normal room lighting and note whether the damage has changed over time.',
+      'Provide matching paint information and describe any prior moisture source or repair.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Can you match the existing wall or ceiling texture?',
+        answer: 'We evaluate the existing pattern and use the most practical blending method for the approved repair. Lighting and finish age can affect how closely any local repair matches.',
+      },
+    ],
+    projectScopeNotes: [
+      'Moisture sources and any suspect material conditions should be addressed before drywall is closed or disturbed.',
+    ],
+  },
+  'interior-painting': {
+    commonApplications: [
+      'Wall and ceiling repainting',
+      'Trim, baseboard, and door painting',
+      'Color and sheen changes',
+      'Patch and touch-up coordination',
+      'Occupied-home protection',
+      'Vacant property and turnover painting',
+    ],
+    overviewClosing:
+      'JBTRADESMENLLC reviews the rooms, surfaces, existing finish, patching needs, colors, sheen, and protection plan before work begins. We prepare approved surfaces, protect floors and fixtures, complete the specified coats and finish details, maintain an orderly work area, and clean up after completion. Labeled product information is retained when available for future touch-ups.',
+    workFocus: 'surface preparation and interior painting',
+    professionalInsights: [
+      'Surface preparation has a direct effect on the finish. Patches, adhesion problems, stains, gloss, and damaged caulking should be addressed before the final coats.',
+      'The same color can appear different across walls, ceilings, natural light, and artificial light, so confirming both color and sheen is important.',
+    ],
+    preparationDetails: [
+      'Share room photos, desired colors and sheen, and any known existing paint information.',
+      'Identify furniture, wall-mounted items, occupied-room needs, and areas requiring special protection.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Do you handle patching before painting?',
+        answer: 'Yes. Minor patching and surface preparation can be included so the approved walls or ceilings are ready for the planned finish.',
+      },
+    ],
+    projectScopeNotes: [
+      'Existing coating condition, moisture, unusual substrates, and material compatibility may affect the preparation plan.',
+    ],
+  },
+  'flooring-installation': {
+    commonApplications: [
+      'LVP and laminate installation',
+      'Existing flooring removal',
+      'Room measurement and material planning',
+      'Subfloor observations',
+      'Transitions and door clearances',
+      'Baseboard, quarter-round, and appliance-area details',
+    ],
+    overviewClosing:
+      'Our technicians verify the product, room measurements, layout, substrate observations, moisture considerations, transitions, door clearances, appliances, and trim plan. We complete approved removal and preparation, install according to product requirements, finish transitions and perimeter details, clean the area, and review care information supplied for the selected flooring.',
+    workFocus: 'flooring removal, preparation, installation, and finish details',
+    professionalInsights: [
+      'Subfloor condition, room transitions, appliance clearance, moisture, and baseboard details often have as much impact on the finished installation as the flooring product itself.',
+      'Product number, lot information, acclimation instructions, expansion requirements, underlayment, and matching trim should be confirmed before installation day.',
+    ],
+    preparationDetails: [
+      'Provide the exact flooring product, manufacturer instructions, room measurements, and matching trim information.',
+      'Identify furniture, appliances, door-clearance concerns, transitions, and any known moisture history.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Do you inspect the subfloor during the project?',
+        answer: 'We inspect visible and accessible substrate conditions during the approved scope and discuss practical preparation or repair needs before covering the area.',
+      },
+    ],
+    projectScopeNotes: [
+      'Final scope may vary based on product requirements, substrate condition, moisture, removal materials, transitions, and structural repairs.',
+    ],
+  },
+  'tv-mounting': {
+    commonApplications: [
+      'Fixed and full-motion TV mounting',
+      'Viewing-height and alignment planning',
+      'Bracket compatibility review',
+      'Stud and wall-construction evaluation',
+      'Soundbar and accessory mounting',
+      'Residential and commercial display installation',
+    ],
+    overviewClosing:
+      'We confirm the display model and weight, bracket rating, mounting pattern, wall construction, support location, viewing height, and accessory plan before installation. The team mounts and aligns the approved equipment, checks bracket movement and final stability, cleans the work area, and reviews the completed position with the customer.',
+    workFocus: 'display, bracket, and soundbar mounting',
+    professionalInsights: [
+      'Display weight, bracket leverage, stud location, wall material, and existing backing determine the mounting approach more than screen size alone.',
+      'Planning viewing height, furniture placement, soundbar position, and cable appearance together produces a cleaner alignment than treating each item separately.',
+    ],
+    preparationDetails: [
+      'Share the TV and bracket model numbers, display weight, wall photo, and preferred viewing position.',
+      'Identify soundbars, accessories, furniture, prior mounts, and desired cable appearance.',
+    ],
+    specificFaqs: [
+      {
+        question: 'How do you determine the mounting height?',
+        answer: 'We consider the primary seating position, screen size, furniture, room use, bracket type, and customer preference before confirming the final height.',
+      },
+    ],
+    projectScopeNotes: [
+      'Mounting approach depends on verified wall construction, available support, equipment compatibility, and any concealed cable or electrical scope.',
+    ],
+  },
+  'plumbing-repair': {
+    commonApplications: [
+      'Faucet and toilet repairs',
+      'Shutoff-valve and hose-bib replacement',
+      'Visible localized leak diagnosis',
+      'Water filtration service',
+      'Fixture and garbage-disposal replacement',
+      'Water-heater connection maintenance',
+    ],
+    overviewClosing:
+      'Our technicians discuss the symptom, inspect accessible fixtures and connections, identify the likely source, confirm parts and shutoff access, complete the approved repair, restore service, and test normal operation. We also review the surrounding cabinet, wall, or floor for visible moisture concerns and explain useful maintenance observations before leaving.',
+    workFocus: 'residential fixture, valve, leak, and connection repairs',
+    professionalInsights: [
+      'A recurring faucet, toilet, or connection leak may involve worn components, corrosion, movement, pressure conditions, or a shutoff valve that should be addressed with the visible repair.',
+      'Knowing the location and condition of the main and local shutoffs supports faster diagnosis and more predictable fixture service.',
+    ],
+    preparationDetails: [
+      'Share photos of the fixture, visible connections, surrounding moisture, and any model information.',
+      'Note when the issue occurs, prior repairs, and the location of available water shutoffs.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Will you test the repair before completing service?',
+        answer: 'Yes. After restoring water service, we test normal operation and inspect accessible completed connections for leakage.',
+      },
+    ],
+    projectScopeNotes: [
+      'Scope may vary when the source involves concealed piping, slab conditions, sewer or major drain work, gas systems, permits, or jurisdictional requirements.',
+    ],
+  },
+  'appliance-repair': {
+    commonApplications: [
+      'Appliance diagnostics and condition assessment',
+      'Model, serial number, and error-code review',
+      'Water-filter and garbage-disposal service',
+      'Dishwasher installation support',
+      'Washer and dryer installation support',
+      'Refrigerator water-line, filter, and commercial ice-machine maintenance',
+    ],
+    overviewClosing:
+      'We review the reported symptom, model and serial information, error codes, access, utilities, and visible connections before confirming the service approach. For approved work, the technician completes accessible diagnostics, maintenance, connection, filter, disposal, or installation support; checks normal operation where applicable; cleans the area; and explains parts or follow-up needs.',
+    workFocus: 'appliance diagnostics, maintenance, and installation support',
+    professionalInsights: [
+      'Model and serial numbers, error-code timing, utility condition, and a clear description of when the symptom occurs can narrow the diagnostic path before parts are ordered.',
+      'Appliance performance concerns are sometimes connected to access, filters, drains, water connections, venting, or installation conditions rather than an internal component alone.',
+    ],
+    preparationDetails: [
+      'Share the model and serial numbers, photos, error codes, and a description of when the problem occurs.',
+      'Clear reasonable access and identify recent installation, outage, filter, utility, or connection changes.',
+    ],
+    specificFaqs: [
+      {
+        question: 'Do you service every appliance brand and sealed refrigeration system?',
+        answer: 'Service depends on the appliance, symptoms, access, parts, and manufacturer requirements. We confirm whether the request fits our diagnostic, maintenance, or installation-support capabilities before scheduling the final scope.',
+      },
+    ],
+    projectScopeNotes: [
+      'Factory-authorized, gas, electrical, sealed refrigeration, refrigerant, and manufacturer-specific work may affect the appropriate service approach.',
+    ],
+  },
+}
+
+const commercialProcess = (workFocus: string) => [
+  'Review the work order, site requirements, priorities, and requested documentation.',
+  'Coordinate access and inspect visible conditions with the site contact.',
+  'Confirm the approved scope, materials, equipment, and work-area plan.',
+  `Complete the approved ${workFocus}.`,
+  'Test normal operation or review the completed finish where applicable.',
+  'Clean the work area and provide completion notes or photos as requested.',
+]
+
+const residentialProcess = (workFocus: string) => [
+  'Discuss the issue, project goals, prior repairs, and available product information.',
+  'Inspect visible and accessible conditions at the work area.',
+  'Confirm the approved repair option, materials, and preparation needs.',
+  `Complete the approved ${workFocus}.`,
+  'Test normal operation or review the completed finish where applicable.',
+  'Clean the work area and explain useful maintenance recommendations.',
+]
+
+const commercialPreparation = [
+  'Share photos of the affected area and note whether the condition is constant, intermittent, or recurring.',
+  'Provide the location, site contact, work-order number, and priority.',
+  'Identify access, parking, security, loading, tenant, or after-hours requirements.',
+  'Provide model numbers, finish standards, or prior repair information when applicable.',
+]
+
+const residentialPreparation = [
+  'Share photos of the affected area and note whether the condition is constant, intermittent, or recurring.',
+  'Provide model, serial, paint, flooring, tile, fixture, or hardware information when applicable.',
+  'Clear reasonable access to the work area without dismantling equipment or systems.',
+  'Identify previous repairs, recent changes, and the result you want to achieve.',
+]
+
+function buildFaqs(record: LegacyServiceRecord, plan: ServiceContentPlan): ServiceFAQ[] {
+  const shared = record.audience === 'commercial'
+    ? [
+        {
+          question: 'Can you handle multiple repairs during one visit?',
+          answer: 'Yes. We can review a multi-item work order, group compatible tasks, and confirm the most practical sequence for the approved visit.',
+        },
+        {
+          question: 'Do you work with property managers and corporate accounts?',
+          answer: 'Yes. JBTRADESMENLLC supports property managers, facility teams, commercial accounts, and multi-location work orders with coordinated access and documentation.',
+        },
+        {
+          question: 'Can service be coordinated around business operations?',
+          answer: 'Yes. We review operating hours, tenant activity, access, noise, work-area control, and site requirements when planning the service approach.',
+        },
+      ]
+    : [
+        {
+          question: 'What information helps before scheduling?',
+          answer: 'Photos, the exact location, model or material information, prior repair history, and a clear description of the desired result help us prepare.',
+        },
+        {
+          question: `Can more than one ${record.shortTitle.toLowerCase()} item be reviewed?`,
+          answer: 'Yes. Share the complete list so we can group compatible items and confirm the practical scope, materials, and visit plan.',
+        },
+        {
+          question: 'What happens after the work is approved?',
+          answer: 'We confirm the repair approach, complete the approved work, test normal function or review the finish, clean the area, and discuss useful follow-up recommendations.',
+        },
+      ]
+
+  return [...shared, ...plan.specificFaqs].slice(0, 5)
+}
+
+function confidentCapabilities(record: LegacyServiceRecord, plan: ServiceContentPlan) {
+  const existing = record.includedServices.map((item) =>
+    item
+      .replace(/^Accessible /, '')
+      .replace(/^Selected /, '')
+      .replace(/ where appropriate$/, ''),
+  )
+
+  return [...new Set([...existing, ...(plan.capabilityAdditions ?? [])])].slice(0, 12)
+}
+
+function buildOverview(record: LegacyServiceRecord, plan: ServiceContentPlan) {
+  const process = record.audience === 'commercial'
+    ? 'Commercial service begins with the work order, operating priorities, and site requirements. Our technicians inspect visible conditions, identify the likely cause, confirm access and material needs, complete the approved work, test normal operation where applicable, and document additional concerns. The goal is a practical repair that supports reliability, presentation, and daily property operation—not simply a temporary cosmetic response.'
+    : 'Residential service begins with a clear discussion of the issue, the desired result, and any prior repairs. Our technicians inspect visible and accessible conditions, identify the likely cause, confirm materials and repair options, complete the approved work, test normal operation where applicable, and review useful maintenance recommendations. This organized approach helps homeowners understand what was addressed and how the completed repair supports everyday use of the property.'
+
+  return [record.overview[0], process, plan.overviewClosing]
+}
+
+export const serviceHubServices: ServiceHubService[] = serviceHubRecords.map((record) => {
+  const plan = serviceContentPlans[record.id]
+  if (!plan) throw new Error(`Missing service content plan for ${record.id}`)
+
+  const {
+    includedServices: _includedServices,
+    commonConcerns: _commonConcerns,
+    helpfulTips: _helpfulTips,
+    whenToCallProfessional: _whenToCallProfessional,
+    regulatedWorkNotes: _regulatedWorkNotes,
+    assumptions: _assumptions,
+    ...service
+  } = record
+  void [
+    _includedServices,
+    _commonConcerns,
+    _helpfulTips,
+    _whenToCallProfessional,
+    _regulatedWorkNotes,
+    _assumptions,
+  ]
+
+  return {
+    ...service,
+    overview: buildOverview(record, plan),
+    whatWeDo: confidentCapabilities(record, plan),
+    commonApplications: plan.commonApplications,
+    whatToExpect: record.audience === 'commercial'
+      ? commercialProcess(plan.workFocus)
+      : residentialProcess(plan.workFocus),
+    professionalInsights: plan.professionalInsights,
+    preparationTips: [
+      ...(record.audience === 'commercial' ? commercialPreparation : residentialPreparation),
+      ...plan.preparationDetails,
+    ],
+    faqs: buildFaqs(record, plan),
+    projectScopeNotes: plan.projectScopeNotes ?? [],
+  }
+})

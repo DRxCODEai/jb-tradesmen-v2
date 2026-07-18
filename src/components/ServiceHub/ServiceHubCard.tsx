@@ -13,7 +13,7 @@ export default function ServiceHubCard({ service }: ServiceHubCardProps) {
       <h3>{service.title}</h3>
       <p className="service-hub-card__copy">{service.heroDescription}</p>
       <ul aria-label={`${service.title} examples`}>
-        {service.includedServices.slice(0, 3).map((item) => (
+        {service.whatWeDo.slice(0, 3).map((item) => (
           <li key={item}>
             <Check size={17} aria-hidden="true" />
             <span>{item}</span>

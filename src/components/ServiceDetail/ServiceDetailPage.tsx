@@ -1,8 +1,9 @@
-import { ArrowRight, Check, ChevronRight, MapPin, Phone, TriangleAlert } from 'lucide-react'
+import { ArrowRight, Check, ChevronRight, Lightbulb, MapPin, Phone } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { KOALENDAR_URL } from '../../config/links'
 import { getServiceById } from '../../data/serviceHubServices'
 import type { ServiceHubService } from '../../types/serviceHub'
+import ServiceFAQ from './ServiceFAQ'
 import ServiceStructuredData from './ServiceStructuredData'
 import './ServiceDetailPage.css'
 
@@ -45,6 +46,9 @@ export default function ServiceDetailPage({ service }: ServiceDetailPageProps) {
           <p className="service-detail__eyebrow">{service.eyebrow}</p>
           <h1>{service.heroHeading}</h1>
           <p className="service-detail__hero-copy">{service.heroDescription}</p>
+          <p className="service-detail__credentials">
+            Licensed &amp; Insured · OSHA 30 Certified · EPA 608 &amp; 609 Certified · Federal Contractor
+          </p>
           <div className="service-detail__actions">
             <Link className="service-detail__button service-detail__button--gold" to={service.primaryCTA.route}>
               {service.primaryCTA.label} <ArrowRight size={18} aria-hidden="true" />
@@ -67,53 +71,71 @@ export default function ServiceDetailPage({ service }: ServiceDetailPageProps) {
           </div>
         </section>
 
-        <section className="service-detail__lists" aria-label={`${service.title} scope and concerns`}>
+        <section className="service-detail__lists" aria-label={`${service.title} capabilities and applications`}>
           <div className="service-detail__container service-detail__two-column">
             <section className="service-detail__panel" aria-labelledby="included-services-heading">
-              <p className="service-detail__eyebrow">Typical scope</p>
-              <h2 id="included-services-heading">Services Commonly Included</h2>
-              <DetailList items={service.includedServices} />
+              <p className="service-detail__eyebrow">Service capabilities</p>
+              <h2 id="included-services-heading">What We Do</h2>
+              <DetailList items={service.whatWeDo} />
             </section>
             <section className="service-detail__panel" aria-labelledby="common-concerns-heading">
-              <p className="service-detail__eyebrow">Planning concerns</p>
-              <h2 id="common-concerns-heading">Common Problems or Project Needs</h2>
-              <DetailList items={service.commonConcerns} />
+              <p className="service-detail__eyebrow">Where we help</p>
+              <h2 id="common-concerns-heading">Common Applications</h2>
+              <DetailList items={service.commonApplications} />
             </section>
+          </div>
+        </section>
+
+        <section className="service-detail__expectations" aria-labelledby="service-expectations-heading">
+          <div className="service-detail__container">
+            <header className="service-detail__section-heading">
+              <p className="service-detail__eyebrow">Our service process</p>
+              <h2 id="service-expectations-heading">What to Expect During Service</h2>
+            </header>
+            <ol className="service-detail__process-grid">
+              {service.whatToExpect.map((step, index) => (
+                <li key={step}>
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                  <p>{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section className="service-detail__professional" aria-labelledby="professional-insight-heading">
+          <div className="service-detail__container">
+            <header className="service-detail__section-heading">
+              <p className="service-detail__eyebrow">Field knowledge</p>
+              <h2 id="professional-insight-heading">Professional Insight</h2>
+            </header>
+            <div className="service-detail__insight-grid">
+              {service.professionalInsights.map((insight) => (
+                <article key={insight}>
+                  <Lightbulb size={24} aria-hidden="true" />
+                  <p>{insight}</p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="service-detail__tips" aria-labelledby="helpful-tips-heading">
           <div className="service-detail__container">
             <header className="service-detail__section-heading">
-              <p className="service-detail__eyebrow">Helpful knowledge</p>
-              <h2 id="helpful-tips-heading">Practical Tips Before Service</h2>
-              <p>Use these points to document the condition and prepare for a more focused service conversation.</p>
+              <p className="service-detail__eyebrow">Prepare for the visit</p>
+              <h2 id="helpful-tips-heading">Helpful Preparation Tips</h2>
+              <p>A little project information helps our team prepare materials, access, and the most practical service approach.</p>
             </header>
             <ol className="service-detail__tip-grid">
-              {service.helpfulTips.map((tip, index) => (
+              {service.preparationTips.map((tip, index) => (
                 <li key={tip}><span>{String(index + 1).padStart(2, '0')}</span><p>{tip}</p></li>
               ))}
             </ol>
           </div>
         </section>
 
-        <section className="service-detail__professional" aria-labelledby="professional-service-heading">
-          <div className="service-detail__container service-detail__professional-grid">
-            <div>
-              <p className="service-detail__eyebrow">Professional review</p>
-              <h2 id="professional-service-heading">When Professional Service Is Recommended</h2>
-              <DetailList items={service.whenToCallProfessional} />
-            </div>
-            <aside className="service-detail__notice" aria-label="Scope and safety notes">
-              <TriangleAlert size={25} aria-hidden="true" />
-              <div>
-                <h3>Scope &amp; Safety Notes</h3>
-                {service.regulatedWorkNotes.map((note) => <p key={note}>{note}</p>)}
-                {service.assumptions.map((assumption) => <p key={assumption}>{assumption}</p>)}
-              </div>
-            </aside>
-          </div>
-        </section>
+        <ServiceFAQ serviceName={service.title} faqs={service.faqs} />
 
         <section className="service-detail__related" aria-labelledby="related-services-heading">
           <div className="service-detail__container">
@@ -160,6 +182,15 @@ export default function ServiceDetailPage({ service }: ServiceDetailPageProps) {
           </div>
         </div>
       </section>
+
+      {service.projectScopeNotes.length > 0 && (
+        <aside className="service-detail__scope-notes" aria-labelledby="project-scope-notes-heading">
+          <div className="service-detail__container service-detail__narrow">
+            <h2 id="project-scope-notes-heading">Project Scope Notes</h2>
+            {service.projectScopeNotes.map((note) => <p key={note}>{note}</p>)}
+          </div>
+        </aside>
+      )}
     </div>
   )
 }

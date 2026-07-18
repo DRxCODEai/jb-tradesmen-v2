@@ -83,6 +83,15 @@
   line-height: 1.8;
 }
 
+.service-detail__credentials {
+  margin: 22px 0 0;
+  color: #d4af37;
+  font-size: 0.86rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+}
+
 .service-detail__actions {
   display: flex;
   flex-wrap: wrap;
@@ -135,9 +144,12 @@
 .service-detail__overview h2,
 .service-detail__panel h2,
 .service-detail__section-heading h2,
+.service-detail__expectations h2,
 .service-detail__professional h2,
+.service-detail__faq h2,
 .service-detail__area h2,
-.service-detail__cta h2 {
+.service-detail__cta h2,
+.service-detail__scope-notes h2 {
   margin: 0;
   font-size: clamp(2rem, 4vw, 3.35rem);
   line-height: 1.1;
@@ -204,6 +216,41 @@
   color: #a87911;
 }
 
+.service-detail__expectations {
+  padding: 100px 0;
+  background: #fff;
+}
+
+.service-detail__process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.service-detail__process-grid li {
+  min-width: 0;
+  padding: 25px;
+  background: #f6f6f6;
+  border: 1px solid rgba(17, 17, 17, 0.08);
+  border-radius: 16px;
+}
+
+.service-detail__process-grid span {
+  color: #9a7010;
+  font-size: 0.8rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+.service-detail__process-grid p {
+  margin: 10px 0 0;
+  color: #3f3f3f;
+  line-height: 1.65;
+}
+
 .service-detail__tips {
   padding: 100px 0;
   background: #fff;
@@ -259,50 +306,67 @@
   background: #111;
 }
 
-.service-detail__professional-grid {
+.service-detail__insight-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
-  gap: 52px;
-  align-items: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.service-detail__professional .service-detail__check-list li {
-  color: #dedede;
-}
-
-.service-detail__professional .service-detail__check-list svg {
-  color: #d4af37;
-}
-
-.service-detail__notice {
+.service-detail__insight-grid article {
   display: flex;
-  padding: 28px;
-  gap: 15px;
-  color: #e3e3e3;
+  min-width: 0;
+  padding: 29px;
+  gap: 16px;
   background: #1c1c1c;
   border: 1px solid rgba(212, 175, 55, 0.28);
   border-radius: 18px;
 }
 
-.service-detail__notice > svg {
+.service-detail__insight-grid svg {
   flex: 0 0 auto;
   color: #d4af37;
 }
 
-.service-detail__notice h3 {
-  margin: 0 0 12px;
-  color: #fff;
-  font-size: 1.2rem;
+.service-detail__insight-grid p {
+  margin: 0;
+  color: #dedede;
+  line-height: 1.75;
 }
 
-.service-detail__notice p {
-  margin: 0 0 12px;
-  color: #c9c9c9;
-  line-height: 1.65;
+.service-detail__faq {
+  padding: 100px 0;
+  background: #fff;
 }
 
-.service-detail__notice p:last-child {
-  margin-bottom: 0;
+.service-detail__faq-list {
+  display: grid;
+  gap: 13px;
+}
+
+.service-detail__faq-list details {
+  background: #f7f7f7;
+  border: 1px solid rgba(17, 17, 17, 0.09);
+  border-radius: 15px;
+}
+
+.service-detail__faq-list summary {
+  padding: 21px 24px;
+  color: #222;
+  cursor: pointer;
+  font-weight: 800;
+  line-height: 1.5;
+}
+
+.service-detail__faq-list summary:focus-visible {
+  outline: 3px solid #d4af37;
+  outline-offset: 3px;
+}
+
+.service-detail__faq-list details p {
+  padding: 0 24px 23px;
+  margin: 0;
+  color: #535353;
+  line-height: 1.75;
 }
 
 .service-detail__related {
@@ -421,12 +485,31 @@
   justify-content: center;
 }
 
+.service-detail__scope-notes {
+  padding: 36px 0;
+  color: #4f4f4f;
+  background: #f0f0f0;
+  border-top: 1px solid rgba(17, 17, 17, 0.08);
+}
+
+.service-detail__scope-notes h2 {
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.service-detail__scope-notes p {
+  margin: 9px 0 0;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
 @media (max-width: 900px) {
-  .service-detail__two-column,
-  .service-detail__professional-grid {
+  .service-detail__two-column {
     grid-template-columns: 1fr;
   }
 
+  .service-detail__process-grid,
+  .service-detail__insight-grid,
   .service-detail__related-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -451,8 +534,10 @@
 
   .service-detail__overview,
   .service-detail__lists,
+  .service-detail__expectations,
   .service-detail__tips,
   .service-detail__professional,
+  .service-detail__faq,
   .service-detail__related,
   .service-detail__area,
   .service-detail__cta {
@@ -460,11 +545,13 @@
   }
 
   .service-detail__panel,
-  .service-detail__notice {
+  .service-detail__insight-grid article {
     padding: 25px 21px;
   }
 
   .service-detail__tip-grid,
+  .service-detail__process-grid,
+  .service-detail__insight-grid,
   .service-detail__related-grid {
     grid-template-columns: 1fr;
   }

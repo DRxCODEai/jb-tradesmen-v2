@@ -5,6 +5,11 @@ export interface ServiceCTA {
   route: string
 }
 
+export type ServiceFAQ = {
+  question: string
+  answer: string
+}
+
 export interface ServiceHubService {
   id: string
   slug: string
@@ -21,16 +26,17 @@ export interface ServiceHubService {
   heroHeading: string
   heroDescription: string
   overview: string[]
-  includedServices: string[]
-  commonConcerns: string[]
-  helpfulTips: string[]
-  whenToCallProfessional: string[]
+  whatWeDo: string[]
+  commonApplications: string[]
+  whatToExpect: string[]
+  professionalInsights: string[]
+  preparationTips: string[]
+  faqs: ServiceFAQ[]
+  projectScopeNotes: string[]
   serviceAreaCopy: string
   relatedServiceIds: string[]
   primaryCTA: ServiceCTA
   secondaryCTA: ServiceCTA
   schemaServiceType: string
-  regulatedWorkNotes: string[]
-  assumptions: string[]
   active: boolean
 }
