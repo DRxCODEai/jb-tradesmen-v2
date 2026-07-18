@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { activeServiceHubServices } from '../data/serviceHubServices'
+import { serviceHubServices } from '../data/serviceHubServices'
 
 const SITE_URL = 'https://www.jbtradesmenllc.com'
 
@@ -163,8 +163,8 @@ export default function RouteSeo() {
   const normalizedPath = pathname === '/' ? pathname : pathname.replace(/\/+$/, '')
 
   useEffect(() => {
-    const service = activeServiceHubServices.find(
-      (entry) => entry.route === normalizedPath,
+    const service = serviceHubServices.find(
+      (entry) => entry.active && entry.route === normalizedPath,
     )
     const seo = routeSeo[normalizedPath] ?? (service ? {
       title: service.metaTitle,

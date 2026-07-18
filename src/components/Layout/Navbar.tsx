@@ -20,6 +20,7 @@ export default function Navbar() {
   const navbarRef = useRef<HTMLElement>(null)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
   const { pathname } = useLocation()
+  const isServiceHubPath = pathname === '/service-hub' || pathname.startsWith('/services/')
 
   useEffect(() => {
     const closeAfterNavigation = window.setTimeout(() => setIsMenuOpen(false), 0)
@@ -82,7 +83,17 @@ export default function Navbar() {
             </li>
             {links.map((link) => (
               <li key={link.to}>
-                <NavLink to={link.to} onClick={closeMenu}>{link.label}</NavLink>
+                <NavLink
+                  to={link.to}
+                  className={({ isActive }) =>
+                    isActive || (link.to === '/service-hub' && isServiceHubPath)
+                      ? 'active'
+                      : undefined
+                  }
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </NavLink>
               </li>
             ))}
             <li className="navbar-mobile-call">

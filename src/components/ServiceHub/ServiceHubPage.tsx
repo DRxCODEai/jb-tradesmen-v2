@@ -1,15 +1,15 @@
-import { activeServiceHubServices } from '../../data/serviceHubServices'
+import { serviceHubServices } from '../../data/serviceHubServices'
 import ServiceCategorySection from './ServiceCategorySection'
 import ServiceHubCTA from './ServiceHubCTA'
 import ServiceHubHero from './ServiceHubHero'
 import './ServiceHubPage.css'
 
 export default function ServiceHubPage() {
-  const commercialServices = activeServiceHubServices.filter(
-    (service) => service.audience === 'commercial',
+  const commercialServices = serviceHubServices.filter(
+    (service) => service.active && service.audience === 'commercial',
   )
-  const residentialServices = activeServiceHubServices.filter(
-    (service) => service.audience === 'residential',
+  const residentialServices = serviceHubServices.filter(
+    (service) => service.active && service.audience === 'residential',
   )
 
   return (
